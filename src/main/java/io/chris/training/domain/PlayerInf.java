@@ -10,7 +10,9 @@ import javax.persistence.Table;
 public class PlayerInf {
 
     @Id
-    private Long Id; // how to match with User
+    //@GeneratedValue(strategy = SEQUENCE, generator= "users_id_seq")
+    //@SequenceGenerator(name = "users_id_seq",sequenceName = "users_id_seq",allocationSize = 1)
+    private Long id;
 
     @Column(name ="first_name")
     private String firstName;
@@ -39,9 +41,7 @@ public class PlayerInf {
         this.weight=weight;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
+    public String getFirstName() { return firstName; }
 
     public String getLastName() {
         return lastName;
