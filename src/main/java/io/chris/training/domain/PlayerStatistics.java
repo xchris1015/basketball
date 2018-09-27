@@ -19,8 +19,8 @@ public class PlayerStatistics {
     @Column(name ="last_name")
     private String lastName;
 
-    @Column(name ="position")
-    private String position;
+    @Column(name ="player_position")
+    private String playerPosition;
 
     @Column(name ="score")
     private String score;
@@ -31,10 +31,10 @@ public class PlayerStatistics {
     @Column(name ="assistant")
     private String assistant;
 
-    public PlayerStatistics(String firstName,String lastName,String position, String score,String rebound, String assistant){
+    public PlayerStatistics(String firstName,String lastName,String playerPosition, String score,String rebound, String assistant){
         this.firstName=firstName;
         this.lastName=lastName;
-        this.position=position;
+        this.playerPosition=playerPosition;
         this.score=score;
         this.rebound=rebound;
         this.assistant=assistant;
@@ -48,8 +48,8 @@ public class PlayerStatistics {
         return lastName;
     }
 
-    public String getPosition() {
-        return position;
+    public String getPlayerPosition() {
+        return playerPosition;
     }
 
     public String getScore() {

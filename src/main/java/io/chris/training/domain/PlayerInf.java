@@ -20,8 +20,8 @@ public class PlayerInf {
     @Column(name ="last_name")
     private String lastName;
 
-    @Column(name ="position")
-    private String position;
+    @Column(name ="player_position")
+    private String playerPosition;
 
     @Column(name ="born")
     private String born;
@@ -32,10 +32,10 @@ public class PlayerInf {
     @Column(name ="weight")
     private String weight;
 
-    public PlayerInf(String firstName,String lastName,String position, String born,String height, String weight){
+    public PlayerInf(String firstName,String lastName,String playerPosition, String born,String height, String weight){
         this.firstName=firstName;
         this.lastName=lastName;
-        this.position=position;
+        this.playerPosition=playerPosition;
         this.born=born;
         this.height=height;
         this.weight=weight;
@@ -47,8 +47,8 @@ public class PlayerInf {
         return lastName;
     }
 
-    public String getPosition() {
-        return position;
+    public String getPlayerPosition() {
+        return playerPosition;
     }
 
     public String getBorn() {
