@@ -11,7 +11,41 @@
     <properties>
         <spring.version>5.1.0.RELEASE</spring.version>
         <hibernate.version>5.3.6.Final</hibernate.version>
+        <java-version>1.8</java-version>
+        <flyway.version>5.1.4</flyway.version>
     </properties>
+
+    <build>
+        <finalName>basketball-spring-mvc</finalName>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java-version}</source>
+                    <target>${java-version}</target>
+                    <compilerArgument>-Xlint:all</compilerArgument>
+                    <showWarnings>true</showWarnings>
+                    <showDeprecation>true</showDeprecation>
+                </configuration>
+            </plugin>
+
+            <plugin>
+               <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>${flyway.version}</version>
+                <configuration>
+                    <driver>org.postgresql.Driver</driver>
+                    <url>jdbc:postgresql://localhost:5432/basketball</url>
+                    <password>password</password>
+                    <user>admin</user>
+                    <locations>
+                        <location>db/migration</location>
+                    </locations>
+                </configuration>
+
+            </plugin>
+        </plugins>
+    </build>
 
     <dependencies>
 

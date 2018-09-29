@@ -1,6 +1,6 @@
 package io.chris.training.domain;
 
-import com.sun.istack.internal.NotNull;
+
 import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 
 import javax.persistence.*;
@@ -16,18 +16,18 @@ public class User {
     private Long id;
 
     @Column(name="username",unique = true)
-    @NotNull
+//    @NotNull
     private String username;
 
     @Column(name="first_name")
     private String firstName;
 
     @Column(name="last_name")
-    @NotNull
+//    @NotNull
     private String lastName;
 
     @Column(name="email",unique = true)
-    @NotNull
+//    @NotNull
     private String email;
 
     @Column(name="passwords")
