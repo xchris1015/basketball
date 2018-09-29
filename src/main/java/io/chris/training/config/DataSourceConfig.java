@@ -2,6 +2,9 @@ package io.chris.training.config;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.jpa.HibernatePersistenceProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -17,6 +20,8 @@ import java.util.Properties;
 @EnableTransactionManagement
 @EnableJpaRepositories( basePackages = "io.chris.training.repository")
 public class DataSourceConfig {
+
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     private String driverClassName ="org.postgresql.ds.PGSimpleDataSource";
     private String databaseUrl ="jdbc:postgresql://localhost:5432/basketball";
@@ -54,6 +59,7 @@ public class DataSourceConfig {
     @Bean(name="dataSource")
     public DataSource getDataSource(){
         DataSource dataSource = createDataSource();
+        logger.debug("create datasource");
         return dataSource;
     }
 
