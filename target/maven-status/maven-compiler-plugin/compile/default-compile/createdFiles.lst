@@ -1,0 +1,4 @@
+io/chris/training/config/AppConfig.class
+io/chris/training/config/MvcConfig.class
+io/chris/training/domain/User.class
+io/chris/training/config/DataSourceConfig.class
