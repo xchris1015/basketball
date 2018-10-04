@@ -60,6 +60,9 @@ public class DataSourceConfig {
     public DataSource getDataSource(){
         DataSource dataSource = createDataSource();
         logger.debug("create datasource");
+        logger.info("test");
+        logger.warn("warn test");
+        logger.error("error test");
         return dataSource;
     }
 
