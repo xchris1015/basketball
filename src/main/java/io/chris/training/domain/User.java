@@ -33,8 +33,7 @@ public class User {
     @Column(name="passwords")
     private String passwords;
 
-    public User(Long id,String username,String firstName,String lastName,String email,String passwords){
-        this.id=id;
+    public User(String username,String firstName,String lastName,String email,String passwords){
         this.username= username;
         this.firstName = firstName;
         this.lastName=lastName;

@@ -37,7 +37,7 @@ public class DataSourceConfig {
         factoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
         Properties props = new Properties();
         props.put("hibernate.dialect", "org.hibernate.spatial.dialect.postgis.PostgisDialect");
-        props.put("hibernate.hbm2ddl.auto", "validate");// 会去找所有domain 里面的entity 和 table 然后扫那些 instance variables
+        props.put("hibernate.hbm2ddl.auto", "validate");// fin all the stuff in domain and entity and table then scan instance variables
 //        props.put("hibernate.physical_naming_strategy", "com.overture.family.extend.hibernate.ImprovedNamingStrategy")
         props.put("hibernate.connection.charSet","UTF-8");
         props.put("hibernate.show_sql","true");
