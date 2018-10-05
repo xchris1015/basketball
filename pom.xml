@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <spring.version>5.1.0.RELEASE</spring.version>
+        <spring.version>5.0.6.RELEASE</spring.version>
         <hibernate.version>5.3.6.Final</hibernate.version>
         <java-version>1.8</java-version>
         <flyway.version>5.1.4</flyway.version>
@@ -50,6 +50,14 @@
     </build>
 
     <dependencies>
+
+        <!--Unit test-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>
 
         <dependency>
             <groupId>commons-dbcp</groupId>
@@ -177,6 +185,12 @@
                 </exclusion>
             </exclusions>
             <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
