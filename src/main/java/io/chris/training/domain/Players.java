@@ -12,8 +12,8 @@ import java.time.Instant;
 import static javax.persistence.GenerationType.SEQUENCE;/// ??? why this work
 
 @Entity
-@Table(name="player")
-public class Player {
+@Table(name="players")
+public class Players {
 
     @Id
     @GeneratedValue(strategy = SEQUENCE, generator= "users_id_seq")
@@ -38,7 +38,7 @@ public class Player {
     @Column(name ="weight")
     private Double weight;
 
-    public Player(String firstName,String lastName,String playerPosition, Instant born,Double height, Double weight){
+    public Players(String firstName,String lastName,String playerPosition, Instant born,Double height, Double weight){
         this.firstName=firstName;
         this.lastName=lastName;
         this.playerPosition=playerPosition;

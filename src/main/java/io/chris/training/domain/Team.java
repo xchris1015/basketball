@@ -8,7 +8,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity
 @Table(name="team")
-public class TeamInf {
+public class Team {
 
     @Id
     @GeneratedValue(strategy = SEQUENCE, generator= "users_id_seq")
@@ -33,7 +33,7 @@ public class TeamInf {
     @Column(name ="location")
     private String location;
 
-    public TeamInf(String conference,String division,Instant foundYear, String history,String arena, String location){
+    public Team(String conference,String division,Instant foundYear, String history,String arena, String location){
         this.conference=conference;
         this.division=division;
         this.foundYear=foundYear;
