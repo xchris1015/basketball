@@ -33,13 +33,29 @@ public class Team {
     @Column(name ="location")
     private String location;
 
-    public Team(String conference,String division,Instant foundYear, String history,String arena, String location){
-        this.conference=conference;
-        this.division=division;
-        this.foundYear=foundYear;
-        this.history=history;
-        this.arena=arena;
-        this.location=location;
+
+    public void setConference(String conference) {
+        this.conference = conference;
+    }
+
+    public void setDivision(String division) {
+        this.division = division;
+    }
+
+    public void setFoundYear(Instant foundYear) {
+        this.foundYear = foundYear;
+    }
+
+    public void setHistory(String history) {
+        this.history = history;
+    }
+
+    public void setArena(String arena) {
+        this.arena = arena;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public Long getId(){ return id; }

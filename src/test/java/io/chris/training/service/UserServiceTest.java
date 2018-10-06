@@ -38,7 +38,7 @@ public class UserServiceTest extends UserService{
         ExpectedResult.setLastName("xu");
         ExpectedResult.setPasswords("password");
         userRepository.save(ExpectedResult);
-        User actualResult=userService.findbyusername("xchris");
+        User actualResult=userService.findByUsername("xchris");
         assertEquals(actualResult.getId(),ExpectedResult.getId());
     }
 

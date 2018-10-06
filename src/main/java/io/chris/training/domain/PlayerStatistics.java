@@ -22,10 +22,17 @@ public class PlayerStatistics {
     @Column(name ="assistant")
     private Double assistant;
 
-    public PlayerStatistics(Double score,Double rebound, Double assistant){
-        this.score=score;
-        this.rebound=rebound;
-        this.assistant=assistant;
+
+    public void setScore(Double score) {
+        this.score = score;
+    }
+
+    public void setRebound(Double rebound) {
+        this.rebound = rebound;
+    }
+
+    public void setAssistant(Double assistant) {
+        this.assistant = assistant;
     }
 
     public Long getId(){ return id; }

@@ -13,7 +13,7 @@ import static javax.persistence.GenerationType.SEQUENCE;/// ??? why this work
 
 @Entity
 @Table(name="players")
-public class Players {
+public class Player {
 
     @Id
     @GeneratedValue(strategy = SEQUENCE, generator= "users_id_seq")
@@ -38,13 +38,29 @@ public class Players {
     @Column(name ="weight")
     private Double weight;
 
-    public Players(String firstName,String lastName,String playerPosition, Instant born,Double height, Double weight){
-        this.firstName=firstName;
-        this.lastName=lastName;
-        this.playerPosition=playerPosition;
-        this.born=born;
-        this.height=height;
-        this.weight=weight;
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setPlayerPosition(String playerPosition) {
+        this.playerPosition = playerPosition;
+    }
+
+    public void setBorn(Instant born) {
+        this.born = born;
+    }
+
+    public void setHeight(Double height) {
+        this.height = height;
+    }
+
+    public void setWeight(Double weight) {
+        this.weight = weight;
     }
 
     public Long getId(){ return id; }
