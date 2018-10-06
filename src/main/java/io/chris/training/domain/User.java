@@ -33,12 +33,25 @@ public class User {
     @Column(name="passwords")
     private String passwords;
 
-    public User(String username,String firstName,String lastName,String email,String passwords){
-        this.username= username;
+
+    public void setUsername(String username){
+        this.username=username;
+    }
+
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
-        this.lastName=lastName;
-        this.email=email;
-        this.passwords=passwords;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPasswords(String passwords) {
+        this.passwords = passwords;
     }
 
     public Long getId(){ return id; }
