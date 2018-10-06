@@ -12,6 +12,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
+import java.time.LocalDate;
+
 import static org.junit.Assert.assertEquals;
 
 @WebAppConfiguration
@@ -36,6 +39,7 @@ public class PlayerServiceTest {
         expectedPlayer.setHeight(6.00);
         expectedPlayer.setWeight(180.00);
         expectedPlayer.setPlayerPosition("SF");
+        expectedPlayer.setBorn(Instant.from(LocalDate.of(2013,06,01)));
         playersRepository.save(expectedPlayer);
         Player actualPlayer = playerService.findByFirstName("chris");
         assertEquals(actualPlayer.getId(),expectedPlayer.getId());

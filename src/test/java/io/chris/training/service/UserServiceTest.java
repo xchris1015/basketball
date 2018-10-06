@@ -20,7 +20,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles("unit")
 
-public class UserServiceTest extends UserService{
+public class UserServiceTest extends UserService {
 
     @Autowired
     private UserRepository userRepository;
@@ -30,7 +30,7 @@ public class UserServiceTest extends UserService{
 
     @Transactional
     @Test
-    public void findByUsernameTest(){
+    public void findByUsernameTest() {
         User ExpectedResult = new User();
         ExpectedResult.setUsername("xchris");
         ExpectedResult.setEmail("xchris1015@gmail.com");
@@ -38,9 +38,66 @@ public class UserServiceTest extends UserService{
         ExpectedResult.setLastName("xu");
         ExpectedResult.setPasswords("password");
         userRepository.save(ExpectedResult);
-        User actualResult=userService.findByUsername("xchris");
-        assertEquals(actualResult.getId(),ExpectedResult.getId());
+        User actualResult = userService.findByUsername("xchris");
+        assertEquals(actualResult.getId(), ExpectedResult.getId());
+    }
+
+    @Transactional
+    @Test
+    public void findByFirstNameTest() {
+        User ExpectedResult = new User();
+        ExpectedResult.setUsername("xchris");
+        ExpectedResult.setEmail("xchris1015@gmail.com");
+        ExpectedResult.setFirstName("chris");
+        ExpectedResult.setLastName("xu");
+        ExpectedResult.setPasswords("password");
+        userRepository.save(ExpectedResult);
+        User actualResult = userService.findByFirstName("chris");
+        assertEquals(actualResult.getId(), ExpectedResult.getId());
     }
 
 
+    @Transactional
+    @Test
+    public void findByLastNameTest(){
+        User ExpectedResult = new User();
+        ExpectedResult.setUsername("xchris");
+        ExpectedResult.setEmail("xchris1015@gmail.com");
+        ExpectedResult.setFirstName("chris");
+        ExpectedResult.setLastName("xu");
+        ExpectedResult.setPasswords("password");
+        userRepository.save(ExpectedResult);
+        User actualResult=userService.findByLastName("xu");
+        assertEquals(actualResult.getId(),ExpectedResult.getId());
+    }
+
+    @Transactional
+    @Test
+    public void findByEmailTest(){
+        User ExpectedResult = new User();
+        ExpectedResult.setUsername("xchris");
+        ExpectedResult.setEmail("xchris1015@gmail.com");
+        ExpectedResult.setFirstName("chris");
+        ExpectedResult.setLastName("xu");
+        ExpectedResult.setPasswords("password");
+        userRepository.save(ExpectedResult);
+        User actualResult=userService.findByEmail("xchris1015@gmail.com");
+        assertEquals(actualResult.getId(),ExpectedResult.getId());
+    }
+
+    @Transactional
+    @Test
+    public void findByPasswordTest(){
+        User ExpectedResult = new User();
+        ExpectedResult.setUsername("xchris");
+        ExpectedResult.setEmail("xchris1015@gmail.com");
+        ExpectedResult.setFirstName("chris");
+        ExpectedResult.setLastName("xu");
+        ExpectedResult.setPasswords("password");
+        userRepository.save(ExpectedResult);
+        User actualResult=userService.findByPasswords("password");
+        assertEquals(actualResult.getId(),ExpectedResult.getId());
+    }
+
 }
+
