@@ -22,6 +22,16 @@ public class PlayerStatistics {
     @Column(name ="assistant")
     private Double assistant;
 
+    @Column(name="steal")
+    private Double steal;
+
+    public Double getSteal() {
+        return steal;
+    }
+
+    public void setSteal(Double steal) {
+        this.steal = steal;
+    }
 
     public void setScore(Double score) {
         this.score = score;
