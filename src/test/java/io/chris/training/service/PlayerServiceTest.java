@@ -39,9 +39,85 @@ public class PlayerServiceTest {
         expectedPlayer.setHeight(6.00);
         expectedPlayer.setWeight(180.00);
         expectedPlayer.setPlayerPosition("SF");
-        expectedPlayer.setBorn(Instant.from(LocalDate.of(2013,06,01)));
+//        expectedPlayer.setBorn(Instant.from(LocalDate.of(2013,06,01)));
         playersRepository.save(expectedPlayer);
         Player actualPlayer = playerService.findByFirstName("chris");
         assertEquals(actualPlayer.getId(),expectedPlayer.getId());
     }
+
+    @Test
+    @Transactional
+    public void findByLastNameTest(){
+        Player expectedPlayer = new Player();
+        expectedPlayer.setFirstName("chris");
+        expectedPlayer.setLastName("xu");
+        expectedPlayer.setHeight(6.00);
+        expectedPlayer.setWeight(180.00);
+        expectedPlayer.setPlayerPosition("SF");
+//        expectedPlayer.setBorn(Instant.from(LocalDate.of(2013,06,01)));
+        playersRepository.save(expectedPlayer);
+        Player actualPlayer = playerService.findByLastName("xu");
+        assertEquals(actualPlayer.getId(),expectedPlayer.getId());
+    }
+
+    @Test
+    @Transactional
+    public void findByPlayerPositionTest(){
+        Player expectedPlayer = new Player();
+        expectedPlayer.setFirstName("chris");
+        expectedPlayer.setLastName("xu");
+        expectedPlayer.setHeight(6.00);
+        expectedPlayer.setWeight(180.00);
+        expectedPlayer.setPlayerPosition("SF");
+//        expectedPlayer.setBorn(Instant.from(LocalDate.of(2013,06,01)));
+        playersRepository.save(expectedPlayer);
+        Player actualPlayer = playerService.findByPlayerPosition("SF");
+        assertEquals(actualPlayer.getId(),expectedPlayer.getId());
+    }
+
+//    @Test
+//    @Transactional
+//    public void findByBornTest(){
+//        Player expectedPlayer = new Player();
+//        expectedPlayer.setFirstName("chris");
+//        expectedPlayer.setLastName("xu");
+//        expectedPlayer.setHeight(6.00);
+//        expectedPlayer.setWeight(180.00);
+//        expectedPlayer.setPlayerPosition("SF");
+//        expectedPlayer.setBorn(Instant.from(LocalDate.of(2013,06,01)));
+//        playersRepository.save(expectedPlayer);
+//        Player actualPlayer = playerService.findByBorn();
+//        assertEquals(actualPlayer.getId(),expectedPlayer.getId());
+//    }
+
+    @Test
+    @Transactional
+    public void findByHeightTest(){
+        Player expectedPlayer = new Player();
+        expectedPlayer.setFirstName("chris");
+        expectedPlayer.setLastName("xu");
+        expectedPlayer.setHeight(6.00);
+        expectedPlayer.setWeight(180.00);
+        expectedPlayer.setPlayerPosition("SF");
+//        expectedPlayer.setBorn(Instant.from(LocalDate.of(2013,06,01)));
+        playersRepository.save(expectedPlayer);
+        Player actualPlayer = playerService.findByHeight(6.00);
+        assertEquals(actualPlayer.getId(),expectedPlayer.getId());
+    }
+
+    @Test
+    @Transactional
+    public void findByWeightTest(){
+        Player expectedPlayer = new Player();
+        expectedPlayer.setFirstName("chris");
+        expectedPlayer.setLastName("xu");
+        expectedPlayer.setHeight(6.00);
+        expectedPlayer.setWeight(180.00);
+        expectedPlayer.setPlayerPosition("SF");
+//        expectedPlayer.setBorn(Instant.from(LocalDate.of(2013,06,01)));
+        playersRepository.save(expectedPlayer);
+        Player actualPlayer = playerService.findByWeight(180.00);
+        assertEquals(actualPlayer.getId(),expectedPlayer.getId());
+    }
+
 }
