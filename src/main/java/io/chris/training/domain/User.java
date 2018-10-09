@@ -1,10 +1,7 @@
 package io.chris.training.domain;
 
 
-import net.bytebuddy.dynamic.loading.InjectionClassLoader;
-
 import javax.persistence.*;
-import javax.sound.midi.Sequence;
 
 @Entity
 @Table(name="users")
