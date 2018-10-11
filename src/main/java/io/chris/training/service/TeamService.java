@@ -5,6 +5,7 @@ import io.chris.training.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.Optional;
 
 @Service
@@ -26,7 +27,7 @@ public class TeamService {
 
     }
 
-    public Team findByFoundYear(String foundYear){
+    public Team findByFoundYear(Instant foundYear){
         Optional<Team> result = teamRepository.findByFoundYear(foundYear);
         Team obj = result.get();
         return obj;

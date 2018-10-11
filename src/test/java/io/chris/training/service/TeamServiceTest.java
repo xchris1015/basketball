@@ -12,6 +12,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+
 import static org.junit.Assert.assertEquals;
 
 @WebAppConfiguration
@@ -26,6 +30,8 @@ public class TeamServiceTest {
     @Autowired
     private TeamService teamService;
 
+    private LocalDate date = LocalDate.parse("2018-10-10");
+
     @Test
     @Transactional
     public void findByConferenceTest(){
@@ -33,7 +39,8 @@ public class TeamServiceTest {
         expectTeam.setArena("Highland Park");
         expectTeam.setConference("GWU");
         expectTeam.setDivision("Graduate");
-//        expectTeam.setFoundYear();
+        Instant instant = date.atStartOfDay(ZoneId.systemDefault()).toInstant();
+        expectTeam.setFoundYear(instant);
         expectTeam.setLocation("Highland Park");
         expectTeam.setHistory("No History");
         teamRepository.save(expectTeam);
@@ -48,7 +55,8 @@ public class TeamServiceTest {
         expectTeam.setArena("Highland Park");
         expectTeam.setConference("GWU");
         expectTeam.setDivision("Graduate");
-//        expectTeam.setFoundYear();
+        Instant instant = date.atStartOfDay(ZoneId.systemDefault()).toInstant();
+        expectTeam.setFoundYear(instant);
         expectTeam.setLocation("Highland Park");
         expectTeam.setHistory("No History");
         teamRepository.save(expectTeam);
@@ -63,7 +71,8 @@ public class TeamServiceTest {
         expectTeam.setArena("Highland Park");
         expectTeam.setConference("GWU");
         expectTeam.setDivision("Graduate");
-//        expectTeam.setFoundYear();
+        Instant instant = date.atStartOfDay(ZoneId.systemDefault()).toInstant();
+        expectTeam.setFoundYear(instant);
         expectTeam.setLocation("Highland Park");
         expectTeam.setHistory("No History");
         teamRepository.save(expectTeam);
@@ -78,7 +87,8 @@ public class TeamServiceTest {
         expectTeam.setArena("Highland Park");
         expectTeam.setConference("GWU");
         expectTeam.setDivision("Graduate");
-//        expectTeam.setFoundYear();
+        Instant instant = date.atStartOfDay(ZoneId.systemDefault()).toInstant();
+        expectTeam.setFoundYear(instant);
         expectTeam.setLocation("Highland Park");
         expectTeam.setHistory("No History");
         teamRepository.save(expectTeam);
@@ -93,7 +103,8 @@ public class TeamServiceTest {
         expectTeam.setArena("Highland Park");
         expectTeam.setConference("GWU");
         expectTeam.setDivision("Graduate");
-//        expectTeam.setFoundYear();
+        Instant instant = date.atStartOfDay(ZoneId.systemDefault()).toInstant();
+        expectTeam.setFoundYear(instant);
         expectTeam.setLocation("Highland Park");
         expectTeam.setHistory("No History");
         teamRepository.save(expectTeam);
@@ -101,20 +112,21 @@ public class TeamServiceTest {
         assertEquals(expectTeam.getId(),actualTeam.getId());
     }
 
-//    @Test
-//    @Transactional
-//    public void findByFoundYearTest(){
-//        Team expectTeam = new Team();
-//        expectTeam.setArena("Highland Park");
-//        expectTeam.setConference("GWU");
-//        expectTeam.setDivision("Graduate");
-//        expectTeam.setFoundYear();
-//        expectTeam.setLocation("Highland Park");
-//        expectTeam.setHistory("No History");
-//        teamRepository.save(expectTeam);
-//        Team actualTeam = teamService.findByFoundYear("No History");
-//        assertEquals(expectTeam.getId(),actualTeam.getId());
-//    }
+    @Test
+    @Transactional
+    public void findByFoundYearTest(){
+        Team expectTeam = new Team();
+        expectTeam.setArena("Highland Park");
+        expectTeam.setConference("GWU");
+        expectTeam.setDivision("Graduate");
+        Instant instant = date.atStartOfDay(ZoneId.systemDefault()).toInstant();
+        expectTeam.setFoundYear(instant);
+        expectTeam.setLocation("Highland Park");
+        expectTeam.setHistory("No History");
+        teamRepository.save(expectTeam);
+        Team actualTeam = teamService.findByFoundYear(instant);
+        assertEquals(expectTeam.getId(),actualTeam.getId());
+    }
 
 
 

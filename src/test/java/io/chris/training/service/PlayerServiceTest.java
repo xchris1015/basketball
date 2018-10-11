@@ -14,6 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.*;
+import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
 
@@ -29,6 +32,11 @@ public class PlayerServiceTest {
     @Autowired
     private PlayerService playerService;
 
+    private LocalDate date = LocalDate.parse("1993-10-15");
+
+
+
+
     @Test
     @Transactional
     public void findByFirstNameTest(){
@@ -39,7 +47,8 @@ public class PlayerServiceTest {
         expectedPlayer.setHeight(6.00);
         expectedPlayer.setWeight(180.00);
         expectedPlayer.setPlayerPosition("SF");
-//        expectedPlayer.setBorn(Instant.from(LocalDate.of(2013,06,01)));
+        Instant instant = date.atStartOfDay(ZoneId.systemDefault()).toInstant();
+        expectedPlayer.setBorn(instant);
         playersRepository.save(expectedPlayer);
         Player actualPlayer = playerService.findByFirstName("chris");
         assertEquals(actualPlayer.getId(),expectedPlayer.getId());
@@ -54,7 +63,8 @@ public class PlayerServiceTest {
         expectedPlayer.setHeight(6.00);
         expectedPlayer.setWeight(180.00);
         expectedPlayer.setPlayerPosition("SF");
-//        expectedPlayer.setBorn(Instant.from(LocalDate.of(2013,06,01)));
+        Instant instant = date.atStartOfDay(ZoneId.systemDefault()).toInstant();
+        expectedPlayer.setBorn(instant);
         playersRepository.save(expectedPlayer);
         Player actualPlayer = playerService.findByLastName("xu");
         assertEquals(actualPlayer.getId(),expectedPlayer.getId());
@@ -69,26 +79,28 @@ public class PlayerServiceTest {
         expectedPlayer.setHeight(6.00);
         expectedPlayer.setWeight(180.00);
         expectedPlayer.setPlayerPosition("SF");
-//        expectedPlayer.setBorn(Instant.from(LocalDate.of(2013,06,01)));
+        Instant instant = date.atStartOfDay(ZoneId.systemDefault()).toInstant();
+        expectedPlayer.setBorn(instant);
         playersRepository.save(expectedPlayer);
         Player actualPlayer = playerService.findByPlayerPosition("SF");
         assertEquals(actualPlayer.getId(),expectedPlayer.getId());
     }
 
-//    @Test
-//    @Transactional
-//    public void findByBornTest(){
-//        Player expectedPlayer = new Player();
-//        expectedPlayer.setFirstName("chris");
-//        expectedPlayer.setLastName("xu");
-//        expectedPlayer.setHeight(6.00);
-//        expectedPlayer.setWeight(180.00);
-//        expectedPlayer.setPlayerPosition("SF");
-//        expectedPlayer.setBorn(Instant.from(LocalDate.of(2013,06,01)));
-//        playersRepository.save(expectedPlayer);
-//        Player actualPlayer = playerService.findByBorn();
-//        assertEquals(actualPlayer.getId(),expectedPlayer.getId());
-//    }
+    @Test
+    @Transactional
+    public void findByBornTest(){
+        Player expectedPlayer = new Player();
+        expectedPlayer.setFirstName("chris");
+        expectedPlayer.setLastName("xu");
+        expectedPlayer.setHeight(6.00);
+        expectedPlayer.setWeight(180.00);
+        expectedPlayer.setPlayerPosition("SF");
+        Instant instant = date.atStartOfDay(ZoneId.systemDefault()).toInstant();
+        expectedPlayer.setBorn(instant);
+        playersRepository.save(expectedPlayer);
+        Player actualPlayer = playerService.findByBorn(instant);
+        assertEquals(actualPlayer.getId(),expectedPlayer.getId());
+    }
 
     @Test
     @Transactional
@@ -99,7 +111,8 @@ public class PlayerServiceTest {
         expectedPlayer.setHeight(6.00);
         expectedPlayer.setWeight(180.00);
         expectedPlayer.setPlayerPosition("SF");
-//        expectedPlayer.setBorn(Instant.from(LocalDate.of(2013,06,01)));
+        Instant instant = date.atStartOfDay(ZoneId.systemDefault()).toInstant();
+        expectedPlayer.setBorn(instant);
         playersRepository.save(expectedPlayer);
         Player actualPlayer = playerService.findByHeight(6.00);
         assertEquals(actualPlayer.getId(),expectedPlayer.getId());
@@ -114,7 +127,8 @@ public class PlayerServiceTest {
         expectedPlayer.setHeight(6.00);
         expectedPlayer.setWeight(180.00);
         expectedPlayer.setPlayerPosition("SF");
-//        expectedPlayer.setBorn(Instant.from(LocalDate.of(2013,06,01)));
+        Instant instant = date.atStartOfDay(ZoneId.systemDefault()).toInstant();
+        expectedPlayer.setBorn(instant);
         playersRepository.save(expectedPlayer);
         Player actualPlayer = playerService.findByWeight(180.00);
         assertEquals(actualPlayer.getId(),expectedPlayer.getId());
