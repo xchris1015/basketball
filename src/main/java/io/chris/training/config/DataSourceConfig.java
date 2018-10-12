@@ -31,6 +31,8 @@ public class DataSourceConfig {
     private String databaseUsername = "admin";
     private String databasePassword = "password";
 
+
+
     @Bean(name="entityManagerFactory")
     public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
@@ -40,7 +42,7 @@ public class DataSourceConfig {
         factoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
         Properties props = new Properties();
         props.put("hibernate.dialect", "org.hibernate.spatial.dialect.postgis.PostgisDialect");
-        props.put("hibernate.hbm2ddl.auto", "validate");// fin all the stuff in domain and entity and table then scan instance variables
+        props.put("hibernate.hbm2ddl.auto", "validate");// fine all the stuff in domain and entity and table then scan instance variables
 //        props.put("hibernate.physical_naming_strategy", "com.overture.family.extend.hibernate.ImprovedNamingStrategy")
         props.put("hibernate.connection.charSet","UTF-8");
         props.put("hibernate.show_sql","true");
@@ -53,6 +55,8 @@ public class DataSourceConfig {
 
         return factoryBean;
     }
+
+
 
     @Bean(name="transactionManager")
     public PlatformTransactionManager transactionManager(@Qualifier("entityManagerFactory") EntityManagerFactory entityManagerFactory, @Autowired DataSource dataSource) {
