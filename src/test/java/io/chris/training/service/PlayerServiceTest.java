@@ -34,8 +34,22 @@ public class PlayerServiceTest {
 
     private LocalDate date = LocalDate.parse("1993-10-15");
 
-
-
+    @Test
+    @Transactional
+    public void findByIdTest(){
+        Player expectedPlayer = new Player();
+        // in this case, we need to back to model/domain to check the variable setting
+        expectedPlayer.setFirstName("chris");
+        expectedPlayer.setLastName("xu");
+        expectedPlayer.setHeight(6.00);
+        expectedPlayer.setWeight(180.00);
+        expectedPlayer.setPlayerPosition("SF");
+        Instant instant = date.atStartOfDay(ZoneId.systemDefault()).toInstant();
+        expectedPlayer.setBorn(instant);
+        playersRepository.save(expectedPlayer);
+        Player actualPlayer = playerService.findById(expectedPlayer.getId());
+        assertEquals(actualPlayer.getId(),expectedPlayer.getId());
+    }
 
     @Test
     @Transactional

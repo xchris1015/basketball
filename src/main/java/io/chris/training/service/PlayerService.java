@@ -14,6 +14,14 @@ public class PlayerService {
     @Autowired
     private PlayersRepository playersRepository;
 
+    public Player findById(Long id){
+
+        Optional<Player> result = playersRepository.findById(id);
+        Player obj = result.get();
+        return obj;
+
+    }
+
 
     public Player findByFirstName(String firstName){
 

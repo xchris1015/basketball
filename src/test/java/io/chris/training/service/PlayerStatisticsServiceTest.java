@@ -28,6 +28,18 @@ public class PlayerStatisticsServiceTest {
 
     @Test
     @Transactional
+    public void findByIdTest(){
+        PlayerStatistics expectedPlayer = new PlayerStatistics();
+        expectedPlayer.setAssistant(3.0);
+        expectedPlayer.setRebound(7.0);
+        expectedPlayer.setScore(12.5);
+        playerStatisticsRepository.save(expectedPlayer);
+        PlayerStatistics actualPlayer = playerStatisticsService.findById(expectedPlayer.getId());
+        assertEquals(actualPlayer.getId(),expectedPlayer.getId());
+    }
+
+    @Test
+    @Transactional
     public void findByScoreTest(){
         PlayerStatistics expectedPlayer = new PlayerStatistics();
         expectedPlayer.setAssistant(3.0);

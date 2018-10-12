@@ -34,6 +34,22 @@ public class TeamServiceTest {
 
     @Test
     @Transactional
+    public void findByIdTest(){
+        Team expectTeam = new Team();
+        expectTeam.setArena("Highland Park");
+        expectTeam.setConference("GWU");
+        expectTeam.setDivision("Graduate");
+        Instant instant = date.atStartOfDay(ZoneId.systemDefault()).toInstant();
+        expectTeam.setFoundYear(instant);
+        expectTeam.setLocation("Highland Park");
+        expectTeam.setHistory("No History");
+        teamRepository.save(expectTeam);
+        Team actualTeam = teamService.findById(expectTeam.getId());
+        assertEquals(expectTeam.getId(),actualTeam.getId());
+    }
+
+    @Test
+    @Transactional
     public void findByConferenceTest(){
         Team expectTeam = new Team();
         expectTeam.setArena("Highland Park");

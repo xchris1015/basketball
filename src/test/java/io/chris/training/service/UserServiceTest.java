@@ -30,73 +30,87 @@ public class UserServiceTest extends UserService {
 
     @Transactional
     @Test
+    public void findByIdTest() {
+        User expectedResult = new User();
+        expectedResult.setUsername("xchris");
+        expectedResult.setEmail("xchris1015@gmail.com");
+        expectedResult.setFirstName("chris");
+        expectedResult.setLastName("xu");
+        expectedResult.setPasswords("password");
+        userRepository.save(expectedResult);
+        User actualResult = userService.findById(expectedResult.getId());
+        assertEquals(actualResult.getId(), expectedResult.getId());
+    }
+
+    @Transactional
+    @Test
     public void findByUsernameTest() {
-        User ExpectedResult = new User();
-        ExpectedResult.setUsername("xchris");
-        ExpectedResult.setEmail("xchris1015@gmail.com");
-        ExpectedResult.setFirstName("chris");
-        ExpectedResult.setLastName("xu");
-        ExpectedResult.setPasswords("password");
-        userRepository.save(ExpectedResult);
+        User expectedResult = new User();
+        expectedResult.setUsername("xchris");
+        expectedResult.setEmail("xchris1015@gmail.com");
+        expectedResult.setFirstName("chris");
+        expectedResult.setLastName("xu");
+        expectedResult.setPasswords("password");
+        userRepository.save(expectedResult);
         User actualResult = userService.findByUsername("xchris");
-        assertEquals(actualResult.getId(), ExpectedResult.getId());
+        assertEquals(actualResult.getId(), expectedResult.getId());
     }
 
     @Transactional
     @Test
     public void findByFirstNameTest() {
-        User ExpectedResult = new User();
-        ExpectedResult.setUsername("xchris");
-        ExpectedResult.setEmail("xchris1015@gmail.com");
-        ExpectedResult.setFirstName("chris");
-        ExpectedResult.setLastName("xu");
-        ExpectedResult.setPasswords("password");
-        userRepository.save(ExpectedResult);
+        User expectedResult = new User();
+        expectedResult.setUsername("xchris");
+        expectedResult.setEmail("xchris1015@gmail.com");
+        expectedResult.setFirstName("chris");
+        expectedResult.setLastName("xu");
+        expectedResult.setPasswords("password");
+        userRepository.save(expectedResult);
         User actualResult = userService.findByFirstName("chris");
-        assertEquals(actualResult.getId(), ExpectedResult.getId());
+        assertEquals(actualResult.getId(), expectedResult.getId());
     }
 
 
     @Transactional
     @Test
     public void findByLastNameTest(){
-        User ExpectedResult = new User();
-        ExpectedResult.setUsername("xchris");
-        ExpectedResult.setEmail("xchris1015@gmail.com");
-        ExpectedResult.setFirstName("chris");
-        ExpectedResult.setLastName("xu");
-        ExpectedResult.setPasswords("password");
-        userRepository.save(ExpectedResult);
+        User expectedResult = new User();
+        expectedResult.setUsername("xchris");
+        expectedResult.setEmail("xchris1015@gmail.com");
+        expectedResult.setFirstName("chris");
+        expectedResult.setLastName("xu");
+        expectedResult.setPasswords("password");
+        userRepository.save(expectedResult);
         User actualResult=userService.findByLastName("xu");
-        assertEquals(actualResult.getId(),ExpectedResult.getId());
+        assertEquals(actualResult.getId(),expectedResult.getId());
     }
 
     @Transactional
     @Test
     public void findByEmailTest(){
-        User ExpectedResult = new User();
-        ExpectedResult.setUsername("xchris");
-        ExpectedResult.setEmail("xchris1015@gmail.com");
-        ExpectedResult.setFirstName("chris");
-        ExpectedResult.setLastName("xu");
-        ExpectedResult.setPasswords("password");
-        userRepository.save(ExpectedResult);
+        User expectedResult = new User();
+        expectedResult.setUsername("xchris");
+        expectedResult.setEmail("xchris1015@gmail.com");
+        expectedResult.setFirstName("chris");
+        expectedResult.setLastName("xu");
+        expectedResult.setPasswords("password");
+        userRepository.save(expectedResult);
         User actualResult=userService.findByEmail("xchris1015@gmail.com");
-        assertEquals(actualResult.getId(),ExpectedResult.getId());
+        assertEquals(actualResult.getId(),expectedResult.getId());
     }
 
     @Transactional
     @Test
     public void findByPasswordTest(){
-        User ExpectedResult = new User();
-        ExpectedResult.setUsername("xchris");
-        ExpectedResult.setEmail("xchris1015@gmail.com");
-        ExpectedResult.setFirstName("chris");
-        ExpectedResult.setLastName("xu");
-        ExpectedResult.setPasswords("password");
-        userRepository.save(ExpectedResult);
+        User expectedResult = new User();
+        expectedResult.setUsername("xchris");
+        expectedResult.setEmail("xchris1015@gmail.com");
+        expectedResult.setFirstName("chris");
+        expectedResult.setLastName("xu");
+        expectedResult.setPasswords("password");
+        userRepository.save(expectedResult);
         User actualResult=userService.findByPasswords("password");
-        assertEquals(actualResult.getId(),ExpectedResult.getId());
+        assertEquals(actualResult.getId(),expectedResult.getId());
     }
 
 }

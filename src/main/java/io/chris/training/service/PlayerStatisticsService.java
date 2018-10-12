@@ -14,6 +14,13 @@ public class PlayerStatisticsService {
     @Autowired
     private PlayerStatisticsRepository playerStatisticsRepository;
 
+    public PlayerStatistics findById(Long id){
+
+        Optional<PlayerStatistics> result = playerStatisticsRepository.findById(id);
+        PlayerStatistics obj = result.get();
+        return obj;
+
+    }
 
 
     public PlayerStatistics findByScore(Double score){

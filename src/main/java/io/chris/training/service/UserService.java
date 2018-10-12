@@ -13,6 +13,14 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    public User findById(Long id){
+
+        Optional<User> result = userRepository.findById(id);
+        User obj = result.get();
+        return obj;
+
+    }
+
     public User findByUsername(String username){
         Optional<User> result = userRepository.findByUsername(username);
         User obj = result.get();

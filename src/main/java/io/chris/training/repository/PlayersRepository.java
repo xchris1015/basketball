@@ -14,5 +14,6 @@ public interface PlayersRepository extends CrudRepository<Player,Long> {
     Optional<Player> findByBorn(Instant born);
     Optional<Player> findByHeight(Double height);
     Optional<Player> findByWeight(Double weight);
+    Optional<Player> findById(Long id);
 
 }

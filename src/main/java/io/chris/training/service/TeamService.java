@@ -13,6 +13,14 @@ public class TeamService {
     @Autowired
     private TeamRepository teamRepository;
 
+    public Team findById(Long id){
+
+        Optional<Team> result = teamRepository.findById(id);
+        Team obj = result.get();
+        return obj;
+
+    }
+
     public Team findByConference(String conference){
         Optional<Team> result = teamRepository.findByConference(conference);
         Team obj = result.get();
