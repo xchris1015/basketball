@@ -51,6 +51,7 @@
 
     <dependencies>
 
+
         <!--Unit test-->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -142,6 +143,18 @@
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
             <version>2.0.7.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.postgis</groupId>
+            <artifactId>postgis-jdbc</artifactId>
+            <version>2.2.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.1.1</version>
         </dependency>
 
         <!-- Logging -->
