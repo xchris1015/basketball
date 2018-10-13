@@ -5,9 +5,14 @@ import io.chris.training.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
+import java.awt.*;
 import java.util.Optional;
 
+@RestController
+@RequestMapping(value = "/api/user")
 public class UserController {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -15,10 +20,18 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    public User findUserById(Long Id){
+    @RequestMapping(value = "/{Id}",method = RequestMethod.GET)
+    public User findUserById(@PathVariable("Id") Long Id){
+        logger.debug("User variables is:" + Id);
         User user = userService.findById(Id);
         return user;
     }
 
-    
+    @RequestMapping(method = RequestMethod.POST)
+    public User addUser(@RequestBody User user){
+        User result = userService.addUser(user);
+        return result;
+    }
+
+
 }

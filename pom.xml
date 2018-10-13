@@ -15,6 +15,7 @@
         <flyway.version>5.1.4</flyway.version>
         <org.slf4j-version>1.7.25</org.slf4j-version>
         <slf4j-log4j12>1.7.25</slf4j-log4j12>
+        <fasterxml-jackson.version>2.9.7</fasterxml-jackson.version>
     </properties>
 
     <build>
@@ -204,6 +205,23 @@
             <artifactId>junit</artifactId>
             <version>4.12</version>
             <scope>test</scope>
+        </dependency>
+
+        <!--json-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${fasterxml-jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${fasterxml-jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${fasterxml-jackson.version}</version>
         </dependency>
 
     </dependencies>

@@ -51,4 +51,9 @@ public class UserService {
         return obj;
     }
 
+    public User addUser(User user){
+        User result = userRepository.save(user);
+        return result;
+    }
+
 }
