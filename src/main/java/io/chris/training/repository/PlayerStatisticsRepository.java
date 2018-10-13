@@ -11,7 +11,6 @@ public interface PlayerStatisticsRepository extends CrudRepository<PlayerStatist
     Optional<PlayerStatistics> findByRebound(Double rebound);
     Optional<PlayerStatistics> findByAssistant(Double assistant);
     Optional<PlayerStatistics> findBySteal(Double steal);
-    Optional<PlayerStatistics> findById(Long id);
 
 
 

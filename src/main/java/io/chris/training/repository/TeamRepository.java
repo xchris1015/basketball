@@ -15,6 +15,5 @@ public interface TeamRepository extends CrudRepository<Team,Long> {
     Optional<Team> findByHistory(String history);
     Optional<Team> findByArena(String arena);
     Optional<Team> findByLocation(String location);
-    Optional<Team> findById(Long id);
 
 }
