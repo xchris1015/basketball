@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.*;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -21,6 +21,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @RequestMapping(value = "",method = RequestMethod.GET)
+    public List<User> findAllUser(){
+        List<User> users = userService.findAll();
+        return users;
+    }
+
     @RequestMapping(value = "/{Id}",method = RequestMethod.GET)
     public User findUserById(@PathVariable("Id") Long Id){
         logger.debug("User variables is:" + Id);
@@ -28,7 +34,7 @@ public class UserController {
         return user;
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/signup",method = RequestMethod.POST)
     public User addUser(@RequestBody User user){
         User result = userService.addUser(user);
         return result;

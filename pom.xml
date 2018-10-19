@@ -15,7 +15,7 @@
         <flyway.version>5.1.4</flyway.version>
         <org.slf4j-version>1.7.25</org.slf4j-version>
         <slf4j-log4j12>1.7.25</slf4j-log4j12>
-        <fasterxml-jackson.version>2.9.7</fasterxml-jackson.version>
+        <fasterxml-jackson.version>2.9.5</fasterxml-jackson.version>
     </properties>
 
     <build>

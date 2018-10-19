@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.jws.soap.SOAPBinding;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,6 +21,12 @@ public class UserService {
         return obj;
 
     }
+    public List<User> findAll(){
+        List<User> results = userRepository.findAll();
+        return results;
+
+    }
+
 
     public User findByUsername(String username){
         Optional<User> result = userRepository.findByUsername(username);
