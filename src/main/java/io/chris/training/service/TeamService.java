@@ -62,4 +62,10 @@ public class TeamService {
         return obj;
 
     }
+
+    public Team addTeam(Team team){
+        Team result = teamRepository.save(team);
+        return result;
+
+    }
 }

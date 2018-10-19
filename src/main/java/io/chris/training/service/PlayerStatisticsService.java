@@ -47,5 +47,10 @@ public class PlayerStatisticsService {
         return obj;
     }
 
+    public PlayerStatistics addPlayerStatistics(PlayerStatistics playerStatistics){
+        PlayerStatistics result = playerStatisticsRepository.save(playerStatistics);
+        return result;
+    }
+
 
 }

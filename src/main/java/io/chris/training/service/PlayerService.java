@@ -71,5 +71,10 @@ public class PlayerService {
 
     }
 
+    public Player save(Player player){
+        Player result = playersRepository.save(player);
+        return result;
+    }
+
 
 }
