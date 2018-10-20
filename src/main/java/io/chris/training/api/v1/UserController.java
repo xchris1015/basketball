@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,6 +44,13 @@ public class UserController {
     @RequestMapping(method = RequestMethod.PUT)
     public User updateUser(@RequestBody User user) {
         User result = userService.addUser(user);
+        return result;
+    }
+
+    @RequestMapping(method = RequestMethod.GET,params = {"first_name"})
+    public List<User> findByFirstName(@RequestParam(value = "first_name") String firstName) {
+        logger.debug("This first name is :"+ firstName);
+        List<User> result = userService.findByFirstName(firstName);
         return result;
     }
 

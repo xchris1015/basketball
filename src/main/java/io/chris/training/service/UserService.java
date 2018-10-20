@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.jws.soap.SOAPBinding;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,16 +35,14 @@ public class UserService {
         return obj;
     }
 
-    public User findByFirstName(String firstName){
-        Optional<User> result =userRepository.findByFirstName(firstName);
-        User obj = result.get();
-        return obj;
+    public List<User> findByFirstName(String firstName){
+        List<User> result =userRepository.findByFirstName(firstName);
+        return result;
     }
 
-    public User findByLastName(String lastName){
-        Optional<User> result =userRepository.findByLastName(lastName);
-        User obj = result.get();
-        return obj;
+    public List<User> findByLastName(String lastName){
+        List<User> result =userRepository.findByLastName(lastName);
+        return result;
     }
 
     public User findByEmail(String email){
