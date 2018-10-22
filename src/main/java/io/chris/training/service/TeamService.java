@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -21,24 +22,27 @@ public class TeamService {
 
     }
 
-    public Team findByConference(String conference){
-        Optional<Team> result = teamRepository.findByConference(conference);
-        Team obj = result.get();
-        return obj;
+    public List<Team> findALL(){
+        List<Team> result = teamRepository.findAll();
+        return result;
 
     }
 
-    public Team findByDivision(String division){
-        Optional<Team> result = teamRepository.findByDivision(division);
-        Team obj = result.get();
-        return obj;
+    public List<Team> findByConference(String conference){
+        List<Team> result = teamRepository.findByConference(conference);
+        return result;
 
     }
 
-    public Team findByFoundYear(Instant foundYear){
-        Optional<Team> result = teamRepository.findByFoundYear(foundYear);
-        Team obj = result.get();
-        return obj;
+    public List<Team> findByDivision(String division){
+        List<Team> result = teamRepository.findByDivision(division);
+        return result;
+
+    }
+
+    public List<Team> findByFoundYear(Instant foundYear){
+        List<Team> result = teamRepository.findByFoundYear(foundYear);
+        return result;
 
     }
 

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,52 +23,51 @@ public class PlayerService {
 
     }
 
+    public List<Player> findAll(){
+        List<Player> result = playersRepository.findAll();
+        return result;
+    }
 
-    public Player findByFirstName(String firstName){
 
-        Optional<Player> result = playersRepository.findByFirstName(firstName);
-        Player obj = result.get();
-        return obj;
+    public List<Player> findByFirstName(String firstName){
+
+        List<Player> result = playersRepository.findByFirstName(firstName);
+        return result;
 
     }
 
-    public Player findByLastName(String lastName){
+    public List<Player> findByLastName(String lastName){
 
-        Optional<Player> result = playersRepository.findByLastName(lastName);
-        Player obj = result.get();
-        return obj;
-
-    }
-
-    public Player findByPlayerPosition(String playerPosition){
-
-        Optional<Player> result = playersRepository.findByPlayerPosition(playerPosition);
-        Player obj = result.get();
-        return obj;
+        List<Player> result = playersRepository.findByLastName(lastName);
+        return result;
 
     }
 
-    public Player findByBorn(Instant born){
+    public List<Player> findByPlayerPosition(String playerPosition){
 
-        Optional<Player> result = playersRepository.findByBorn(born);
-        Player obj = result.get();
-        return obj;
-
-    }
-
-    public Player findByHeight(Double height){
-
-        Optional<Player> result = playersRepository.findByHeight(height);
-        Player obj = result.get();
-        return obj;
+        List<Player> result = playersRepository.findByPlayerPosition(playerPosition);
+        return result;
 
     }
 
-    public Player findByWeight(Double weight){
+    public List<Player> findByBorn(Instant born){
 
-        Optional<Player> result = playersRepository.findByWeight(weight);
-        Player obj = result.get();
-        return obj;
+        List<Player> result = playersRepository.findByBorn(born);
+        return result;
+
+    }
+
+    public List<Player> findByHeight(Double height){
+
+        List<Player> result = playersRepository.findByHeight(height);
+        return result;
+
+    }
+
+    public List<Player> findByWeight(Double weight){
+
+        List<Player> result = playersRepository.findByWeight(weight);
+        return result;
 
     }
 

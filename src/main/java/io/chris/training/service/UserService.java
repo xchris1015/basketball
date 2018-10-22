@@ -22,12 +22,12 @@ public class UserService {
         return obj;
 
     }
+
     public List<User> findAll(){
         List<User> results = userRepository.findAll();
         return results;
 
     }
-
 
     public User findByUsername(String username){
         Optional<User> result = userRepository.findByUsername(username);
@@ -47,12 +47,6 @@ public class UserService {
 
     public User findByEmail(String email){
         Optional<User> result =userRepository.findByEmail(email);
-        User obj = result.get();
-        return obj;
-    }
-
-    public User findByPasswords(String passwords){
-        Optional<User> result =userRepository.findByPasswords(passwords);
         User obj = result.get();
         return obj;
     }

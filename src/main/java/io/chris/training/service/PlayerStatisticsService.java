@@ -6,6 +6,7 @@ import io.chris.training.repository.PlayersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,29 +23,30 @@ public class PlayerStatisticsService {
 
     }
 
-
-    public PlayerStatistics findByScore(Double score){
-        Optional<PlayerStatistics> result = playerStatisticsRepository.findByScore(score);
-        PlayerStatistics obj = result.get();
-        return obj;
+    public List<PlayerStatistics> findAll(){
+        List<PlayerStatistics> result = playerStatisticsRepository.findAll();
+        return result;
     }
 
-    public PlayerStatistics findByRebound(Double rebound){
-        Optional<PlayerStatistics> result = playerStatisticsRepository.findByRebound(rebound);
-        PlayerStatistics obj = result.get();
-        return obj;
+
+    public List<PlayerStatistics> findByScore(Double score){
+        List<PlayerStatistics> result = playerStatisticsRepository.findByScore(score);
+        return result;
     }
 
-    public PlayerStatistics findByAssistant(Double assistant){
-        Optional<PlayerStatistics> result = playerStatisticsRepository.findByAssistant(assistant);
-        PlayerStatistics obj = result.get();
-        return obj;
+    public List<PlayerStatistics> findByRebound(Double rebound){
+        List<PlayerStatistics> result = playerStatisticsRepository.findByRebound(rebound);
+        return result;
     }
 
-    public PlayerStatistics findBySteal(Double steal){
-        Optional<PlayerStatistics> result = playerStatisticsRepository.findBySteal(steal);
-        PlayerStatistics obj = result.get();
-        return obj;
+    public List<PlayerStatistics> findByAssistant(Double assistant){
+        List<PlayerStatistics> result = playerStatisticsRepository.findByAssistant(assistant);
+        return result;
+    }
+
+    public List<PlayerStatistics> findBySteal(Double steal){
+        List<PlayerStatistics> result = playerStatisticsRepository.findBySteal(steal);
+        return result;
     }
 
     public PlayerStatistics addPlayerStatistics(PlayerStatistics playerStatistics){
