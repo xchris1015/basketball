@@ -28,13 +28,6 @@ public class UserController {
         return users;
     }
 
-    @RequestMapping(value = "/{Id}",method = RequestMethod.GET)
-    public User findUserById(@PathVariable("Id") Long Id){
-        logger.debug("User variables is:" + Id);
-        User user = userService.findById(Id);
-        return user;
-    }
-
     @RequestMapping(value = "/signup",method = RequestMethod.POST)
     public User addUser(@RequestBody User user){
         User result = userService.addUser(user);
@@ -47,10 +40,38 @@ public class UserController {
         return result;
     }
 
+    @RequestMapping(value = "/{Id}",method = RequestMethod.GET)
+    public User findUserById(@PathVariable("Id") Long Id){
+        logger.debug("User variables is:" + Id);
+        User user = userService.findById(Id);
+        return user;
+    }
+
     @RequestMapping(method = RequestMethod.GET,params = {"first_name"})
     public List<User> findByFirstName(@RequestParam(value = "first_name") String firstName) {
         logger.debug("This first name is :"+ firstName);
         List<User> result = userService.findByFirstName(firstName);
+        return result;
+    }
+
+    @RequestMapping(method = RequestMethod.GET,params = {"last_name"})
+    public List<User> findByLastName(@RequestParam(value = "last_name") String lastName) {
+        logger.debug("This first name is :"+ lastName);
+        List<User> result = userService.findByFirstName(lastName);
+        return result;
+    }
+
+    @RequestMapping(method = RequestMethod.GET,params = {"username"})
+    public List<User> findByUsername(@RequestParam(value = "username") String username) {
+        logger.debug("This first name is :"+ username);
+        List<User> result = userService.findByFirstName(username);
+        return result;
+    }
+
+    @RequestMapping(method = RequestMethod.GET,params = {"email"})
+    public List<User> findByEmail(@RequestParam(value = "email") String email) {
+        logger.debug("This first name is :"+ email);
+        List<User> result = userService.findByFirstName(email);
         return result;
     }
 

@@ -22,7 +22,7 @@ public class TeamService {
 
     }
 
-    public List<Team> findALL(){
+    public List<Team> findAll(){
         List<Team> result = teamRepository.findAll();
         return result;
 

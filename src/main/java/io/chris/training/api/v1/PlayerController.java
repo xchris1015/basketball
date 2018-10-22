@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/api/player")
 public class PlayerController {
@@ -18,10 +20,9 @@ public class PlayerController {
     @Autowired
     private PlayerService playerService;
 
-    @RequestMapping(value = "/{Id}",method = RequestMethod.GET)
-    public Player findPlayerById(@PathVariable("Id") Long Id){
-        logger.debug("The player Id is:"+ Id);
-        Player result = playerService.findById(Id);
+    @RequestMapping(method = RequestMethod.GET,value = "")
+    public List<Player> findAll(){
+        List<Player> result = playerService.findAll();
         return result;
     }
 
@@ -34,6 +35,13 @@ public class PlayerController {
     @RequestMapping(method = RequestMethod.PUT)
     public Player updatePlayer(@RequestBody Player player) {
         Player result = playerService.save(player);
+        return result;
+    }
+
+    @RequestMapping(value = "/{Id}",method = RequestMethod.GET)
+    public Player findPlayerById(@PathVariable("Id") Long Id){
+        logger.debug("The player Id is:"+ Id);
+        Player result = playerService.findById(Id);
         return result;
     }
 
