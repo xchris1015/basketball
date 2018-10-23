@@ -56,22 +56,22 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.GET,params = {"last_name"})
     public List<User> findByLastName(@RequestParam(value = "last_name") String lastName) {
-        logger.debug("This first name is :"+ lastName);
-        List<User> result = userService.findByFirstName(lastName);
+        logger.debug("This last name is :"+ lastName);
+        List<User> result = userService.findByLastName(lastName);
         return result;
     }
 
     @RequestMapping(method = RequestMethod.GET,params = {"username"})
-    public List<User> findByUsername(@RequestParam(value = "username") String username) {
-        logger.debug("This first name is :"+ username);
-        List<User> result = userService.findByFirstName(username);
+    public User findByUsername(@RequestParam(value = "username") String username) {
+        logger.debug("This username is :"+ username);
+        User result = userService.findByUsername(username);
         return result;
     }
 
     @RequestMapping(method = RequestMethod.GET,params = {"email"})
-    public List<User> findByEmail(@RequestParam(value = "email") String email) {
+    public User findByEmail(@RequestParam(value = "email") String email) {
         logger.debug("This first name is :"+ email);
-        List<User> result = userService.findByFirstName(email);
+        User result = userService.findByEmail(email);
         return result;
     }
 

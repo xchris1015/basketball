@@ -48,43 +48,43 @@ public class TeamController {
 
     @RequestMapping(method = RequestMethod.GET,params = {"conference"})
     public List<Team> findByConference(@RequestParam(value = "conference") String conference) {
-        logger.debug("This first name is :"+ conference);
+        logger.debug("This conference is :"+ conference);
         List<Team> result = teamService.findByConference(conference);
         return result;
     }
 
     @RequestMapping(method = RequestMethod.GET,params = {"division"})
     public List<Team> findByDivision(@RequestParam(value = "division") String division) {
-        logger.debug("This first name is :"+ division);
+        logger.debug("This division is :"+ division);
         List<Team> result = teamService.findByDivision(division);
         return result;
     }
 
     @RequestMapping(method = RequestMethod.GET,params = {"found_year"})
     public List<Team> findByFoundYear(@RequestParam(value = "found_year") Instant foundYear) {
-        logger.debug("This first name is :"+ foundYear);
+        logger.debug("This found year is :"+ foundYear);
         List<Team> result = teamService.findByFoundYear(foundYear);
         return result;
     }
 
     @RequestMapping(method = RequestMethod.GET,params = {"history"})
     public Team findByHistory(@RequestParam(value = "history") String history) {
-        logger.debug("This first name is :"+ history);
+        logger.debug("This history is :"+ history);
         Team result = teamService.findByHistory(history);
         return result;
     }
 
     @RequestMapping(method = RequestMethod.GET,params = {"arena"})
     public Team findByArena(@RequestParam(value = "arena") String arena) {
-        logger.debug("This first name is :"+ arena);
-        Team result = teamService.findByHistory(arena);
+        logger.debug("This area is :"+ arena);
+        Team result = teamService.findByArena(arena);
         return result;
     }
 
     @RequestMapping(method = RequestMethod.GET,params = {"location"})
     public Team findByLocation(@RequestParam(value = "location") String location) {
-        logger.debug("This first name is :"+ location);
-        Team result = teamService.findByHistory(location);
+        logger.debug("This location is :"+ location);
+        Team result = teamService.findByLocation(location);
         return result;
     }
 

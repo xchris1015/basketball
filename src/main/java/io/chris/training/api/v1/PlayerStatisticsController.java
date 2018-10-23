@@ -44,4 +44,33 @@ public class PlayerStatisticsController {
         PlayerStatistics result = playerStatisticsService.findById(Id);
         return result;
     }
+
+    @RequestMapping(method = RequestMethod.GET,params = {"score"})
+    public List<PlayerStatistics> findByScore(@RequestParam(value = "score") Double score) {
+        logger.debug("This score is :"+ score);
+        List<PlayerStatistics> result = playerStatisticsService.findByScore(score);
+        return result;
+    }
+
+    @RequestMapping(method = RequestMethod.GET,params = {"rebound"})
+    public List<PlayerStatistics> findByRebound(@RequestParam(value = "rebound") Double rebound) {
+        logger.debug("This rebound is :"+ rebound);
+        List<PlayerStatistics> result = playerStatisticsService.findByRebound(rebound);
+        return result;
+    }
+
+    @RequestMapping(method = RequestMethod.GET,params = {"assistant"})
+    public List<PlayerStatistics> findByAssistant(@RequestParam(value = "assistant") Double assistant) {
+        logger.debug("This assistant is :"+ assistant);
+        List<PlayerStatistics> result = playerStatisticsService.findByAssistant(assistant);
+        return result;
+    }
+
+    @RequestMapping(method = RequestMethod.GET,params = {"steal"})
+    public List<PlayerStatistics> findBySteal(@RequestParam(value = "steal") Double steal) {
+        logger.debug("This steal is :"+ steal);
+        List<PlayerStatistics> result = playerStatisticsService.findBySteal(steal);
+        return result;
+    }
+
 }
