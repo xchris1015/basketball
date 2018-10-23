@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .formLogin();
 //    }
 
-    //Step 2
+//    Step 2
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {

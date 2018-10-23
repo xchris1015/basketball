@@ -70,7 +70,7 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.GET,params = {"email"})
     public User findByEmail(@RequestParam(value = "email") String email) {
-        logger.debug("This first name is :"+ email);
+        logger.debug("This email is :"+ email);
         User result = userService.findByEmail(email);
         return result;
     }
