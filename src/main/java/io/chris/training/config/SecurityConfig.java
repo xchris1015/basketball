@@ -6,17 +6,20 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-    @Autowired
-    private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
-
-    //Step 1
+public class SecurityConfig {
+    //            @Autowired
+//            private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
+//    step1
 //    @Autowired
 //    public void configureGlobal(AuthenticationManagerBuilder auth)
 //            throws Exception {
@@ -31,23 +34,66 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .and()
 //                .formLogin();
 //    }
+    //step2
+//    @Autowired
+//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.inMemoryAuthentication().withUser("user")
+//                .password("{noop}password").roles("USER");
+//    }
+//
+//    protected void configure(HttpSecurity http) throws Exception {
+//        http.csrf().disable().authorizeRequests().antMatchers("/api/users/login","/api/user/login","/api/users/signup").permitAll()
+//                .and()
+//                    .authorizeRequests().antMatchers("/api/**").hasAnyRole("REGISTERED_USER","ADMIN")
+////                .and()
+//                .and()
+//                  .formLogin();;
+//    }
 
-//    Step 2
+    @Configuration
+//    @Order(1)
+    public static class RestWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
+        @Autowired
+        private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
+        //curl -i -X POST -d username=user -d password=password -c ./cookies.txt http://localhost:8080/login
+        @Autowired
+        private UserDetailsService userDetailsService;
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("user")
-                .password("password").roles("USER");
+        @Autowired
+        public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+            PasswordEncoder encoder = new BCryptPasswordEncoder();
+//            auth.inMemoryAuthentication().withUser("user")
+//                .password("{noop}password").roles("REGISTERED_USER");
+            auth.userDetailsService(userDetailsService).passwordEncoder(encoder);
+        }
+
+        @Override
+        public void configure(WebSecurity web) throws Exception {
+            web.ignoring()
+                    .antMatchers("/resources/**");
+        }
+
+        protected void configure(HttpSecurity http) throws Exception {
+            //http://www.baeldung.com/securing-a-restful-web-service-with-spring-security
+            http.csrf().disable().authorizeRequests().antMatchers("/api/users/login","/api/users/signup").permitAll()
+                    .and()
+                    .authorizeRequests().antMatchers("/api/**").authenticated()
+                    .and()
+                    .exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint)
+                    .and()
+                    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                    .and()
+                    .formLogin();
+        }
     }
 
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests().antMatchers("/api/users/login","/api/user/login","/api/users/signup").permitAll()
-                .and()
-                .authorizeRequests().antMatchers("/api/**").hasAnyRole("REGISTERED_USER","ADMIN")
-                .and()
-                .exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint);
-    }
-
-
+//    @Configuration
+//    public static class ResourcesWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
+//        @Override
+//        public void configure(WebSecurity web) throws Exception {
+//            web.ignoring()
+//                    .antMatchers("/resources/**","/swagger-ui.html","/webjars/**");
+//        }
+//    }
 
 }

@@ -1,11 +1,15 @@
 package io.chris.training.domain;
 
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name="users")
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(generator= "users_id_seq")
@@ -28,7 +32,7 @@ public class User {
     private String email;
 
     @Column(name="passwords")
-    private String passwords;
+    private String password;
 
 
     public void setUsername(String username){
@@ -47,14 +51,44 @@ public class User {
         this.email = email;
     }
 
-    public void setPasswords(String passwords) {
-        this.passwords = passwords;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Long getId(){ return id; }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public String getPassword() {
+        return this.password;
+    }
+
     public String getUsername() {
-        return username;
+        return this.username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
     public String getFirstName() {
@@ -70,7 +104,7 @@ public class User {
     }
 
     public String getPasswords() {
-        return passwords;
+        return password;
     }
 
 
