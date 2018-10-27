@@ -3,7 +3,9 @@ package io.chris.training.service;
 import io.chris.training.domain.User;
 import io.chris.training.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.jws.soap.SOAPBinding;
 import java.util.ArrayList;
@@ -15,6 +17,8 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
     public User findById(Long id){
 
         Optional<User> result = userRepository.findById(id);
@@ -22,6 +26,7 @@ public class UserService {
         return obj;
 
     }
+
 
     public List<User> findAll(){
         List<User> results = userRepository.findAll();
@@ -51,7 +56,10 @@ public class UserService {
         return obj;
     }
 
+    @Transactional
     public User addUser(User user){
+        String encodedPassword = encoder.encode(user.getPasswords());
+        user.setPassword(encodedPassword);
         User result = userRepository.save(user);
         return result;
     }

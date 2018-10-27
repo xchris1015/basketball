@@ -75,13 +75,13 @@ public class SecurityConfig {
 
         protected void configure(HttpSecurity http) throws Exception {
             //http://www.baeldung.com/securing-a-restful-web-service-with-spring-security
-            http.csrf().disable().authorizeRequests().antMatchers("/api/users/login","/api/users/signup").permitAll()
+            http.csrf().disable().authorizeRequests().antMatchers("/api/user/login","/api/user/signup").permitAll()
                     .and()
-                    .authorizeRequests().antMatchers("/api/**").authenticated()
-                    .and()
-                    .exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint)
-                    .and()
-                    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                    .authorizeRequests().antMatchers("/api/**").hasAnyRole("REGISTERED_USER","ADMIN")
+//                    .and()
+//                    .exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint)
+//                    .and()
+//                    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and()
                     .formLogin();
         }
