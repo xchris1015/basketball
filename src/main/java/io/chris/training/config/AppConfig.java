@@ -8,12 +8,14 @@ import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 
 
 @Configuration
-@ComponentScan(basePackages = "io.chris.training")
+@ComponentScan(basePackages = "io.chris.training",
+        excludeFilters = @ComponentScan.Filter(type= FilterType.REGEX,pattern="io.ascending.training.api.*"))
 public class AppConfig {
 
     @Autowired
