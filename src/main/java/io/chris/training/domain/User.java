@@ -5,11 +5,13 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name="users")
-public class User implements UserDetails {
+public class User implements UserDetails, Serializable {
 
     @Id
     @GeneratedValue(generator= "users_id_seq")
@@ -33,6 +35,10 @@ public class User implements UserDetails {
 
     @Column(name="passwords")
     private String password;
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "user")
+//    @Transient
+    private List<Authority> authority;
 
 
     public void setUsername(String username){
@@ -58,9 +64,9 @@ public class User implements UserDetails {
     public Long getId(){ return id; }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
+    public Collection<? extends GrantedAuthority> getAuthorities() { return this.authority; }
+
+    public Collection<? extends GrantedAuthority> setAuthorities(List<Authority> authority){return this.authority=authority; }
 
     @Override
     public String getPassword() {

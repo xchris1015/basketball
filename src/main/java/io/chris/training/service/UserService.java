@@ -1,5 +1,6 @@
 package io.chris.training.service;
 
+import io.chris.training.domain.Authority;
 import io.chris.training.domain.User;
 import io.chris.training.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

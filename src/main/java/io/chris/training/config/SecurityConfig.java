@@ -9,14 +9,18 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.io.Serializable;
+import java.util.List;
+
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig {
+public class SecurityConfig implements Serializable {
     //            @Autowired
 //            private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
 //    step1
@@ -77,13 +81,18 @@ public class SecurityConfig {
             //http://www.baeldung.com/securing-a-restful-web-service-with-spring-security
             http.csrf().disable().authorizeRequests().antMatchers("/api/user/login","/api/user/signup").permitAll()
                     .and()
-                    .authorizeRequests().antMatchers("/api/**").hasAnyRole("REGISTERED_USER","ADMIN")
+                    .authorizeRequests().antMatchers("/api/**").hasAnyRole("ADMIN")
+                    .and()
+                    .authorizeRequests().antMatchers("/api/player/**","/api/playerstatistics/**","/api/team/**").hasAnyRole("COACH","PLAYER")
+                    .and()
+                    .authorizeRequests().antMatchers("/api/player/**","/api/team/**").hasAnyRole("REGISTERED_USER")
 //                    .and()
 //                    .exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint)
 //                    .and()
 //                    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and()
                     .formLogin();
+
         }
     }
 
