@@ -1,11 +1,15 @@
 package io.chris.training.service;
 
 import io.chris.training.config.AppConfig;
+import io.chris.training.domain.Authority;
 import io.chris.training.domain.User;
+import io.chris.training.extension.security.UserDetailServiceImpl;
+import io.chris.training.repository.AuthorityRepository;
 import io.chris.training.repository.UserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -21,7 +25,7 @@ import static org.junit.Assert.assertTrue;
 @WebAppConfiguration
 @ContextConfiguration(classes = {AppConfig.class})
 @RunWith(SpringJUnit4ClassRunner.class)
-@ActiveProfiles("dev")
+@ActiveProfiles("unit")
 
 public class UserServiceTest extends UserService {
 
@@ -30,6 +34,15 @@ public class UserServiceTest extends UserService {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private AuthorityRepository authorityRepository;
+
+    @Autowired
+    private AuthorityService authorityService;
+
+    @Autowired
+    private UserDetailServiceImpl userDetailServiceImpl;
 
     @Transactional
     @Test
@@ -100,6 +113,24 @@ public class UserServiceTest extends UserService {
         userRepository.save(expectedResult);
         User actualResult=userService.findByEmail("xchris1015@gmail.com7");
         assertEquals(actualResult.getId(),expectedResult.getId());
+    }
+
+    @Test
+    @Transactional
+    public void loadUserByUsernameTest() {
+        Authority expectedAuthority = new Authority();
+        User user = new User();
+        expectedAuthority.setAuthority("ADMIN");
+        expectedAuthority.setUser(user);
+        user.setUsername("xchris6");
+        user.setEmail("xchris1015@gmail.com6");
+        user.setFirstName("chris6");
+        user.setLastName("xu6");
+        user.setPassword("password6");
+        userRepository.save(user);
+        authorityRepository.save(expectedAuthority);
+        UserDetails user1 = userDetailServiceImpl.loadUserByUsername("xchris6");
+        assertEquals(user,user1);
     }
 
 

@@ -38,7 +38,7 @@
                 <version>${flyway.version}</version>
                 <configuration>
                     <driver>org.postgresql.Driver</driver>
-                    <url>jdbc:postgresql://localhost:5432/basketball</url>
+                    <url>jdbc:postgresql://localhost:5432/basketball_unit</url>
                     <password>password</password>
                     <user>admin</user>
                     <locations>

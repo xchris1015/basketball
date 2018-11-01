@@ -20,7 +20,7 @@ import static org.junit.Assert.assertTrue;
 @WebAppConfiguration
 @ContextConfiguration(classes = {AppConfig.class})
 @RunWith(SpringJUnit4ClassRunner.class)
-@ActiveProfiles("dev")
+@ActiveProfiles("unit")
 public class PlayerStatisticsServiceTest {
 
     @Autowired

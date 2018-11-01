@@ -7,6 +7,7 @@ import io.chris.training.domain.User;
 import io.chris.training.repository.AuthorityRepository;
 import io.chris.training.repository.PlayersRepository;
 import io.chris.training.repository.UserRepository;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +21,17 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 @WebAppConfiguration
 @ContextConfiguration(classes = {AppConfig.class})
 @RunWith(SpringJUnit4ClassRunner.class)
-@ActiveProfiles("dev")
+@ActiveProfiles("unit")
 public class AuthorityServiceTest {
 
     @Autowired
@@ -54,6 +58,9 @@ public class AuthorityServiceTest {
         userRepository.save(user);
         authorityRepository.save(expectedAuthority);
         Authority actualAuthority = authorityService.findAuthoritiesByUser(user);
-        assertEquals(expectedAuthority.getAuthority(), actualAuthority.getAuthority());
+        List<Authority> obj = new ArrayList<>();
+        obj.add(actualAuthority);
+        assertTrue(obj.size()==1);
+
     }
 }

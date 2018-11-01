@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,10 +23,12 @@ public class UserDetailServiceImpl implements UserDetailsService {
     private AuthorityService authorityService;
 
     @Override
-    public UserDetails loadUserByUsername(String username) {
+    public User loadUserByUsername(String username) {
         User domainUser = userService.findByUsername(username);
-//        List<Authority> authorityList = authorityService.findAuthoritiesByUser(domainUser);
-//        domainUser.setAuthorities(authorityList);
+        Authority authority = authorityService.findAuthoritiesByUser(domainUser);
+        List<Authority> obj = new ArrayList<>();
+        obj.add(authority);
+        domainUser.setAuthorities(obj);
         return domainUser;
     }
 }
