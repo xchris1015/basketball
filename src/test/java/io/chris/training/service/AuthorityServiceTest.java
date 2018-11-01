@@ -57,10 +57,8 @@ public class AuthorityServiceTest {
         user.setPassword("password6");
         userRepository.save(user);
         authorityRepository.save(expectedAuthority);
-        Authority actualAuthority = authorityService.findAuthoritiesByUser(user);
-        List<Authority> obj = new ArrayList<>();
-        obj.add(actualAuthority);
-        assertTrue(obj.size()==1);
+        List<Authority> actualAuthority = authorityService.findAuthoritiesByUser(user);
+        assertTrue(actualAuthority.size()==1);
 
     }
 }

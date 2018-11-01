@@ -13,8 +13,8 @@ public class AuthorityService {
     @Autowired
     private AuthorityRepository authorityRepository;
 
-    public Authority findAuthoritiesByUser(User user){
-        Authority result = authorityRepository.findAuthoritiesByUser(user);
+    public List<Authority> findAuthoritiesByUser(User user){
+        List<Authority> result = authorityRepository.findAuthoritiesByUser(user);
         return result;
     }
 }

@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface AuthorityRepository extends CrudRepository<Authority,Long> {
 
-    Authority findAuthoritiesByUser(User user);
+    List<Authority> findAuthoritiesByUser(User user);
 
 }

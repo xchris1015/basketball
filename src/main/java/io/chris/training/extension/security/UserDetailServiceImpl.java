@@ -25,10 +25,8 @@ public class UserDetailServiceImpl implements UserDetailsService {
     @Override
     public User loadUserByUsername(String username) {
         User domainUser = userService.findByUsername(username);
-        Authority authority = authorityService.findAuthoritiesByUser(domainUser);
-        List<Authority> obj = new ArrayList<>();
-        obj.add(authority);
-        domainUser.setAuthorities(obj);
+        List<Authority> authority = authorityService.findAuthoritiesByUser(domainUser);
+        domainUser.setAuthorities(authority);
         return domainUser;
     }
 }
