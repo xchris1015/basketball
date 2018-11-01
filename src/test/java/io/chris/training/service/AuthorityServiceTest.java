@@ -58,7 +58,7 @@ public class AuthorityServiceTest {
         userRepository.save(user);
         authorityRepository.save(expectedAuthority);
         List<Authority> actualAuthority = authorityService.findAuthoritiesByUser(user);
-        assertTrue(actualAuthority.size()==1);
+        assertEquals(actualAuthority.size(),1);
 
     }
 }

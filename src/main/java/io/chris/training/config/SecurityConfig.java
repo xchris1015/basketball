@@ -81,11 +81,11 @@ public class SecurityConfig implements Serializable {
             //http://www.baeldung.com/securing-a-restful-web-service-with-spring-security
             http.csrf().disable().authorizeRequests().antMatchers("/api/user/login","/api/user/signup").permitAll()
                     .and()
-                    .authorizeRequests().antMatchers("/api/**").hasAnyRole("ADMIN")
+                    .authorizeRequests().antMatchers("/api/player/**","/api/team/**").hasAnyRole("REGISTERED_USER")
                     .and()
                     .authorizeRequests().antMatchers("/api/player/**","/api/playerstatistics/**","/api/team/**").hasAnyRole("COACH","PLAYER")
                     .and()
-                    .authorizeRequests().antMatchers("/api/player/**","/api/team/**").hasAnyRole("REGISTERED_USER")
+                    .authorizeRequests().antMatchers("/api/**").hasAnyRole("ADMIN")
 //                    .and()
 //                    .exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint)
 //                    .and()
