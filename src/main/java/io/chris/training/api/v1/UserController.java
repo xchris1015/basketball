@@ -7,6 +7,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationTrustResolver;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -16,6 +20,9 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value = "/api/user")
 public class UserController {
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -73,6 +80,19 @@ public class UserController {
         logger.debug("This email is :"+ email);
         User result = userService.findByEmail(email);
         return result;
+    }
+
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST,params = {"username","password"})
+    public void findByUsernameAndPassword(@RequestParam(value = "username") String username, @RequestParam(value = "password") String password){
+        logger.debug("this username is:"+username);
+        logger.debug("this password is:"+password);
+
+        Authentication notFullyAuthentication = new UsernamePasswordAuthenticationToken(username,password);
+        final Authentication authentication = authenticationManager.authenticate(notFullyAuthentication);
+
+
+
     }
 
 

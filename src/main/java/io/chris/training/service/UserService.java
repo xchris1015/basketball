@@ -57,12 +57,15 @@ public class UserService {
         return obj;
     }
 
-    @Transactional
     public User addUser(User user){
         String encodedPassword = encoder.encode(user.getPasswords());
         user.setPassword(encodedPassword);
         User result = userRepository.save(user);
         return result;
     }
+
+
+
+
 
 }
