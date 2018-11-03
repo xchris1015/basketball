@@ -32,6 +32,13 @@ public class AppConfig {
         return bean;
     }
 
+    @Bean(name="shareProperties")
+    public PropertiesFactoryBean getShareProperties(){
+        PropertiesFactoryBean bean = new PropertiesFactoryBean();
+        bean.setLocation(new ClassPathResource("META-INF/share-runtime.properties"));
+        return bean;
+    }
+
 
 
 }

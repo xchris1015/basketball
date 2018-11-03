@@ -6,11 +6,15 @@ import io.chris.training.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.mobile.device.Device;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -84,12 +88,18 @@ public class UserController {
 
 
     @RequestMapping(value = "/login", method = RequestMethod.POST,params = {"username","password"})
-    public void findByUsernameAndPassword(@RequestParam(value = "username") String username, @RequestParam(value = "password") String password){
-        logger.debug("this username is:"+username);
-        logger.debug("this password is:"+password);
+    public void login(@RequestParam(value = "username") String username, @RequestParam(value = "password") String password, Device device){
+        logger.info("this username is:"+username);
+        logger.info("this password is:"+password);
 
-        Authentication notFullyAuthentication = new UsernamePasswordAuthenticationToken(username,password);
-        final Authentication authentication = authenticationManager.authenticate(notFullyAuthentication);
+        try{
+            Authentication notFullyAuthentication = new UsernamePasswordAuthenticationToken(username,password);
+            final Authentication authentication = authenticationManager.authenticate(notFullyAuthentication);
+        }catch(AuthenticationException ex){
+            logger.debug("check your username or password",ex);
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("authentication failure, please check your username or password");
+        }
+
 
 
 
