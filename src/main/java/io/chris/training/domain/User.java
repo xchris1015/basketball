@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Collection;
 import java.util.List;
 
@@ -39,6 +40,18 @@ public class User implements UserDetails, Serializable {
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "user")
 //    @Transient
     private List<Authority> authority;
+
+    @Column(name="create_at")
+    private Instant createAt;
+
+    public Instant getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(Instant createAt) {
+        this.createAt = createAt;
+    }
+
 
 
     public void setUsername(String username){

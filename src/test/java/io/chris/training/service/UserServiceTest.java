@@ -3,12 +3,14 @@ package io.chris.training.service;
 import io.chris.training.config.AppConfig;
 import io.chris.training.domain.Authority;
 import io.chris.training.domain.User;
+import io.chris.training.extension.security.JwtTokenUtil;
 import io.chris.training.extension.security.UserDetailServiceImpl;
 import io.chris.training.repository.AuthorityRepository;
 import io.chris.training.repository.UserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mobile.device.LiteDevice;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
@@ -43,6 +45,9 @@ public class UserServiceTest extends UserService {
 
     @Autowired
     private UserDetailServiceImpl userDetailServiceImpl;
+
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
 
     @Transactional
     @Test
@@ -132,6 +137,26 @@ public class UserServiceTest extends UserService {
         UserDetails user1 = userDetailServiceImpl.loadUserByUsername("xchris6");
         assertEquals(user,user1);
     }
+
+    @Test
+    @Transactional
+    public void getUsernameFromTokenTest(){
+        Authority expectedAuthority = new Authority();
+        User user = new User();
+        expectedAuthority.setAuthority("ADMIN");
+        expectedAuthority.setUser(user);
+        user.setUsername("xchris6");
+        user.setEmail("xchris1015@gmail.com6");
+        user.setFirstName("chris6");
+        user.setLastName("xu6");
+        user.setPassword("password6");
+        userRepository.save(user);
+        authorityRepository.save(expectedAuthority);
+        String token = jwtTokenUtil.generateToken(user,new LiteDevice());
+        String actualUsername = jwtTokenUtil.getUsernameFromToken(token);
+        assertEquals(user.getUsername(),actualUsername);
+    }
+
 
 
 }
