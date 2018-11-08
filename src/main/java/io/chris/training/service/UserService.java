@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.jws.soap.SOAPBinding;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -27,7 +28,6 @@ public class UserService {
         return obj;
 
     }
-
 
     public List<User> findAll(){
         List<User> results = userRepository.findAll();
@@ -62,6 +62,12 @@ public class UserService {
         user.setPassword(encodedPassword);
         User result = userRepository.save(user);
         return result;
+    }
+
+    public List<User> findByCreateAt(Instant createAt){
+        List<User> results = userRepository.findByCreateAt(createAt);
+        return results;
+
     }
 
 

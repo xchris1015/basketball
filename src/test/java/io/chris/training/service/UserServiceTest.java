@@ -18,6 +18,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,6 +51,8 @@ public class UserServiceTest extends UserService {
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
+
+    private LocalDate date = LocalDate.parse("1993-10-15");
 
     @Transactional
     @Test
@@ -156,6 +161,28 @@ public class UserServiceTest extends UserService {
         String actualUsername = jwtTokenUtil.getUsernameFromToken(token);
         assertEquals(user.getUsername(),actualUsername);
     }
+
+    @Test
+    @Transactional
+    public void findByCreateAtTest(){
+        Authority expectedAuthority = new Authority();
+        User user = new User();
+        expectedAuthority.setAuthority("ADMIN");
+        expectedAuthority.setUser(user);
+        user.setUsername("xchris6");
+        user.setEmail("xchris1015@gmail.com6");
+        user.setFirstName("chris6");
+        user.setLastName("xu6");
+        user.setPassword("password6");
+        Instant instant = date.atStartOfDay(ZoneId.systemDefault()).toInstant();
+        user.setCreateAt(instant);
+        userRepository.save(user);
+        authorityRepository.save(expectedAuthority);
+        List<User> actualUsers = userRepository.findByCreateAt(instant);
+        assertEquals(actualUsers.get(0),user);
+    }
+
+
 
 
 
