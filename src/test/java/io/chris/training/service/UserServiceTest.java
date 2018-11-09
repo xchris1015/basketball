@@ -183,6 +183,29 @@ public class UserServiceTest extends UserService {
     }
 
 
+    @Test
+    @Transactional
+    public void getCreatedAtFromTokenTest(){
+        Authority expectedAuthority = new Authority();
+        User user = new User();
+        expectedAuthority.setAuthority("ADMIN");
+        expectedAuthority.setUser(user);
+        user.setUsername("xchris6");
+        user.setEmail("xchris1015@gmail.com6");
+        user.setFirstName("chris6");
+        user.setLastName("xu6");
+        user.setPassword("password6");
+        Instant instant = date.atStartOfDay(ZoneId.systemDefault()).toInstant();
+        user.setCreateAt(instant);
+        userRepository.save(user);
+        authorityRepository.save(expectedAuthority);
+
+        String token = jwtTokenUtil.generateToken(user,new LiteDevice());
+        Instant actualCreateAt = jwtTokenUtil.getCreatedAtFromToken(token);
+        assertEquals(user.getCreateAt(),actualCreateAt);
+    }
+
+
 
 
 
