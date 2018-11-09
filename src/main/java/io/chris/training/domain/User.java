@@ -42,7 +42,7 @@ public class User implements UserDetails, Serializable {
     private List<Authority> authority;
 
     @Column(name="create_at")
-    private Instant createAt;
+    private Instant createAt= Instant.now();
 
     public Instant getCreateAt() {
         return createAt;

@@ -2,6 +2,7 @@ package io.chris.training.api.v1;
 
 import io.chris.training.domain.Player;
 import io.chris.training.domain.User;
+import io.chris.training.extension.security.JwtTokenUtil;
 import io.chris.training.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -27,6 +29,9 @@ public class UserController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private JwtTokenUtil jwtTokenUtil;
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -88,17 +93,20 @@ public class UserController {
 
 
     @RequestMapping(value = "/login", method = RequestMethod.POST,params = {"username","password"})
-    public void login(@RequestParam(value = "username") String username, @RequestParam(value = "password") String password, Device device){
+    public ResponseEntity<?> login(@RequestParam(value = "username") String username, @RequestParam(value = "password") String password, Device device){
         logger.info("this username is:"+username);
         logger.info("this password is:"+password);
 
         try{
             Authentication notFullyAuthentication = new UsernamePasswordAuthenticationToken(username,password);
             final Authentication authentication = authenticationManager.authenticate(notFullyAuthentication);
+            final UserDetails userDetails = userService.findByUsername(username);
+            final String token = jwtTokenUtil.generateToken(userDetails,device);
+            return ResponseEntity.ok(new String(token));
         }catch(AuthenticationException ex){
-            logger.debug("check your username or password",ex);
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("authentication failure, please check your username or password");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("authentication failure, please check your username or password");
         }
+
 
 
 

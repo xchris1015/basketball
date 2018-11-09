@@ -53,7 +53,6 @@ public class JwtTokenUtil {
     }
 
     public Instant getCreatedAtFromToken(String token) {
-        Date createAtDate;
         Instant createAt;
         try {
             final Claims claims = getClaimsFromToken(token);
