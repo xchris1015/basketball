@@ -3,6 +3,7 @@ package io.chris.training.api.v1;
 import io.chris.training.domain.Player;
 import io.chris.training.domain.User;
 import io.chris.training.extension.security.JwtTokenUtil;
+import io.chris.training.extension.security.RestAuthenticationRequest;
 import io.chris.training.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -92,8 +93,10 @@ public class UserController {
     }
 
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST,params = {"username","password"})
-    public ResponseEntity<?> login(@RequestParam(value = "username") String username, @RequestParam(value = "password") String password, Device device){
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public ResponseEntity<?> login(@RequestBody RestAuthenticationRequest authenticationRequest, Device device){
+        String username = authenticationRequest.getUsername();
+        String password = authenticationRequest.getPassword();
         logger.info("this username is:"+username);
         logger.info("this password is:"+password);
 
