@@ -1,5 +1,6 @@
 package io.chris.training.config;
 
+import io.chris.training.extension.security.JwtAuthenticationFilter;
 import io.chris.training.extension.security.RestAuthenticationEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,6 +18,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.io.Serializable;
 import java.util.List;
@@ -57,6 +59,7 @@ public class SecurityConfig implements Serializable {
 //                  .formLogin();;
 //    }
 
+
     @Configuration
 //    @Order(1)
     public static class RestWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
@@ -65,6 +68,9 @@ public class SecurityConfig implements Serializable {
         //curl -i -X POST -d username=user -d password=password -c ./cookies.txt http://localhost:8080/login
         @Autowired
         private UserDetailsService userDetailsService;
+
+        @Autowired
+        private JwtAuthenticationFilter jwtAuthenticationFilter;
 
         @Autowired
         public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -88,19 +94,20 @@ public class SecurityConfig implements Serializable {
 
         protected void configure(HttpSecurity http) throws Exception {
             //http://www.baeldung.com/securing-a-restful-web-service-with-spring-security
-            http.csrf().disable().authorizeRequests().antMatchers("/api/user/login","/api/user/signup").permitAll()
+            http.addFilterAt(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                    .csrf().disable().authorizeRequests().antMatchers("/api/user/login","/api/user/signup").permitAll()
                     .and()
-                    .authorizeRequests().antMatchers("/api/player/**","/api/team/**").hasAnyRole("REGISTERED_USER")
+                        .authorizeRequests().antMatchers("/api/player/**","/api/team/**").hasAnyRole("REGISTERED_USER")
                     .and()
-                    .authorizeRequests().antMatchers("/api/player/**","/api/playerstatistics/**","/api/team/**").hasAnyRole("COACH","PLAYER")
+                        .authorizeRequests().antMatchers("/api/playerstatistic/**").hasAnyRole("COACH","PLAYER")
                     .and()
-                    .authorizeRequests().antMatchers("/api/**").hasAnyRole("ADMIN")
+                        .authorizeRequests().antMatchers("/api/**").hasAnyRole("ADMIN")
+                    .and()
+                        .exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint)
+                    .and()
+                        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 //                    .and()
-//                    .exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint)
-//                    .and()
-//                    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                    .and()
-                    .formLogin();
+//                    .formLogin();
 
         }
     }
