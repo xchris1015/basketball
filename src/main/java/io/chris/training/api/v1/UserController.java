@@ -109,18 +109,18 @@ public class UserController {
             final Authentication authentication = authenticationManager.authenticate(notFullyAuthentication);
             final UserDetails userDetails = userService.findByUsername(username);
             final String token = jwtTokenUtil.generateToken(userDetails,device);
-            return ResponseEntity.ok(new String(token));
+            return ResponseEntity.ok(new String("{"+"token"+":"+token+"}"));
         }catch(AuthenticationException ex){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("authentication failure, please check your username or password");
         }
 
     }
 
-    @RequestMapping(value = "/update",method = RequestMethod.POST)
-    public User updateUserAuthority(@RequestBody User user){
-        User result = userService.updateUserAuthority(user,);
-        return result;
-    }
+//    @RequestMapping(value = "/update",method = RequestMethod.POST)
+//    public User updateUserAuthority(@RequestBody User user){
+//        User result = userService.updateUserAuthority(user,);
+//        return result;
+//    }
 
 
 

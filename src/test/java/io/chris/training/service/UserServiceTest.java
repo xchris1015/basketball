@@ -205,6 +205,24 @@ public class UserServiceTest extends UserService {
         assertEquals(user.getCreateAt(),actualCreateAt);
     }
 
+    @Test
+    @Transactional
+    public void addUserTest(){
+
+        User user = new User();
+        user.setUsername("xchris6");
+        user.setEmail("xchris1015@gmail.com6");
+        user.setFirstName("chris6");
+        user.setLastName("xu6");
+        user.setPassword("password6");
+        userRepository.save(user);
+        User user1 = userService.addUser(user);
+        assertTrue(user1.getPasswords()!="password6");
+        assertTrue(authorityService.findAuthoritiesByUser(user1).size()>=1);
+
+    }
+
+
 
 
 
