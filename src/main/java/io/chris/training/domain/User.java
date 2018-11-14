@@ -38,7 +38,7 @@ public class User implements UserDetails, Serializable {
     private String password;
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "user")
-//    @Transient
+    @Transient
     private List<Authority> authority;
 
     @Column(name="create_at")

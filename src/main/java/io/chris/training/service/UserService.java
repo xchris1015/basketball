@@ -74,13 +74,6 @@ public class UserService {
     }
 
 
-    public User updateUserAuthority(User user,String authority){
-        Authority updateAuthority = authorityService.addAuthority(user,authority);
-        return user;
-    }
-
-
-
     public List<User> findByCreateAt(Instant createAt){
         List<User> results = userRepository.findByCreateAt(createAt);
         return results;

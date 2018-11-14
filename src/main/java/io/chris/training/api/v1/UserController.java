@@ -1,30 +1,28 @@
 package io.chris.training.api.v1;
 
-import io.chris.training.domain.Authority;
-import io.chris.training.domain.Player;
 import io.chris.training.domain.User;
+import io.chris.training.extension.security.ElevateAuthority;
 import io.chris.training.extension.security.JwtTokenUtil;
 import io.chris.training.extension.security.RestAuthenticationRequest;
+import io.chris.training.repository.UserRepository;
 import io.chris.training.service.AuthorityService;
 import io.chris.training.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mobile.device.Device;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/api/user")
@@ -39,10 +37,15 @@ public class UserController {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
+    @Autowired
+    private UserRepository userRepository;
+
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private UserService userService;
+
+    static final String TOEKN_KEY = "token";
 
     @RequestMapping(value = "",method = RequestMethod.GET)
     public List<User> findAllUser(){
@@ -98,7 +101,7 @@ public class UserController {
     }
 
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST,produces = "application/json")
     public ResponseEntity<?> login(@RequestBody RestAuthenticationRequest authenticationRequest, Device device){
         String username = authenticationRequest.getUsername();
         String password = authenticationRequest.getPassword();
@@ -109,18 +112,26 @@ public class UserController {
             final Authentication authentication = authenticationManager.authenticate(notFullyAuthentication);
             final UserDetails userDetails = userService.findByUsername(username);
             final String token = jwtTokenUtil.generateToken(userDetails,device);
-            return ResponseEntity.ok(new String("{"+"token"+":"+token+"}"));
+            Map<String, Object> Jsontoken = new HashMap<>();
+            Jsontoken.put(TOEKN_KEY,token);
+            return ResponseEntity.ok(Jsontoken);
         }catch(AuthenticationException ex){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("authentication failure, please check your username or password");
         }
 
     }
 
-//    @RequestMapping(value = "/update",method = RequestMethod.POST)
-//    public User updateUserAuthority(@RequestBody User user){
-//        User result = userService.updateUserAuthority(user,);
-//        return result;
-//    }
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public void updateUserAuthority(@RequestBody ElevateAuthority elevateAuthority){
+        String username = elevateAuthority.getUsername();
+        String authorityString = elevateAuthority.getAuthorityString();
+        logger.info("this username is:"+username);
+        logger.info("this password is:"+authorityString);
+        User user = userService.findByUsername(username);
+        authorityService.addAuthority(user,authorityString);
+    }
+
+
 
 
 
