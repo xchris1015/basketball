@@ -1,7 +1,6 @@
 package io.chris.training.api.v1;
 
 import io.chris.training.domain.User;
-import io.chris.training.extension.security.ElevateAuthority;
 import io.chris.training.extension.security.JwtTokenUtil;
 import io.chris.training.extension.security.RestAuthenticationRequest;
 import io.chris.training.repository.UserRepository;
@@ -121,15 +120,7 @@ public class UserController {
 
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public void updateUserAuthority(@RequestBody ElevateAuthority elevateAuthority){
-        String username = elevateAuthority.getUsername();
-        String authorityString = elevateAuthority.getAuthorityString();
-        logger.info("this username is:"+username);
-        logger.info("this password is:"+authorityString);
-        User user = userService.findByUsername(username);
-        authorityService.addAuthority(user,authorityString);
-    }
+
 
 
 
