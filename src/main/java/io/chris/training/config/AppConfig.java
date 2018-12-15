@@ -1,9 +1,14 @@
 package io.chris.training.config;
 
 
+import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import io.chris.training.service.StorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -11,6 +16,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
+
+import java.io.IOException;
+
+import static javax.swing.plaf.basic.BasicHTML.propertyKey;
 
 
 @Configuration
@@ -37,6 +46,14 @@ public class AppConfig {
         PropertiesFactoryBean bean = new PropertiesFactoryBean();
         bean.setLocation(new ClassPathResource("META-INF/share-runtime.properties"));
         return bean;
+    }
+
+    @Bean
+    public StorageService  getStorageServiceClass(@Autowired @Qualifier("applicationProperties") PropertiesFactoryBean propertiesFactoryBean) throws IOException {
+        AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withRegion("us-east-1").withCredentials(new ProfileCredentialsProvider()).build();
+        StorageService storageService = new StorageService(s3Client);
+        storageService.setBucket(propertiesFactoryBean.getObject().getProperty("chrisbasketball"));
+        return storageService;
     }
 
 

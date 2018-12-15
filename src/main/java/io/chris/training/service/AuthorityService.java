@@ -20,6 +20,7 @@ public class AuthorityService {
     }
 
     @Transactional
+    //TODO add method if there is register user role exist, unable to add same role
     public Authority addAuthority(User user,String authorityString){
         Authority result = new Authority(user,authorityString);
         return authorityRepository.save(result);
