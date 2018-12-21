@@ -97,7 +97,7 @@ public class SecurityConfig implements Serializable {
             http.addFilterAt(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                     .csrf().disable().authorizeRequests().antMatchers("/api/user/login","/api/user/signup").permitAll()
                     .and()
-                        .authorizeRequests().antMatchers("/api/player/**","/api/team/**","/api/playerstatistic/**","/api/user/**").hasAnyRole("REGISTERED_USER")
+                        .authorizeRequests().antMatchers("/api/player/**","/api/team/**","/api/playerstatistic/**","/api/user/**","/api/image/**").hasAnyRole("REGISTERED_USER")
 //                    .and()
 //                        .authorizeRequests().antMatchers("/api/playerstatistic/**").hasAnyRole("COACH","PLAYER")
                     .and()

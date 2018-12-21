@@ -2,6 +2,7 @@ package io.chris.training.service;
 
 
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import io.chris.training.config.AppConfig;
 import org.junit.After;
 import org.junit.Before;
@@ -55,12 +56,10 @@ public class StorageServiceTest{
 
     @Test
     public void putObjectTest(){
-        String s3Key="hhhh";
-        File file = new File("~/Desktop/1.png");
-        String bucket= "chrisbasketball";
-        storageService.putObject(s3Key,file);
-        assertTrue(false);
-
+        final AmazonS3 s3 = AmazonS3ClientBuilder.standard().withRegion("us-east-1").build();
+        StorageService storageService = new StorageService(s3);
+        File file = new File("User/chris/Desktop/1.png");
+        storageService.putObject("test",file);
     }
 
     @Test

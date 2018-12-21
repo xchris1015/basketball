@@ -49,10 +49,10 @@ public class AppConfig {
     }
 
     @Bean
-    public StorageService  getStorageServiceClass(@Autowired @Qualifier("applicationProperties") PropertiesFactoryBean propertiesFactoryBean) throws IOException {
+    public StorageService getStorageServiceClass(@Autowired @Qualifier("applicationProperties") PropertiesFactoryBean propertiesFactoryBean) throws IOException {
         AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withRegion("us-east-1").withCredentials(new ProfileCredentialsProvider()).build();
         StorageService storageService = new StorageService(s3Client);
-        storageService.setBucket(propertiesFactoryBean.getObject().getProperty("chrisbasketball"));
+        storageService.setBucket("chrisbasketball");
         return storageService;
     }
 
