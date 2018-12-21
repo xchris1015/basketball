@@ -1,11 +1,16 @@
 package io.chris.training.service;
 
+import io.chris.training.domain.Authority;
 import io.chris.training.domain.User;
+import io.chris.training.repository.AuthorityRepository;
 import io.chris.training.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.jws.soap.SOAPBinding;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +19,14 @@ import java.util.Optional;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private AuthorityService authorityService;
+
+    @Autowired
+    private AuthorityRepository authorityRepository;
+
+    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     public User findById(Long id){
 
@@ -52,8 +65,23 @@ public class UserService {
     }
 
     public User addUser(User user){
+        String encodedPassword = encoder.encode(user.getPasswords());
+        user.setPassword(encodedPassword);
+        user.setCreateAt(Instant.now());
         User result = userRepository.save(user);
+        authorityService.addAuthority(user,"ROLE_REGISTERED_USER");
         return result;
     }
+
+
+    public List<User> findByCreateAt(Instant createAt){
+        List<User> results = userRepository.findByCreateAt(createAt);
+        return results;
+
+    }
+
+
+
+
 
 }

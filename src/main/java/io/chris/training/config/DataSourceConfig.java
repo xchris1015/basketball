@@ -1,5 +1,6 @@
 package io.chris.training.config;
 
+import io.chris.training.service.StorageService;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.slf4j.Logger;
@@ -78,10 +79,6 @@ public class DataSourceConfig {
     @Bean(name="dataSource")
     public DataSource getDataSource(){
         DataSource dataSource = createDataSource();
-        logger.debug("create datasource");
-        logger.info("test");
-        logger.warn("warn test");
-        logger.error("error test");
         return dataSource;
     }
 
@@ -99,4 +96,7 @@ public class DataSourceConfig {
         dataSource.setMinEvictableIdleTimeMillis(180000);
         return dataSource;
     }
+
+
+
 }

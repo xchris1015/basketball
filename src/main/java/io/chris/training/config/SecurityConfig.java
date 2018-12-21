@@ -1,22 +1,31 @@
 package io.chris.training.config;
 
+import io.chris.training.extension.security.JwtAuthenticationFilter;
 import io.chris.training.extension.security.RestAuthenticationEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import java.io.Serializable;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig {
+public class SecurityConfig implements Serializable {
     //            @Autowired
 //            private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
 //    step1
@@ -50,6 +59,7 @@ public class SecurityConfig {
 //                  .formLogin();;
 //    }
 
+
     @Configuration
 //    @Order(1)
     public static class RestWebSecurityConfigurationAdapter extends WebSecurityConfigurerAdapter {
@@ -60,11 +70,20 @@ public class SecurityConfig {
         private UserDetailsService userDetailsService;
 
         @Autowired
+        private JwtAuthenticationFilter jwtAuthenticationFilter;
+
+        @Autowired
         public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
             PasswordEncoder encoder = new BCryptPasswordEncoder();
 //            auth.inMemoryAuthentication().withUser("user")
 //                .password("{noop}password").roles("REGISTERED_USER");
             auth.userDetailsService(userDetailsService).passwordEncoder(encoder);
+        }
+
+        @Bean(name = BeanIds.AUTHENTICATION_MANAGER)
+        @Override
+        public AuthenticationManager authenticationManagerBean() throws Exception {
+            return super.authenticationManagerBean();
         }
 
         @Override
@@ -75,15 +94,21 @@ public class SecurityConfig {
 
         protected void configure(HttpSecurity http) throws Exception {
             //http://www.baeldung.com/securing-a-restful-web-service-with-spring-security
-            http.csrf().disable().authorizeRequests().antMatchers("/api/users/login","/api/users/signup").permitAll()
+            http.addFilterAt(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                    .csrf().disable().authorizeRequests().antMatchers("/api/user/login","/api/user/signup").permitAll()
                     .and()
-                    .authorizeRequests().antMatchers("/api/**").authenticated()
+                        .authorizeRequests().antMatchers("/api/player/**","/api/team/**","/api/playerstatistic/**","/api/user/**","/api/image/**").hasAnyRole("REGISTERED_USER")
+//                    .and()
+//                        .authorizeRequests().antMatchers("/api/playerstatistic/**").hasAnyRole("COACH","PLAYER")
                     .and()
-                    .exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint)
+                        .authorizeRequests().antMatchers("/api/admin/**").hasAnyRole("ADMIN")
                     .and()
-                    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                        .exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint)
                     .and()
-                    .formLogin();
+                        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//                    .and()
+//                    .formLogin();
+
         }
     }
 
