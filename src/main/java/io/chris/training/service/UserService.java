@@ -65,7 +65,7 @@ public class UserService {
     }
 
     public User addUser(User user){
-        String encodedPassword = encoder.encode(user.getPasswords());
+        String encodedPassword = encoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
         user.setCreateAt(Instant.now());
         User result = userRepository.save(user);

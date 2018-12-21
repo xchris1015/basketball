@@ -1,6 +1,9 @@
 package io.chris.training.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -30,6 +33,7 @@ public class User implements UserDetails, Serializable {
 //    @NotNull
     private String lastName;
 
+    @JsonView({JsView.Registered_User.class})
     @Column(name="email",unique = true)
 //    @NotNull
     private String email;
@@ -41,6 +45,7 @@ public class User implements UserDetails, Serializable {
     @Transient
     private List<Authority> authority;
 
+    @JsonIgnore
     @Column(name="create_at")
     private Instant createAt= Instant.now();
 
@@ -51,8 +56,6 @@ public class User implements UserDetails, Serializable {
     public void setCreateAt(Instant createAt) {
         this.createAt = createAt;
     }
-
-
 
     public void setUsername(String username){
         this.username=username;
@@ -70,41 +73,49 @@ public class User implements UserDetails, Serializable {
         this.email = email;
     }
 
+    public Long getId(){ return id; }
+
+    @JsonIgnore
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @JsonProperty
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public Long getId(){ return id; }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() { return this.authority; }
 
     public Collection<? extends GrantedAuthority> setAuthorities(List<Authority> authority){return this.authority=authority; }
 
-    @Override
-    public String getPassword() {
-        return this.password;
-    }
 
     public String getUsername() {
         return this.username;
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isEnabled() {
         return true;
@@ -122,9 +133,6 @@ public class User implements UserDetails, Serializable {
         return email;
     }
 
-    public String getPasswords() {
-        return password;
-    }
 
 
 

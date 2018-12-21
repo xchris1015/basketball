@@ -1,12 +1,14 @@
 package io.chris.training.config;
 
 import io.chris.training.config.viewResolver.JsonViewResolver;
+import io.chris.training.extension.Jackson.JsonViewHttpMessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.ResourceHttpMessageConverter;
+import org.springframework.http.converter.json.JsonbHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.mobile.device.DeviceHandlerMethodArgumentResolver;
 import org.springframework.web.accept.ContentNegotiationManager;
@@ -58,7 +60,7 @@ public class MvcConfig implements WebMvcConfigurer {
 
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters){
-        MappingJackson2HttpMessageConverter jsonViewHttpMessageConverter = new MappingJackson2HttpMessageConverter();
+        JsonViewHttpMessageConverter jsonViewHttpMessageConverter = new JsonViewHttpMessageConverter();
         ResourceHttpMessageConverter resourceHttpMessageConverter = new ResourceHttpMessageConverter();
         converters.add(jsonViewHttpMessageConverter);
         converters.add(resourceHttpMessageConverter);

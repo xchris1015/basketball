@@ -217,7 +217,7 @@ public class UserServiceTest extends UserService {
         user.setPassword("password6");
         userRepository.save(user);
         User user1 = userService.addUser(user);
-        assertTrue(user1.getPasswords()!="password6");
+        assertTrue(user1.getPassword()!="password6");
         assertTrue(authorityService.findAuthoritiesByUser(user1).size()>=1);
 
     }

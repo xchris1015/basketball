@@ -1,5 +1,6 @@
 package io.chris.training.api.v1;
 
+import io.chris.training.domain.JsView;
 import io.chris.training.domain.User;
 import io.chris.training.extension.security.JwtTokenUtil;
 import io.chris.training.extension.security.RestAuthenticationRequest;
@@ -25,7 +26,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/api/user")
-public class UserController {
+public class UserController extends BaseController{
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -66,6 +67,8 @@ public class UserController {
 
     @RequestMapping(value = "/{Id}",method = RequestMethod.GET)
     public User findUserById(@PathVariable("Id") Long Id){
+        setJsonViewClass(JsView.Admin.class);
+        disableMapperFeature_DEFAULT_VIEW_INCLUSION();
         logger.debug("User variables is:" + Id);
         User user = userService.findById(Id);
         return user;
