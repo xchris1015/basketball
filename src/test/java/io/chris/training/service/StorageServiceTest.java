@@ -34,15 +34,15 @@ import static org.mockito.Mockito.validateMockitoUsage;
 @TestExecutionListeners(listeners = {DependencyInjectionTestExecutionListener.class})
 public class StorageServiceTest{
 
-    @InjectMocks
+//    @InjectMocks
     @Autowired
     private StorageService storageService;
 
     @Value("#{applicationProperties['amazon.s3.bucket']}")
     protected String s3Bucket;
 
-    @Mock //make a fake instant
-    private AmazonS3 client = Mockito.mock(AmazonS3.class);
+//    @Mock //make a fake instant
+//    private AmazonS3 client = Mockito.mock(AmazonS3.class);
 
     @Before
     public void setUp() throws Exception{
@@ -56,8 +56,8 @@ public class StorageServiceTest{
 
     @Test
     public void putObjectTest(){
-        File file = new File("User/chris/Desktop/1.png");
-        storageService.putObject("test",file);
+        File file = new File("/Users/chris/Desktop/1.png");
+        storageService.putObject("test1.png",file);
     }
 
     @Test

@@ -1,9 +1,14 @@
 package io.chris.training.config;
 
 
+import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.sqs.AmazonSQS;
+import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
+import com.amazonaws.services.sqs.model.SendMessageRequest;
+import io.chris.training.service.MessageService;
 import io.chris.training.service.StorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,13 +53,20 @@ public class AppConfig {
         return bean;
     }
 
-    @Bean
+    @Bean //approach 1: without service bean
     public StorageService getStorageServiceClass(@Autowired @Qualifier("applicationProperties") PropertiesFactoryBean propertiesFactoryBean) throws IOException {
-        AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withRegion("us-east-1").withCredentials(new ProfileCredentialsProvider()).build();
+        AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withCredentials(new DefaultAWSCredentialsProviderChain()).build();
         StorageService storageService = new StorageService(s3Client);
         storageService.setBucket("chrisbasketball");
         return storageService;
     }
+
+    @Bean // approach 2: autowired AmazonSQS
+    public AmazonSQS getAmazonSQS(){
+        AmazonSQS sqsClient = AmazonSQSClientBuilder.standard().withCredentials(new DefaultAWSCredentialsProviderChain()).build();
+        return sqsClient;
+    }
+
 
 
 
