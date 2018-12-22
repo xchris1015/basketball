@@ -25,7 +25,9 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import java.io.File;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.validateMockitoUsage;
+import static org.mockito.Mockito.verify;
 
 @WebAppConfiguration
 @ContextConfiguration(classes = {AppConfig.class})
@@ -34,15 +36,15 @@ import static org.mockito.Mockito.validateMockitoUsage;
 @TestExecutionListeners(listeners = {DependencyInjectionTestExecutionListener.class})
 public class StorageServiceTest{
 
-//    @InjectMocks
+    @InjectMocks
     @Autowired
     private StorageService storageService;
 
     @Value("#{applicationProperties['amazon.s3.bucket']}")
     protected String s3Bucket;
 
-//    @Mock //make a fake instant
-//    private AmazonS3 client = Mockito.mock(AmazonS3.class);
+    @Mock //make a fake instant
+    private AmazonS3 client = Mockito.mock(AmazonS3.class);
 
     @Before
     public void setUp() throws Exception{
@@ -58,18 +60,27 @@ public class StorageServiceTest{
     public void putObjectTest(){
         File file = new File("/Users/chris/Desktop/1.png");
         storageService.putObject("test1.png",file);
+        assertTrue(false);
     }
 
     @Test
     public void putObjectMockTest(){
+        String key = "testkey";
+        File file = new File("/Users/chris/Desktop/1.png");
+        storageService.putObject(key,file);
+        verify(client,times(1)).putObject(s3Bucket,key,file);
 
-
+        String key2 = "";
+        File file2 = new File("/Users/chris/Desktop/1.png");
+        storageService.putObject(key2,file2);
+        verify(client,times(1)).putObject(s3Bucket,key2,file2);
     }
 
     @Test
     public void getObjectMockTest(){
-
-
+        String key = "testkey";
+        storageService.getObject(key);
+        verify(client,times(1)).getObject(s3Bucket,key);
     }
 
 

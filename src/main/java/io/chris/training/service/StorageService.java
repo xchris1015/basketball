@@ -41,4 +41,8 @@ public class StorageService {
         s3.putObject(bucket,S3key,file);
     }
 
+    public void getObject(String S3key){
+        s3.getObject(bucket,S3key);
+    }
+
 }
