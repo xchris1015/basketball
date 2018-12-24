@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -23,6 +24,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
+import java.util.Properties;
 
 import static javax.swing.plaf.basic.BasicHTML.propertyKey;
 
@@ -31,6 +33,9 @@ import static javax.swing.plaf.basic.BasicHTML.propertyKey;
 @ComponentScan(basePackages = "io.chris.training",
         excludeFilters = @ComponentScan.Filter(type= FilterType.REGEX,pattern="io.ascending.training.api.*"))
 public class AppConfig {
+
+    @Value("#{applicationProperties['amazon.s3.bucket']}")
+    private String amazonS3Bucket;
 
     @Autowired
     private Environment environment; // get jvm environment, get a string arrary
@@ -57,7 +62,7 @@ public class AppConfig {
     public StorageService getStorageServiceClass(@Autowired @Qualifier("applicationProperties") PropertiesFactoryBean propertiesFactoryBean) throws IOException {
         AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withCredentials(new DefaultAWSCredentialsProviderChain()).build();
         StorageService storageService = new StorageService(s3Client);
-        storageService.setBucket("chrisbasketball");
+        storageService.setBucket(propertiesFactoryBean.getObject().getProperty(amazonS3Bucket));
         return storageService;
     }
 

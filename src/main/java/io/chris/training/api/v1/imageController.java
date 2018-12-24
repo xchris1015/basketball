@@ -27,6 +27,8 @@ public class imageController {
     public void uploadImage(@RequestParam(value = "image") MultipartFile file){
         String fileName = file.getOriginalFilename();
         logger.info("This file name is:"+ fileName);
+
+        //TODO
         File convertedFile = new File( "/Users/Chris/Downloads/"+file.getOriginalFilename());
         try{
             file.transferTo(convertedFile);
@@ -34,8 +36,6 @@ public class imageController {
             logger.debug("cannot save file," +e);
         }
         storageService.putObject("filename",convertedFile);
-
-
     }
 
 
