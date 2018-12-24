@@ -1,5 +1,6 @@
 package io.chris.training.api.v1;
 
+import io.chris.training.service.ImageService;
 import io.chris.training.service.StorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,13 +24,16 @@ public class imageController {
     @Autowired
     public StorageService storageService;
 
+    @Autowired
+    public ImageService imageService;
+
     @RequestMapping(method = RequestMethod.POST)
     public void uploadImage(@RequestParam(value = "image") MultipartFile file){
         String fileName = file.getOriginalFilename();
         logger.info("This file name is:"+ fileName);
 
         //TODO
-        File convertedFile = new File( "/Users/Chris/Downloads/"+file.getOriginalFilename());
+        File convertedFile = new File( "../"+file.getOriginalFilename());
         try{
             file.transferTo(convertedFile);
         }catch (IOException e){

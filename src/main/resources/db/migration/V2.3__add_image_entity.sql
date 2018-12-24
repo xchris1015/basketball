@@ -1,4 +1,4 @@
-create sequence image_id_seq;
+create sequence images_id_seq;
 create table images(
    id bigint not null DEFAULT NEXTVAL('images_id_seq'),
    UUID varchar (255) not NULL,
