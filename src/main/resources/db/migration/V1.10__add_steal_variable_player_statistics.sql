@@ -1,1 +1,0 @@
-Alter Table player_statistics add steal FLOAT;
