@@ -25,9 +25,9 @@ public class ImageService {
         return result;
     }
 
-    public Image findByUUID(String UUID){
-        logger.debug("this UUID is:" + UUID);
-        Image result = imageRepository.findByUuid(UUID);
+    public Image findByUUID(String uuid){
+        logger.debug("this UUID is:" + uuid);
+        Image result = imageRepository.findByUuid(uuid);
         return result;
     }
 

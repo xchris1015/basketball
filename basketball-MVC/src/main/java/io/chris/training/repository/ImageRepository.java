@@ -9,6 +9,6 @@ import java.util.UUID;
 public interface ImageRepository extends CrudRepository<Image,Long> {
 
     List<Image> findAll();
-    Image findByUuid(String UUID);
+    Image findByUuid(String uuid);
 
 }
