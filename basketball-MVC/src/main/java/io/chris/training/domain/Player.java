@@ -16,8 +16,8 @@ import static javax.persistence.GenerationType.SEQUENCE;/// ??? why this work
 public class Player {
 
     @Id
-    @GeneratedValue(strategy = SEQUENCE, generator= "users_id_seq")
-    @SequenceGenerator(name = "users_id_seq",sequenceName = "users_id_seq",allocationSize = 1)
+    @GeneratedValue(strategy = SEQUENCE, generator= "players_id_seq")
+    @SequenceGenerator(name = "players_id_seq",sequenceName = "players_id_seq",allocationSize = 1)
     private Long id;
 
 //    @ManyToOne(fetch = FetchType.EAGER)
