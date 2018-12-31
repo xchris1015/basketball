@@ -33,6 +33,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.validateMockitoUsage;
@@ -94,26 +95,21 @@ public class StorageServiceTest{
 
     @Test
     public void convertFileTest(){
-//        Path path = Paths.get("/Desktop/1.png");
-//        String name = "file.png";
-//        String originalFileName = "file.png";
-//        String contentType = FilenameUtils.getExtension(name);
-//        byte[] content = null;
-//        try {
-//            content = Files.readAllBytes(path);
-//        } catch (final IOException e) {
-//        }
-//        MultipartFile result = new CommonsMultipartFile();
-//
-//
-//
-//
-//        String key = "testkey";
-//        File file = new File("/Users/chris/Desktop/1.png");
-//        storageService.putObject(key,file);
+        Path path = Paths.get("/Desktop/1.png");
+        String name = "1.png";
+        String originalFileName = "1.png";
+        String contentType = "image/png";
+        byte[] content = null;
+        try {
+            content = Files.readAllBytes(path);
+        } catch (final IOException e) {
+        }
+        MultipartFile multipartFile = new MockMultipartFile(name,originalFileName,contentType,content);
+        File expectedResult = storageService.convertFile(multipartFile);
 
 
 
+        assertEquals(multipartFile.getOriginalFilename(),expectedResult.getName());
     }
 
 

@@ -50,7 +50,6 @@ public class UserController extends BaseController{
     static final String TOEKN_KEY = "token";
 
     @RequestMapping(value = "",method = RequestMethod.GET)
-    @JsonView(User.Admin.class)
     public List<User> findAllUser(){
         List<User> users = userService.findAll();
         return users;

@@ -23,7 +23,7 @@ public class Player {
 //    @ManyToOne(fetch = FetchType.EAGER)
 //    @JoinColumn(name = "team_id")
 //    private Team team;
-
+    //TODO add manytoone oneto many for player and player statistics
     @Column(name ="first_name")
     private String firstName;
 

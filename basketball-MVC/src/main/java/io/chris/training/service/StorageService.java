@@ -62,7 +62,7 @@ public class StorageService {
 
         String systemRoot = System.getProperty("user.home");
 
-        File convertedFile = new File( systemRoot+file.getOriginalFilename());
+        File convertedFile = new File( file.getOriginalFilename());
         try{
             file.transferTo(convertedFile);
         }catch (IOException e){
