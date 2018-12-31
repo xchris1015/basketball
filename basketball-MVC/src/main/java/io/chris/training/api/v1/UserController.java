@@ -1,5 +1,7 @@
 package io.chris.training.api.v1;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
 import io.chris.training.domain.JsView;
 import io.chris.training.domain.User;
 import io.chris.training.extension.security.JwtTokenUtil;
@@ -48,10 +50,12 @@ public class UserController extends BaseController{
     static final String TOEKN_KEY = "token";
 
     @RequestMapping(value = "",method = RequestMethod.GET)
+    @JsonView(User.Admin.class)
     public List<User> findAllUser(){
         List<User> users = userService.findAll();
         return users;
     }
+
 
     @RequestMapping(value = "/signup",method = RequestMethod.POST)
     public User addUser(@RequestBody User user){

@@ -17,12 +17,15 @@ import java.util.List;
 @Table(name="users")
 public class User implements UserDetails, Serializable {
 
+    public interface Registered_User{} //{} represent as class or implementation
+    public interface Player extends Registered_User {}
+    public interface Coach extends Player {}
+    public interface Admin extends Coach {}
+
     @Id
     @GeneratedValue(generator= "users_id_seq")
     @SequenceGenerator(name = "users_id_seq",sequenceName = "users_id_seq",allocationSize = 1)
     private Long id;
-
-
 
     @Column(name="username",unique = true)
 //    @NotNull
@@ -75,6 +78,7 @@ public class User implements UserDetails, Serializable {
         this.email = email;
     }
 
+    @JsonView(Admin.class)
     public Long getId(){ return id; }
 
     @JsonIgnore
