@@ -94,23 +94,23 @@ public class StorageServiceTest{
 
     @Test
     public void convertFileTest(){
-        Path path = Paths.get("/Desktop/1.png");
-        String name = "file.png";
-        String originalFileName = "file.png";
-        String contentType = FilenameUtils.getExtension(name);
-        byte[] content = null;
-        try {
-            content = Files.readAllBytes(path);
-        } catch (final IOException e) {
-        }
-        MultipartFile result = new MockMultipartFile(name, originalFileName, contentType, content);
-
-
-
-
-        String key = "testkey";
-        File file = new File("/Users/chris/Desktop/1.png");
-        storageService.putObject(key,file);
+//        Path path = Paths.get("/Desktop/1.png");
+//        String name = "file.png";
+//        String originalFileName = "file.png";
+//        String contentType = FilenameUtils.getExtension(name);
+//        byte[] content = null;
+//        try {
+//            content = Files.readAllBytes(path);
+//        } catch (final IOException e) {
+//        }
+//        MultipartFile result = new CommonsMultipartFile();
+//
+//
+//
+//
+//        String key = "testkey";
+//        File file = new File("/Users/chris/Desktop/1.png");
+//        storageService.putObject(key,file);
 
 
 
