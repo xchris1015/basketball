@@ -1,8 +1,6 @@
 package io.chris.training.api.v1;
 
-import io.chris.training.domain.JsView;
-import io.chris.training.domain.User;
-import io.chris.training.service.MessageService;
+import io.chris.training.service.jms.MessageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

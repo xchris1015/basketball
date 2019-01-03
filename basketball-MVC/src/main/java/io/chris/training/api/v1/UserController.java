@@ -67,15 +67,18 @@ public class UserController extends BaseController{
         User result = userService.addUser(user);
         return result;
     }
-
+// TODO change the return method, also design two argument API
     @RequestMapping(value = "/{Id}",method = RequestMethod.GET)
     public User findUserById(@PathVariable("Id") Long Id){
         setJsonViewClass(JsView.Admin.class);
         disableMapperFeature_DEFAULT_VIEW_INCLUSION();
         logger.debug("User variables is:" + Id);
         User user = userService.findById(Id);
+//        return userService.findById(new User(Id)).get();
         return user;
     }
+
+
 
     @RequestMapping(method = RequestMethod.GET,params = {"first_name"})
     public List<User> findByFirstName(@RequestParam(value = "first_name") String firstName) {

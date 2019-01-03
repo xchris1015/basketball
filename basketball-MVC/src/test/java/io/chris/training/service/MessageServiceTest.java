@@ -1,9 +1,10 @@
 package io.chris.training.service;
 
-import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.sqs.AmazonSQS;
+import com.amazonaws.services.sqs.model.GetQueueUrlResult;
 import com.amazonaws.services.sqs.model.SendMessageRequest;
 import io.chris.training.config.AppConfig;
+import io.chris.training.service.jms.MessageService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,48 +24,43 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.validateMockitoUsage;
 import static org.mockito.Mockito.verify;
+import static org.powermock.api.mockito.PowerMockito.when;
 
 @WebAppConfiguration
 @ContextConfiguration(classes = {AppConfig.class})
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles("unit")
-@TestExecutionListeners(listeners = {DependencyInjectionTestExecutionListener.class})
+//@TestExecutionListeners(listeners = {DependencyInjectionTestExecutionListener.class})
 public class MessageServiceTest {
 
     @Autowired
     private MessageService messageService;
+    @Autowired
+    private AmazonSQS client;
 
     @Value("#{applicationProperties['jms.queue.name']}") // approach 2, insert to method argument with variable
+    private String queue;
 
-    private String queue="chrisbasketball-unit";
+    private String queueUrl = "mockUrl";
 
-    private String queueUrl;
-
-    @Mock //make a fake instant
-    private AmazonSQS client = Mockito.mock(AmazonSQS.class);
-
-    @Before
-    public void setUp() throws Exception{
-        MockitoAnnotations.initMocks(this);
-    }
-
-    @After
-    public void tearDown() throws Exception{
-        validateMockitoUsage();
-    }
+//    @Mock //make a fake instant
+//    private AmazonSQS client = Mockito.mock(AmazonSQS.class);
 
     @Test
     public void sendMessageTest(){
-        String messageBody="message";
-        Integer delaySecond = 5;
-        messageService.sendMessage(messageBody,delaySecond);
-///       SendMessageRequest messageRequest =
-///       verify(client,times(1)).sendMessage(messageRequest);
+        String messageBody = "Success!";
+        int delaySec = 5;
+        messageService.sendMessage(messageBody, delaySec);
+        SendMessageRequest sendMsgRequest = new SendMessageRequest()
+                .withQueueUrl(queueUrl)
+                .withMessageBody(messageBody)
+                .withDelaySeconds(delaySec);
+        verify(client,times(1)).sendMessage(sendMsgRequest);
     }
 
     @Test
     public void receiveMessageTest(){
-        client.receiveMessage(queue).getMessages();
+
  //       verify(client,times(1)).receiveMessage(queueUrl);
     }
 

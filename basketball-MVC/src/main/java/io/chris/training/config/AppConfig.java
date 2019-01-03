@@ -2,31 +2,21 @@ package io.chris.training.config;
 
 
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
-import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
-import com.amazonaws.services.sqs.model.SendMessageRequest;
-import io.chris.training.service.MessageService;
-import io.chris.training.service.StorageService;
+import io.chris.training.service.jms.StorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.FilterType;
+import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
-import java.util.Properties;
-
-import static javax.swing.plaf.basic.BasicHTML.propertyKey;
 
 
 @Configuration
@@ -67,6 +57,7 @@ public class AppConfig {
     }
 
     @Bean // approach 2: autowired AmazonSQS
+    @Profile({"dev","test","prod"})
     public AmazonSQS getAmazonSQS(){
         AmazonSQS sqsClient = AmazonSQSClientBuilder.standard().withCredentials(new DefaultAWSCredentialsProviderChain()).build();
         return sqsClient;

@@ -1,4 +1,4 @@
-package io.chris.training.service;
+package io.chris.training.service.jms;
 
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
@@ -13,12 +13,12 @@ import java.util.List;
 public class MessageService {
 
     private AmazonSQS sqs;
-    @Value("#{applicationProperties['jms.queue.name']}") // approach 2, insert to method argument with variable
-    private String queue="chrisbasketball-dev";
+//    @Value("#{applicationProperties['jms.queue.name']}") // approach 2, insert to method argument with variable
+//    private String queue="chrisbasketball-dev";
     private String queueUrl;
 
 
-    public MessageService(@Autowired AmazonSQS sqs) {
+    public MessageService(@Autowired AmazonSQS sqs,@Value("#{applicationProperties['jms.queue.name']}") String queue) {
         this.sqs = sqs;
         this.queueUrl = getQueueUrl(queue);
     }
@@ -31,13 +31,13 @@ public class MessageService {
         this.sqs = sqs;
     }
 
-    public String getQueue() {
-        return queue;
-    }
-
-    public void setQueue(String queue) {
-        this.queue = queue;
-    }
+//    public String getQueue() {
+//        return queue;
+//    }
+//
+//    public void setQueue(String queue) {
+//        this.queue = queue;
+//    }
 
     public void sendMessage(String messageBody,Integer delaySecond){
         SendMessageRequest send_msg_request = new SendMessageRequest()
@@ -47,8 +47,8 @@ public class MessageService {
         sqs.sendMessage(send_msg_request);
     }
 
-    public void receiveMessage(AmazonSQS sqs,String queue){
-        List<Message> messages = sqs.receiveMessage(queue).getMessages();
+    public void receiveMessage(AmazonSQS sqs,String queueUrl){
+        List<Message> messages = sqs.receiveMessage(queueUrl).getMessages();
     }
 
     public String getQueueUrl(String queue){

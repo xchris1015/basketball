@@ -1,4 +1,4 @@
-package io.chris.training.service;
+package io.chris.training.service.jms;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.S3Object;
@@ -52,9 +52,6 @@ public class StorageService {
         return s3.getObject(bucket,S3key);
     }
 
-    // TODO relative path, put convert file to Services
-    // TODO 1 Service Mutifile to file. 2 StorageService fileName already to UUID.extension then upload to S3.
-    // TODO 3 S3 Object have S3 Key with new Image setting up on the ImageServices
 
     public File convertFile(MultipartFile file){
         String fileName = file.getOriginalFilename();
@@ -62,7 +59,7 @@ public class StorageService {
 
         String systemRoot = System.getProperty("user.home");
 
-        File convertedFile = new File( file.getOriginalFilename());
+        File convertedFile = new File( systemRoot+"/" + file.getOriginalFilename());
         try{
             file.transferTo(convertedFile);
         }catch (IOException e){

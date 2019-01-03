@@ -28,6 +28,15 @@ public class UserService {
 
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
+    public User findByID(Long Id){
+        return userRepository.findById(Id).get();
+    }
+
+
+
+    // TODO transactional(readOnly = true) how to explain and how to use;
+    //TODO what is encapsulation?
+    // TODO Optional ifprsesent test
     public User findById(Long id){
 
         Optional<User> result = userRepository.findById(id);
@@ -41,6 +50,8 @@ public class UserService {
         return results;
 
     }
+
+
 
     public User findByUsername(String username){
         Optional<User> result = userRepository.findByUsername(username);
