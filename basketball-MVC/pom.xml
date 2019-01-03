@@ -26,6 +26,7 @@
         <fasterxml-jackson.version>2.9.5</fasterxml-jackson.version>
         <aws.sdk.version>1.11.360</aws.sdk.version>
         <mockito.version>2.19.0</mockito.version>
+        <swagger.version>2.9.2</swagger.version>
     </properties>
 
 
@@ -363,6 +364,23 @@
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
             <version>1.3.3</version>
+        </dependency>
+
+        <!--API Documentation-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-bean-validators</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger.version}</version>
         </dependency>
 
     </dependencies>

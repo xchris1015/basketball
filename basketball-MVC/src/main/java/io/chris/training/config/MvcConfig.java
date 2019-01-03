@@ -1,10 +1,12 @@
 package io.chris.training.config;
 
 import io.chris.training.config.viewResolver.JsonViewResolver;
+import io.chris.training.config.viewResolver.SwaggerConfig;
 import io.chris.training.extension.Jackson.JsonViewHttpMessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.ResourceHttpMessageConverter;
@@ -16,10 +18,7 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 
 import java.util.ArrayList;
@@ -28,6 +27,7 @@ import java.util.List;
 @Configuration
 @EnableWebMvc
 @ComponentScan("io.chris.training.api")
+@Import({SwaggerConfig.class})
 public class MvcConfig implements WebMvcConfigurer {
 
     @Override // override the original method inherited from WebMvcConfig
@@ -81,6 +81,14 @@ public class MvcConfig implements WebMvcConfigurer {
         CommonsMultipartResolver resolver = new CommonsMultipartResolver();
         resolver.setMaxInMemorySize(10008439);
         return resolver;
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
+        registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+
     }
 
 

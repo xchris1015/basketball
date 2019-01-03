@@ -21,6 +21,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.validateMockitoUsage;
 import static org.mockito.Mockito.verify;
@@ -35,6 +36,7 @@ public class MessageServiceTest {
 
     @Autowired
     private MessageService messageService;
+
     @Autowired
     private AmazonSQS client;
 
@@ -60,14 +62,18 @@ public class MessageServiceTest {
 
     @Test
     public void receiveMessageTest(){
-
- //       verify(client,times(1)).receiveMessage(queueUrl);
+        String messageBody = "Success!";
+        int delaySec = 5;
+        messageService.sendMessage(messageBody, delaySec);
+        messageService.receiveMessage(client,queueUrl);
+        verify(client,times(1)).receiveMessage(queueUrl);
     }
 
-
-//    public void receiveMessage(AmazonSQS sqs,String queue){
-//        List<Message> messages = sqs.receiveMessage(queue).getMessages();
-//    }
+    @Test
+    public void getQueueUrlTest(){
+        String queue_url = messageService.getQueueUrl(queue);
+        assertEquals(queue_url,queueUrl);
+    }
 
 
 

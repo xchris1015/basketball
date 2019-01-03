@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 import io.chris.training.domain.JsView;
 import io.chris.training.domain.User;
+import io.chris.training.extension.Comparator;
 import io.chris.training.extension.security.JwtTokenUtil;
 import io.chris.training.extension.security.RestAuthenticationRequest;
 import io.chris.training.repository.UserRepository;
@@ -22,6 +23,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -84,6 +86,8 @@ public class UserController extends BaseController{
     public List<User> findByFirstName(@RequestParam(value = "first_name") String firstName) {
         logger.debug("This first name is :"+ firstName);
         List<User> result = userService.findByFirstName(firstName);
+        Comparator comparator = new Comparator();
+        Collections.sort(result,comparator);
         return result;
     }
 

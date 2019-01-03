@@ -28,7 +28,7 @@ public class AppConfig {
     private String amazonS3Bucket="amazon.s3.bucket";
 
     @Autowired
-    private Environment environment; // get jvm environment, get a string arrary
+    private Environment environment; // get jvm environment, get a string array
     private final Logger logger = LoggerFactory.getLogger(getClass());
     //private String propertyKey = "amazon.s3.bucket";
 

@@ -24,6 +24,7 @@ public class MockAmazonSQS {
         AmazonSQS client= Mockito.mock(AmazonSQS.class);
         GetQueueUrlResult mockQueueResult = Mockito.mock(GetQueueUrlResult.class);
         when(mockQueueResult.getQueueUrl()).thenReturn(queueUrl);
+        // TODO why return mockQueueResult in here?
         when(client.getQueueUrl(queue)).thenReturn(mockQueueResult);
         return client;
     }
