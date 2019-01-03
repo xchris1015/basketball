@@ -2,6 +2,7 @@ package io.chris.training.config;
 
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.model.GetQueueUrlResult;
+import com.amazonaws.services.sqs.model.ReceiveMessageResult;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -26,6 +27,8 @@ public class MockAmazonSQS {
         when(mockQueueResult.getQueueUrl()).thenReturn(queueUrl);
         // TODO why return mockQueueResult in here?
         when(client.getQueueUrl(queue)).thenReturn(mockQueueResult);
+        ReceiveMessageResult receiveMessage = Mockito.mock(ReceiveMessageResult.class);
+        when(client.receiveMessage(queueUrl)).thenReturn(receiveMessage);
         return client;
     }
 }

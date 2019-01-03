@@ -62,9 +62,9 @@ public class MessageServiceTest {
 
     @Test
     public void receiveMessageTest(){
-        String messageBody = "Success!";
-        int delaySec = 5;
-        messageService.sendMessage(messageBody, delaySec);
+//        String messageBody = "Success!";
+//        int delaySec = 5;
+//        messageService.sendMessage(messageBody, delaySec);
         messageService.receiveMessage(client,queueUrl);
         verify(client,times(1)).receiveMessage(queueUrl);
     }

@@ -2,6 +2,7 @@ package io.chris.training.service.jms;
 
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
+import com.amazonaws.services.sqs.model.GetQueueUrlResult;
 import com.amazonaws.services.sqs.model.Message;
 import com.amazonaws.services.sqs.model.SendMessageRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +53,8 @@ public class MessageService {
     }
 
     public String getQueueUrl(String queue){
-        String queue_url = sqs.getQueueUrl(queue).getQueueUrl();
+        GetQueueUrlResult result = sqs.getQueueUrl(queue);
+        String queue_url = result.getQueueUrl();
         return queue_url;
     }
 
