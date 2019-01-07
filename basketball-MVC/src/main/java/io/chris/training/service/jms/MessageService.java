@@ -4,12 +4,15 @@ import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 import com.amazonaws.services.sqs.model.GetQueueUrlResult;
 import com.amazonaws.services.sqs.model.Message;
+import com.amazonaws.services.sqs.model.MessageAttributeValue;
 import com.amazonaws.services.sqs.model.SendMessageRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+
 @Service
 public class MessageService {
 
@@ -44,6 +47,17 @@ public class MessageService {
         SendMessageRequest send_msg_request = new SendMessageRequest()
                 .withQueueUrl(queueUrl)
                 .withMessageBody(messageBody)
+                .withDelaySeconds(delaySecond);
+        sqs.sendMessage(send_msg_request);
+    }
+
+
+    // TODO unit test
+    public void sendMessage(Map<String, MessageAttributeValue> messageBody, Integer delaySecond){
+        SendMessageRequest send_msg_request = new SendMessageRequest()
+                .withQueueUrl(queueUrl)
+                .withMessageBody("This is my message text.")
+                .withMessageAttributes(messageBody)
                 .withDelaySeconds(delaySecond);
         sqs.sendMessage(send_msg_request);
     }

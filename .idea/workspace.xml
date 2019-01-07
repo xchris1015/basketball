@@ -7,11 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fdd04d86-e467-4374-bd31-405e1b33bbbd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/basketball_MVC_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/basketball_MVC_war_exploded.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/basketball-worker/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/basketball-worker/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/basketball-worker/src/main/java/io/chris/training/worker/Controller/HelloController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/basketball-worker/src/main/java/io/chris/training/worker/domain/Hello.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/basketball-MVC/src/main/java/io/chris/training/api/v1/MessageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/basketball-MVC/src/main/java/io/chris/training/api/v1/MessageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/basketball-MVC/src/main/java/io/chris/training/service/jms/MessageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/basketball-MVC/src/main/java/io/chris/training/service/jms/MessageService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/basketball-worker/src/main/java/io/chris/training/worker/WorkerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/basketball-worker/src/main/java/io/chris/training/worker/WorkerApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/basketball-worker/src/main/java/io/chris/training/worker/service/SQSMessageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/basketball-worker/src/main/java/io/chris/training/worker/service/SQSMessageService.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/basketball-MVC/target/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -25,6 +24,9 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/basketball$StorageServiceTest_convertFileTest.ic" NAME="StorageServiceTest.convertFileTest Coverage Results" MODIFIED="1546293792168" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>io.chris.training.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/basketball$WorkerApplication.ic" NAME="WorkerApplication Coverage Results" MODIFIED="1546702057061" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>io.chris.training.worker.*</FILTER>
     </SUITE>
   </component>
   <component name="FUSProjectUsageTrigger">
@@ -40,12 +42,15 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
+          <entry key="Dockerfile" value="1" />
           <entry key="class" value="15" />
           <entry key="gitignore" value="3" />
           <entry key="iml" value="1" />
-          <entry key="java" value="216" />
+          <entry key="java" value="224" />
           <entry key="properties" value="8" />
+          <entry key="sh" value="2" />
           <entry key="sql" value="40" />
+          <entry key="txt" value="2" />
           <entry key="xml" value="14" />
         </counts>
       </usages-collector>
@@ -53,8 +58,8 @@
         <counts>
           <entry key="CLASS" value="15" />
           <entry key="IDEA_MODULE" value="1" />
-          <entry key="JAVA" value="216" />
-          <entry key="PLAIN_TEXT" value="3" />
+          <entry key="JAVA" value="224" />
+          <entry key="PLAIN_TEXT" value="8" />
           <entry key="Properties" value="8" />
           <entry key="SQL" value="40" />
           <entry key="XML" value="14" />
@@ -62,15 +67,18 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="2485" />
+          <entry key="java" value="3192" />
           <entry key="properties" value="25" />
+          <entry key="sh" value="171" />
           <entry key="sql" value="243" />
+          <entry key="txt" value="174" />
           <entry key="xml" value="260" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="2485" />
+          <entry key="JAVA" value="3192" />
+          <entry key="PLAIN_TEXT" value="345" />
           <entry key="Properties" value="25" />
           <entry key="SQL" value="243" />
           <entry key="XML" value="260" />
@@ -81,43 +89,64 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ops/container/Dockerfile">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ops/container/setenv.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="60" lean-forward="true" selection-start-line="4" selection-start-column="60" selection-end-line="4" selection-end-column="60" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ops/container/build.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="42" selection-end-line="6" selection-end-column="42" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/basketball-worker/src/main/java/io/chris/training/worker/WorkerApplication.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="15" column="86" lean-forward="true" selection-start-line="15" selection-start-column="86" selection-end-line="15" selection-end-column="86" />
+            <state relative-caret-position="104">
+              <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/basketball-worker/src/main/java/io/chris/training/worker/config/AmazonConfig.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="553">
+              <caret line="62" column="5" selection-start-line="62" selection-start-column="5" selection-end-line="62" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/basketball-worker/src/main/java/io/chris/training/worker/config/AmazonConfig.java">
+        <entry file="file://$PROJECT_DIR$/basketball-worker/src/main/java/io/chris/training/worker/service/ProcessService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-98">
-              <caret line="29" column="36" lean-forward="true" selection-start-line="29" selection-start-column="36" selection-end-line="29" selection-end-column="36" />
+            <state relative-caret-position="165">
+              <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/basketball-worker/src/main/java/io/chris/training/worker/service/SQSMessageService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="412">
-              <caret line="48" column="5" lean-forward="true" selection-start-line="48" selection-start-column="5" selection-end-line="48" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/basketball-worker/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="765">
-              <caret line="51" column="26" selection-start-line="51" selection-start-column="26" selection-end-line="51" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -181,7 +210,6 @@
         <option value="$PROJECT_DIR$/basketball-MVC/src/main/java/io/chris/training/config/viewResolver/SwaggerConfig.java" />
         <option value="$PROJECT_DIR$/basketball-MVC/src/main/java/io/chris/training/config/MvcConfig.java" />
         <option value="$PROJECT_DIR$/basketball-MVC/src/test/java/io/chris/training/service/MessageServiceTest.java" />
-        <option value="$PROJECT_DIR$/basketball-MVC/src/main/java/io/chris/training/service/jms/MessageService.java" />
         <option value="$PROJECT_DIR$/basketball-MVC/src/test/java/io/chris/training/config/MockAmazonSQS.java" />
         <option value="$PROJECT_DIR$/basketball-worker/src/main/java/io/chris/training/worker/domain/Hello.java" />
         <option value="$PROJECT_DIR$/basketball-worker/src/main/java/io/chris/training/worker/domain/WorkerApplication.java" />
@@ -190,9 +218,16 @@
         <option value="$PROJECT_DIR$/basketball-worker/src/main/java/io/chris/training/worker/Service/SQSMessageService.java" />
         <option value="$PROJECT_DIR$/basketball-worker/src/main/java/io/chris/training/worker/controller/WorkerController.java" />
         <option value="$PROJECT_DIR$/basketball-worker/pom.xml" />
-        <option value="$PROJECT_DIR$/basketball-worker/src/main/java/io/chris/training/worker/service/SQSMessageService.java" />
         <option value="$PROJECT_DIR$/basketball-worker/src/main/java/io/chris/training/worker/config/AmazonConfig.java" />
+        <option value="$PROJECT_DIR$/basketball-worker/src/main/java/io/chris/training/worker/service/SQSMessageService.java" />
+        <option value="$PROJECT_DIR$/basketball-MVC/src/main/java/io/chris/training/service/jms/MessageService.java" />
+        <option value="$PROJECT_DIR$/basketball-MVC/src/main/java/io/chris/training/api/v1/MessageController.java" />
+        <option value="$PROJECT_DIR$/ops/container/Dcokerfile.txt" />
         <option value="$PROJECT_DIR$/basketball-worker/src/main/java/io/chris/training/worker/WorkerApplication.java" />
+        <option value="$PROJECT_DIR$/ops/container/Dockerfile.txt" />
+        <option value="$PROJECT_DIR$/ops/container/setenv.sh" />
+        <option value="$PROJECT_DIR$/ops/container/build.sh" />
+        <option value="$PROJECT_DIR$/basketball-worker/src/main/java/io/chris/training/worker/service/ProcessService.java" />
       </list>
     </option>
   </component>
@@ -253,70 +288,7 @@
               <item name="basketball" type="b2602c69:ProjectViewProjectNode" />
               <item name="basketball" type="462c0819:PsiDirectoryNode" />
               <item name="basketball-MVC" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="basketball" type="b2602c69:ProjectViewProjectNode" />
-              <item name="basketball" type="462c0819:PsiDirectoryNode" />
-              <item name="basketball-MVC" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="basketball" type="b2602c69:ProjectViewProjectNode" />
-              <item name="basketball" type="462c0819:PsiDirectoryNode" />
-              <item name="basketball-MVC" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="basketball" type="b2602c69:ProjectViewProjectNode" />
-              <item name="basketball" type="462c0819:PsiDirectoryNode" />
-              <item name="basketball-MVC" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="training" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="basketball" type="b2602c69:ProjectViewProjectNode" />
-              <item name="basketball" type="462c0819:PsiDirectoryNode" />
-              <item name="basketball-MVC" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="training" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="basketball" type="b2602c69:ProjectViewProjectNode" />
-              <item name="basketball" type="462c0819:PsiDirectoryNode" />
-              <item name="basketball-MVC" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="training" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="basketball" type="b2602c69:ProjectViewProjectNode" />
-              <item name="basketball" type="462c0819:PsiDirectoryNode" />
-              <item name="basketball-MVC" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="training" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="jms" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="basketball" type="b2602c69:ProjectViewProjectNode" />
-              <item name="basketball" type="462c0819:PsiDirectoryNode" />
-              <item name="basketball-MVC" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="basketball" type="b2602c69:ProjectViewProjectNode" />
@@ -372,6 +344,17 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="worker" type="462c0819:PsiDirectoryNode" />
               <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="basketball" type="b2602c69:ProjectViewProjectNode" />
+              <item name="basketball" type="462c0819:PsiDirectoryNode" />
+              <item name="ops" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="basketball" type="b2602c69:ProjectViewProjectNode" />
+              <item name="basketball" type="462c0819:PsiDirectoryNode" />
+              <item name="ops" type="462c0819:PsiDirectoryNode" />
+              <item name="container" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -387,7 +370,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1546641928081" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1546882799072" />
     <property name="js.buildTools.gulp.gulp_package_dir" value="" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -416,7 +399,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.WorkerApplication">
+  <component name="RunManager" selected="Tomcat Server.basketball-MVC">
     <configuration name="MessageServiceTest.getQueueUrlTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="basketball-MVC" />
       <extension name="coverage">
@@ -489,7 +472,7 @@
         </pattern>
       </extension>
       <option name="SPRING_BOOT_MAIN_CLASS" value="io.chris.training.worker.WorkerApplication" />
-      <option name="VM_PARAMETERS" value="-Dspring.profiles.active=dev -ea -Daws.accessKeyId=AKIAJQAPEG2QLQS27VNA -Daws.secretKey=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 -Daws.region=us-east-1 -Djms.queue.name=chrisbasketball-unit" />
+      <option name="VM_PARAMETERS" value="-Dspring.profiles.active=dev -ea -Daws.accessKeyId=AKIAJQAPEG2QLQS27VNA -Daws.secretKey=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 -Daws.region=us-east-1" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -735,7 +718,7 @@
       <workItem from="1546053564300" duration="3500000" />
       <workItem from="1546057260488" duration="5288000" />
       <workItem from="1546102619962" duration="24493000" />
-      <workItem from="1546530157914" duration="20327000" />
+      <workItem from="1546530157914" duration="27412000" />
     </task>
     <servers />
   </component>
@@ -772,13 +755,13 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53608000" />
+    <option name="totallyTimeSpent" value="60693000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="1027" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20818071" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20818071" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -789,20 +772,20 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32941177" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.38074866" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4993895" visible="true" weight="0.38074866" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Application Servers" order="7" weight="0.32941177" />
-      <window_info anchor="bottom" id="Spring" order="8" />
+      <window_info anchor="bottom" id="Spring" order="8" weight="0.32941177" />
       <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50061053" side_tool="true" weight="0.38074866" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.32941177" />
       <window_info anchor="bottom" id="Java Enterprise" order="12" />
       <window_info anchor="bottom" id="Database Changes" order="13" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="14" show_stripe_button="false" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.24969475" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
@@ -831,6 +814,10 @@
         <watch expression="sqs.receiveMessage(queueUrl)" language="JAVA" />
       </configuration>
     </watches-manager>
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
@@ -862,55 +849,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/5.0.6.RELEASE/spring-core-5.0.6.RELEASE.jar!/org/springframework/core/env/Environment.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-core/5.0.6.RELEASE/spring-core-5.0.6.RELEASE-sources.jar!/org/springframework/core/env/Environment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="85" column="13" selection-start-line="85" selection-start-column="13" selection-end-line="85" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-beans/5.0.6.RELEASE/spring-beans-5.0.6.RELEASE-sources.jar!/org/springframework/beans/factory/annotation/Qualifier.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="39" column="18" selection-start-line="39" selection-start-column="18" selection-end-line="39" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/amazonaws/aws-java-sdk-sqs/1.11.360/aws-java-sdk-sqs-1.11.360-sources.jar!/com/amazonaws/services/sqs/model/ReceiveMessageRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2609">
-          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/mockito/mockito-core/2.19.0/mockito-core-2.19.0-sources.jar!/org/mockito/internal/creation/bytebuddy/MockMethodInterceptor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="127" selection-start-line="127" selection-end-line="127" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/amazonaws/aws-java-sdk-sqs/1.11.360/aws-java-sdk-sqs-1.11.360-sources.jar!/com/amazonaws/services/sqs/model/GetQueueUrlResult.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-86">
-          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/internal/runners/model/ReflectiveCallable.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/basketball-MVC/src/main/java/io/chris/training/service/UserService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1005">
@@ -1046,13 +984,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/basketball-MVC/src/main/java/io/chris/training/api/v1/MessageController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/basketball-MVC/src/main/java/io/chris/training/api/v1/PlayerController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -1178,16 +1109,6 @@
     <entry file="file://$PROJECT_DIR$/basketball-worker/src/main/java/io/chris/training/worker/log4j.properties">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/basketball-MVC/src/main/java/io/chris/training/service/jms/MessageService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="58" column="5" selection-start-line="54" selection-start-column="4" selection-end-line="58" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/basketball-MVC/src/main/java/io/chris/training/config/DataSourceConfig.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -1202,6 +1123,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ops/container/Dcokerfile.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/basketball-worker/src/main/java/io/chris/training/worker/service/SQSMessageService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" selection-start-line="16" selection-start-column="2" selection-end-line="16" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/basketball-MVC/src/test/java/io/chris/training/service/UserServiceTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-204">
+          <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/basketball-MVC/src/main/java/io/chris/training/service/jms/MessageService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="301">
+          <caret line="55" column="97" selection-start-line="55" selection-start-column="97" selection-end-line="55" selection-end-column="97" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/basketball-MVC/src/main/java/io/chris/training/api/v1/MessageController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="26" column="49" selection-start-line="26" selection-start-column="49" selection-end-line="26" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/basketball-worker/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="765">
@@ -1209,17 +1171,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/basketball-worker/src/main/java/io/chris/training/worker/WorkerApplication.java">
+    <entry file="file://$PROJECT_DIR$/ops/container/Dockerfile.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="15" column="86" lean-forward="true" selection-start-line="15" selection-start-column="86" selection-end-line="15" selection-end-column="86" />
+        <state>
+          <caret column="11" selection-start-column="11" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/basketball-worker/src/main/java/io/chris/training/worker/service/SQSMessageService.java">
+    <entry file="file://$PROJECT_DIR$/ops/container/Dockerfile">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="412">
-          <caret line="48" column="5" lean-forward="true" selection-start-line="48" selection-start-column="5" selection-end-line="48" selection-end-column="5" />
+        <state relative-caret-position="90">
+          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ops/container/setenv.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="60" lean-forward="true" selection-start-line="4" selection-start-column="60" selection-end-line="4" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ops/container/build.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="42" selection-end-line="6" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/basketball-worker/src/main/java/io/chris/training/worker/WorkerApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1228,8 +1211,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/basketball-worker/src/main/java/io/chris/training/worker/config/AmazonConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-98">
-          <caret line="29" column="36" lean-forward="true" selection-start-line="29" selection-start-column="36" selection-end-line="29" selection-end-column="36" />
+        <state relative-caret-position="553">
+          <caret line="62" column="5" selection-start-line="62" selection-start-column="5" selection-end-line="62" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/basketball-worker/src/main/java/io/chris/training/worker/service/ProcessService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

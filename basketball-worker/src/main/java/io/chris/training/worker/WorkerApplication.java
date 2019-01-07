@@ -2,7 +2,6 @@ package io.chris.training.worker;
 
 import java.util.Arrays;
 
-import io.chris.training.worker.service.SQSMessageService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
