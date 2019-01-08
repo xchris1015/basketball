@@ -52,15 +52,14 @@ public class MessageService {
     }
 
 
-    // TODO unit test
-    public void sendMessage(Map<String, MessageAttributeValue> messageBody, Integer delaySecond){
-        SendMessageRequest send_msg_request = new SendMessageRequest()
-                .withQueueUrl(queueUrl)
-                .withMessageBody("This is my message text.")
-                .withMessageAttributes(messageBody)
-                .withDelaySeconds(delaySecond);
-        sqs.sendMessage(send_msg_request);
-    }
+//    public void sendMessage(Map<String, MessageAttributeValue> messageBody, Integer delaySecond){
+//        SendMessageRequest send_msg_request = new SendMessageRequest()
+//                .withQueueUrl(queueUrl)
+//                .withMessageBody("This is my message text.")
+//                .withMessageAttributes(messageBody)
+//                .withDelaySeconds(delaySecond);
+//        sqs.sendMessage(send_msg_request);
+//    }
 
     public void receiveMessage(AmazonSQS sqs,String queueUrl){
         List<Message> messages = sqs.receiveMessage(queueUrl).getMessages();

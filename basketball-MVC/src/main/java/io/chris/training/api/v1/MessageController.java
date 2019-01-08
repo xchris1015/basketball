@@ -1,15 +1,17 @@
 package io.chris.training.api.v1;
 
+import com.amazonaws.services.sqs.model.Message;
 import com.amazonaws.services.sqs.model.MessageAttributeValue;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import io.chris.training.service.jms.MessageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,10 +24,35 @@ public class MessageController {
     @Autowired
     private MessageService messageService;
 
-    @RequestMapping(value = "/{Id}",method = RequestMethod.POST)
-    public Boolean findUserById(@PathVariable("Id") Long message){
-        logger.debug("Message id is:" + message);
-        messageService.sendMessage("Id",5);
+    @RequestMapping(params={"messageBody","messageKey"},method = RequestMethod.POST)
+    public boolean sendMessage(@RequestParam(value = "messageBody") String messageBody,@RequestParam(value = "messageKey") String messageKey){
+        logger.debug("Message Body is:" + messageBody);
+        logger.debug("Message Body is:" + messageKey);
+        Map<String,Object> map = convertStringToMap(messageKey,messageBody);
+        String jsonString = convertMapToString(map);
+        messageService.sendMessage(jsonString,5);
         return true;
     }
+
+    private Map<String,Object> convertStringToMap(String messageKey,String messageBody){
+        Map<String, Object> map = new HashMap<>();
+        map.put("id",messageKey);
+        map.put("body",messageBody);
+        return map;
+    }
+
+    private String convertMapToString(Map<String,Object> map){
+        String jsonString= null;
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            // convert map to JSON string
+            jsonString = mapper.writeValueAsString(map);
+            jsonString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(map);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return jsonString;
+    }
+
+
 }
