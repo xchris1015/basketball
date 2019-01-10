@@ -61,4 +61,26 @@ public class AuthorityServiceTest {
         assertEquals(actualAuthority.size(),1);
 
     }
+
+    //TODO add authority test 1 add authority 2 add duplicate authority
+    @Test
+    @Transactional
+    public void addAuthorityTest() {
+        Authority expectedAuthority = new Authority();
+        User user = new User();
+        expectedAuthority.setAuthority("ADMIN");
+        expectedAuthority.setUser(user);
+        user.setUsername("xchris6");
+        user.setEmail("xchris1015@gmail.com6");
+        user.setFirstName("chris6");
+        user.setLastName("xu6");
+        user.setPassword("password6");
+        userRepository.save(user);
+        authorityRepository.save(expectedAuthority);
+        authorityService.addAuthority(user,"COACH");
+        authorityService.addAuthority(user,"ADMIN");
+        List<Authority> actualAuthority1 = authorityService.findAuthoritiesByUser(user);
+        assertEquals(actualAuthority1.size(),2);
+
+    }
 }

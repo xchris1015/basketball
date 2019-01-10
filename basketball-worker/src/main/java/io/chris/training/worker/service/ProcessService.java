@@ -16,22 +16,26 @@ import java.util.Map;
 
 @Component
 public class ProcessService {
-    // TODO Fix that message sender and receiver on map object.
     protected final Logger logger = LoggerFactory.getLogger(getClass());
 
+    //TODO add sms send message method then test the method.
     @JmsListener(destination ="chrisbasketball-dev")
     public void processMessage(String message){
-        ProcessService processService = new ProcessService();
-        Map<String, Object> map = processService.convertStringToMap(message);
+//        ProcessService processService = new ProcessService();
+        Map<String, Object> map = convertStringToMap(message);
 
         for (Map.Entry<String, Object> entry : map.entrySet()) {
             String key = entry.getKey();
             Object value = entry.getValue();
             logger.info("receive messageKey:" + key);
             logger.info("receive messageContent:" + value);
+            twilloSend((String)value);
         }
     }
 
+    public void twilloSend(String body){
+
+    }
 
     public Map<String,Object> convertStringToMap(String string){
         Map<String, Object> map = null;

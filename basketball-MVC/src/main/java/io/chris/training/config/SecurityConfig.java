@@ -26,7 +26,7 @@ import java.util.List;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig implements Serializable {
-    //            @Autowired
+//                @Autowired
 //            private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
 //    step1
 //    @Autowired

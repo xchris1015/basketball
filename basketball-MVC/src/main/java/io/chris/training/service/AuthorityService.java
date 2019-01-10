@@ -3,13 +3,21 @@ package io.chris.training.service;
 import io.chris.training.domain.Authority;
 import io.chris.training.domain.User;
 import io.chris.training.repository.AuthorityRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
+
 @Service
 public class AuthorityService {
+
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private AuthorityRepository authorityRepository;
@@ -20,9 +28,30 @@ public class AuthorityService {
     }
 
     @Transactional
-    //TODO add method if there is register user role exist, unable to add same role
+    //TODO more efficient
     public Authority addAuthority(User user,String authorityString){
-        Authority result = new Authority(user,authorityString);
-        return authorityRepository.save(result);
+
+        List<Authority> authorities = authorityRepository.findAuthoritiesByUser(user);
+        List<String> authoritiesString = new LinkedList<>();
+        Set<String> foo = new HashSet<>();
+
+        for (int i =0;i<authorities.size();i++){
+            authoritiesString.add(authorities.get(i).getAuthority());
+            foo.add(authorities.get(i).getAuthority());
+        }
+
+        foo.add(authorityString);
+
+        if (authorities.size()<foo.size()){
+            Authority result = new Authority(user,authorityString);
+            return authorityRepository.save(result);
+        }else{
+            logger.info("This role already exist!");
+            return null;
+        }
     }
+
+
+
+
 }

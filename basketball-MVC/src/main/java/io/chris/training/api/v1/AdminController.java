@@ -25,4 +25,6 @@ public class AdminController {
         User user = userService.findById(Id);
         authorityService.addAuthority(user,authority);
     }
+
+
 }

@@ -13,7 +13,6 @@ import static org.mockito.Mockito.when;
 
 @Configuration
 public class MockAmazonSQS {
-    //TODO is this a random url?
     private String queueUrl = "mockUrl";
 
     @Value("#{applicationProperties['jms.queue.name']}")
@@ -25,7 +24,6 @@ public class MockAmazonSQS {
         AmazonSQS client= Mockito.mock(AmazonSQS.class);
         GetQueueUrlResult mockQueueResult = Mockito.mock(GetQueueUrlResult.class);
         when(mockQueueResult.getQueueUrl()).thenReturn(queueUrl);
-        // TODO why return mockQueueResult in here?
         when(client.getQueueUrl(queue)).thenReturn(mockQueueResult);
         ReceiveMessageResult receiveMessage = Mockito.mock(ReceiveMessageResult.class);
         when(client.receiveMessage(queueUrl)).thenReturn(receiveMessage);

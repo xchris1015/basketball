@@ -36,8 +36,7 @@ public class MessageController {
 
     private Map<String,Object> convertStringToMap(String messageKey,String messageBody){
         Map<String, Object> map = new HashMap<>();
-        map.put("id",messageKey);
-        map.put("body",messageBody);
+        map.put(messageKey,messageBody);
         return map;
     }
 
