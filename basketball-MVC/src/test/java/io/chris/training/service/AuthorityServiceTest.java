@@ -62,7 +62,6 @@ public class AuthorityServiceTest {
 
     }
 
-    //TODO add authority test 1 add authority 2 add duplicate authority
     @Test
     @Transactional
     public void addAuthorityTest() {

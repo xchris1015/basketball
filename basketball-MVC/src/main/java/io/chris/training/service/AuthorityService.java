@@ -28,7 +28,7 @@ public class AuthorityService {
     }
 
     @Transactional
-    //TODO more efficient
+    //TODO more efficient how to check element already in the set or use sql
     public Authority addAuthority(User user,String authorityString){
 
         List<Authority> authorities = authorityRepository.findAuthoritiesByUser(user);

@@ -23,7 +23,7 @@ public class ProcessService {
     public void processMessage(String message){
 //        ProcessService processService = new ProcessService();
         Map<String, Object> map = convertStringToMap(message);
-
+        
         for (Map.Entry<String, Object> entry : map.entrySet()) {
             String key = entry.getKey();
             Object value = entry.getValue();

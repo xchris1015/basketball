@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -42,7 +44,34 @@ public class DataSourceConfig {
 
 
     @Bean(name="entityManagerFactory")
+//    @DependsOn("flyway")
+    @Profile({"dev","test"})
     public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() {
+        LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
+
+        factoryBean.setDataSource(getDataSource());
+        factoryBean.setPackagesToScan(new String[] { "io.chris.training.domain","io.chris.training.repository" });
+        factoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
+        Properties props = new Properties();
+        props.put("hibernate.dialect", "org.hibernate.spatial.dialect.postgis.PostgisDialect");
+        props.put("hibernate.hbm2ddl.auto", "validate");// fine all the stuff in domain and entity and table then scan instance variables
+//        props.put("hibernate.physical_naming_strategy", "com.overture.family.extend.hibernate.ImprovedNamingStrategy")
+        props.put("hibernate.connection.charSet","UTF-8");
+        props.put("hibernate.show_sql","false"); // this is the only change on method on unit
+//        props.put("")
+
+
+//            <property name="hibernate.ejb.interceptor" value="com.overture.family.repository.jpa.DBNullsFirstLastInteceptor"/>
+
+        factoryBean.setJpaProperties(props);
+
+        return factoryBean;
+    }
+
+    @Bean(name="entityManagerFactory")
+//    @DependsOn("flyway")
+    @Profile({"unit"})
+    public LocalContainerEntityManagerFactoryBean entityUnitManagerFactoryBean() {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
 
         factoryBean.setDataSource(getDataSource());
@@ -66,7 +95,7 @@ public class DataSourceConfig {
 
 
 
-    @Bean(name="transactionManager")
+    @Bean(name="transactionManager") //check all the annotation with entity, this is for roll back on transactional
     public PlatformTransactionManager transactionManager(@Qualifier("entityManagerFactory") EntityManagerFactory entityManagerFactory, @Autowired DataSource dataSource) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory);

@@ -35,7 +35,6 @@ public class UserService {
 
 
     // TODO transactional(readOnly = true) how to explain and how to use;
-    //TODO what is encapsulation?
     // TODO Optional ifprsesent test
     public User findById(Long id){
 
