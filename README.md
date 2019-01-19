@@ -67,6 +67,7 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
 ### Package
 ---
 7. Package and Run the Basketball jar type file to spin up the Basketball Reference
+    
     ```
     mvn compile package -DskipTests=true && java -jar -Dspring.profiles.active={dev} -Ddb.url={localhost} -Ddb.port={5432} -Ddb.dName={basketballDB_demo} -Ddb.username={admin} -Ddb.password={password} target/basketball-1.0-SNAPSHOT.jar  
     ```
@@ -81,15 +82,19 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
     Requestbody
     ```
     {
-      "firstName" : "Chris",
-      "lastName" : "Paul",
-      "email":"xpaul@gmail.com"
+	"username":"cPaul",
+	"email":"cpaul@gmail.com",
+	"password":"password",
+	"lastName": "Paul",
+	"firstName": "Chris"
     }
     ``` 
 
 2. User Login with Token 
 	
 		POST - http://localhost:8080/api/user/login
+   		
+   
    
    ResponseEntity:
 	
