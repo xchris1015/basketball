@@ -25,6 +25,10 @@ public class PlayerStatistics {
     @Column(name="steal")
     private Double steal;
 
+    @OneToOne
+    @JoinColumn(name = "player_id")
+    private Player player;
+
     public Double getSteal() {
         return steal;
     }

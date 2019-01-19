@@ -36,6 +36,7 @@ public class UserService {
 
     // TODO transactional(readOnly = true) how to explain and how to use;
     // TODO Optional ifprsesent test
+    // TODO find user by email or username
     public User findById(Long id){
 
         Optional<User> result = userRepository.findById(id);

@@ -112,7 +112,7 @@ public class UserController extends BaseController{
         return result;
     }
 
-
+//TODO anther try catch if the user does not exist
     @RequestMapping(value = "/login", method = RequestMethod.POST,produces = "application/json")
     public ResponseEntity<?> login(@RequestBody RestAuthenticationRequest authenticationRequest, Device device){
         String username = authenticationRequest.getUsername();

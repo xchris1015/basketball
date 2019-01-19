@@ -1,5 +1,7 @@
 package io.chris.training.domain;
 
+import org.hibernate.annotations.LazyToOne;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -20,10 +22,10 @@ public class Player {
     @SequenceGenerator(name = "player_id_seq",sequenceName = "player_id_seq",allocationSize = 1)
     private Long id;
 
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "team_id")
-//    private Team team;
-    //TODO add manytoone oneto many for player and player statistics
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "team_id")
+    private Team team;
+
     @Column(name ="first_name")
     private String firstName;
 
@@ -41,6 +43,10 @@ public class Player {
 
     @Column(name ="weight")
     private Double weight;
+
+    @OneToOne(mappedBy = "player_statistic")
+    @Transient
+    private PlayerStatistics playerStatistics;
 
 
     public void setFirstName(String firstName) {

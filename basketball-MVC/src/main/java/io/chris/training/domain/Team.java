@@ -17,9 +17,9 @@ public class Team {
     @SequenceGenerator(name = "team_id_seq",sequenceName = "team_id_seq",allocationSize = 1)
     private Long id;
 
-//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "team")
-//    @Transient
-//    private List<Player> player;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "team")
+    @Transient
+    private List<Player> player;
 
     @Column(name ="conference")
     private String conference;

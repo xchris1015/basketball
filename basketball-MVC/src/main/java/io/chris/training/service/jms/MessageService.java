@@ -21,6 +21,9 @@ public class MessageService {
 //    private String queue="chrisbasketball-dev";
     private String queueUrl;
 
+//    @Value("${jms.queue.name}")
+//    private String queue;
+
 
     public MessageService(@Autowired AmazonSQS sqs,@Value("#{applicationProperties['jms.queue.name']}") String queue) {
         this.sqs = sqs;

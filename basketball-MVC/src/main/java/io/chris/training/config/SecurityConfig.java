@@ -28,7 +28,7 @@ import java.util.List;
 public class SecurityConfig implements Serializable {
 //                @Autowired
 //            private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
-//    step1
+//    step1  // in here we need to imple WebSecurityConfigurerAdapter
 //    @Autowired
 //    public void configureGlobal(AuthenticationManagerBuilder auth)
 //            throws Exception {
@@ -99,7 +99,7 @@ public class SecurityConfig implements Serializable {
                     .and()
                         .authorizeRequests().antMatchers("/api/player/**","/api/team/**","/api/playerstatistic/**","/api/user/**","/api/image/**").hasAnyRole("REGISTERED_USER")
 //                    .and()
-//                        .authorizeRequests().antMatchers("/api/playerstatistic/**").hasAnyRole("COACH","PLAYER")
+//                        .authorizeRequests().antMatchers("/api/playerstatistic/**").hasAnyRole("COACH","PLAYER")  // has role method
                     .and()
                         .authorizeRequests().antMatchers("/api/admin/**").hasAnyRole("ADMIN")
                     .and()

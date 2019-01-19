@@ -48,7 +48,9 @@ public class AppConfig {
         return bean;
     }
 
-    @Bean //approach 1: without service bean
+
+
+    @Bean //approach 1: without service bean. Here we might not need Autowired, it also work with current spring framework
     public StorageService getStorageServiceClass(@Autowired @Qualifier("applicationProperties") PropertiesFactoryBean propertiesFactoryBean) throws IOException {
         AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withCredentials(new DefaultAWSCredentialsProviderChain()).build();
         StorageService storageService = new StorageService(s3Client);
