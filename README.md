@@ -93,7 +93,7 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
 	
 		POST - http://localhost:8080/api/user/login
    		
-   ![signup](https://github.com/xchris1015/basketball/tree/master/ReadmePicture/signup.png)
+   ![signup](https://github.com/xchris1015/basketball/blob/master/ReadmePicture/signup.png)
    
    ResponseEntity:
 	
