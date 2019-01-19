@@ -71,7 +71,7 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
     mvn compile package -DskipTests=true && java -jar -Dspring.profiles.active={dev} -Ddb.url={localhost} -Ddb.port={5432} -Ddb.dName={basketballDB_demo} -Ddb.username={admin} -Ddb.password={password} target/basketball-1.0-SNAPSHOT.jar  
     ```
 
-### BasketballReferenceDemo
+### Basketball Reference Demo
 ---
 
 1.  User sign up to get email 
