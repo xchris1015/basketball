@@ -45,11 +45,14 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
      ```
 ### Database Migration
 ---
-5. Schema migration for creating tables in database
+5. Schema migration for creating tables in database for dev environment.
      ```
      mvn compile flyway:migrate -P dev -Ddb_url={localhost:5432/basketballDB_Demo} -Ddb_password={password} -Ddb_username={admin}
      ```
+     
+   Schema migration for creating tables in database for unit environment.
      ```
+     
      mvn compile flyway:migrate -P unit -Ddb_url={localhost:5432/basketballDB_Demo_unit} -Ddb_password={password} -Ddb_username={admin}
      ```
      
