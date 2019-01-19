@@ -101,7 +101,7 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
 		"token":"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ4Y2hyaXMyMCIsImF1ZGllbmNlIjoid2ViIiwidXNlcl9jcmVhdGVkX2F0IjoxNTQ1NDI2MjUxMTYzLCJjcmVdGVkIjoxNTQ3OTMyNjI4NTUzLCJleHAiOjE1NDgwMTkwMjh9.wosIv6mGFxR4exxfjtVkwRBM_VNrToaw709AB88mnuO_Ha5AVz7U4Y5bWoWJSSRdDA4HD3pIiVwq2WlioI6dQ"
 		}
 		
-   ![token](https://github.com/xchris1015/basketball/tree/master/ReadmePicture/token.png)
+   ![token](https://github.com/xchris1015/basketball/blob/master/ReadmePicture/token.png)
    
 3. Input the JwtToken with Serect Key and use findByFirstName pass the User last name by using @PathParam.
     
@@ -118,7 +118,7 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
             "authorities": null
         }
         
-    ![findByUsername](https://github.com/xchris1015/basketball/tree/master/ReadmePicture/findByUsername.png)
+    ![findByUsername](https://github.com/xchris1015/basketball/blob/master/ReadmePicture/findByUsername.png)
 
 ### Todo List In The Future
 ---
