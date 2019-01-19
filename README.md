@@ -57,9 +57,9 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
 ---
 6. Tests are done using JUnit and Mockito. Tests are run using the command
 
-```
+     ```
 mvn compile test -Dspring.profiles.active={unit} -Ddb.url={localhost} -Ddb.port={5432} -Ddb.dName={basketball_unit} -Ddb.username={admin} -Ddb.password={password}
-```
+     ```
 
 ### Package
 ---
