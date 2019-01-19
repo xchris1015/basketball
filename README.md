@@ -43,7 +43,8 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
      create database baskerballDB_Demo_unit
      \q
      ```
-    
+### Database Migration
+---
 5. Schema migration for creating tables in database
      ```
      mvn compile flyway:migrate -P dev -Ddb_url={localhost:5432/basketballDB_Demo} -Ddb_password={password} -Ddb_username={admin}
@@ -51,10 +52,22 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
      ```
      mvn compile flyway:migrate -P unit -Ddb_url={localhost:5432/basketballDB_Demo_unit} -Ddb_password={password} -Ddb_username={admin}
      ```
-6. Package and Run the Basketball jar type file to spin up the Basketball Reference
+     
+### Testing Results
+---
+6. Tests are done using JUnit and Mockito. Tests are run using the command
+
+```
+mvn compile test -Dspring.profiles.active={unit} -Ddb.url={localhost} -Ddb.port={5432} -Ddb.dName={basketball_unit} -Ddb.username={admin} -Ddb.password={password}
+```
+
+### Package
+---
+7. Package and Run the Basketball jar type file to spin up the Basketball Reference
     ```
     mvn compile package -DskipTests=true && java -jar -Dspring.profiles.active={dev} -Ddb.url={localhost} -Ddb.port={5432} -Ddb.dName={basketballDB_demo} -Ddb.username={admin} -Ddb.password={password} target/basketball-1.0-SNAPSHOT.jar  
     ```
+
 ### BasketballReferenceDemo
 ---
 
@@ -95,19 +108,6 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
             "authorities": null
         }
         
-	
-### Testing Results
----
-Tests are done using JUnit and Mockito. Tests are run using the command
-
-```
-mvn compile test -Dspring.profiles.active={unit} -Ddb.url={localhost} -Ddb.port={5432} -Ddb.dName={basketball_unit} -Ddb.username={admin} -Ddb.password={password}
-```
-
-
-### DB Schema
----
-The application is designed using PostgreSql. Data migration using Flyway plugin.
 
 
 ### Todo List In The Future
