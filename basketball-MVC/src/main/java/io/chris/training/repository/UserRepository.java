@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public interface UserRepository extends CrudRepository<User,Long> {
 
-    Optional<User>findByUsername(String username);
+    User findByUsername(String username);
 
     List<User> findByFirstName(String firstName);
 
@@ -18,7 +18,7 @@ public interface UserRepository extends CrudRepository<User,Long> {
 
     List<User>findByCreateAt(Instant createAt);
 
-    Optional<User>findByEmail(String email);
+    User findByEmail(String email);
 
     List<User> findAll();
 

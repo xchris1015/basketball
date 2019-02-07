@@ -2,9 +2,11 @@ package io.chris.training.api.v1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.google.common.hash.HashCode;
 import io.chris.training.domain.JsView;
 import io.chris.training.domain.User;
 import io.chris.training.extension.Comparator;
+import io.chris.training.extension.exp.NotFoundException;
 import io.chris.training.extension.security.JwtTokenUtil;
 import io.chris.training.extension.security.RestAuthenticationRequest;
 import io.chris.training.repository.UserRepository;
@@ -80,8 +82,6 @@ public class UserController extends BaseController{
         return user;
     }
 
-
-
     @RequestMapping(method = RequestMethod.GET,params = {"first_name"})
     public List<User> findByFirstName(@RequestParam(value = "first_name") String firstName) {
         logger.debug("This first name is :"+ firstName);
@@ -112,9 +112,8 @@ public class UserController extends BaseController{
         return result;
     }
 
-//TODO anther try catch if the user does not exist
     @RequestMapping(value = "/login", method = RequestMethod.POST,produces = "application/json")
-    public ResponseEntity<?> login(@RequestBody RestAuthenticationRequest authenticationRequest, Device device){
+    public ResponseEntity<?> login(@RequestBody RestAuthenticationRequest authenticationRequest, Device device) throws NullPointerException, NotFoundException {
         String username = authenticationRequest.getUsername();
         String password = authenticationRequest.getPassword();
         logger.info("this username is:"+username);
@@ -122,11 +121,17 @@ public class UserController extends BaseController{
         try{
             Authentication notFullyAuthentication = new UsernamePasswordAuthenticationToken(username,password);
             final Authentication authentication = authenticationManager.authenticate(notFullyAuthentication);
-            final UserDetails userDetails = userService.findByUsername(username);
-            final String token = jwtTokenUtil.generateToken(userDetails,device);
-            Map<String, Object> Jsontoken = new HashMap<>();
-            Jsontoken.put(TOEKN_KEY,token);
-            return ResponseEntity.ok(Jsontoken);
+            try {
+                final UserDetails userDetails = userService.findByEmailOrUsername(username);
+                final String token = jwtTokenUtil.generateToken(userDetails,device);
+                Map<String, Object> Jsontoken = new HashMap<>();
+                Jsontoken.put(TOEKN_KEY,token);
+                return ResponseEntity.ok(Jsontoken);
+            }catch (NotFoundException e){
+                logger.info("This user does not exist");
+                return  ResponseEntity.notFound().build();
+            }
+
         }catch(AuthenticationException ex){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("authentication failure, please check your username or password");
         }

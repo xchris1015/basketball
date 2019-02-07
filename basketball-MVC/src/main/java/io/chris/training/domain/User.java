@@ -54,6 +54,10 @@ public class User implements UserDetails, Serializable {
     @Column(name="create_at")
     private Instant createAt= Instant.now();
 
+
+    @Column(name="phone_number")
+    private String phoneNumber;
+
     public Instant getCreateAt() {
         return createAt;
     }
@@ -137,6 +141,14 @@ public class User implements UserDetails, Serializable {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
 

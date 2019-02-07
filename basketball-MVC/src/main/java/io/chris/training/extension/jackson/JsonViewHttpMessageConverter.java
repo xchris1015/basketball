@@ -1,4 +1,4 @@
-package io.chris.training.extension.Jackson;
+package io.chris.training.extension.jackson;
 
 import com.fasterxml.jackson.core.JsonEncoding;
 import com.fasterxml.jackson.core.JsonGenerator;

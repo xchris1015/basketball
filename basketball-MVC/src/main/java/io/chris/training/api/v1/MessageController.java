@@ -24,11 +24,13 @@ public class MessageController {
     @Autowired
     private MessageService messageService;
 
-    @RequestMapping(params={"messageBody","messageKey"},method = RequestMethod.POST)
-    public boolean sendMessage(@RequestParam(value = "messageBody") String messageBody,@RequestParam(value = "messageKey") String messageKey){
+    @RequestMapping(params={"messageBody","messageKey","id"},method = RequestMethod.POST)
+    public boolean sendMessage(@RequestParam(value = "messageBody") String messageBody,@RequestParam(value = "messageKey") String messageKey,@RequestParam(value = "id")Long id){
         logger.debug("Message Body is:" + messageBody);
         logger.debug("Message Body is:" + messageKey);
+        logger.debug("User Id is:" +id);
         Map<String,Object> map = convertStringToMap(messageKey,messageBody);
+        map.put("object_id",id);
         String jsonString = convertMapToString(map);
         messageService.sendMessage(jsonString,5);
         return true;

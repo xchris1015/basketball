@@ -2,6 +2,7 @@ package io.chris.training.service;
 
 import io.chris.training.domain.Authority;
 import io.chris.training.domain.User;
+import io.chris.training.extension.exp.NotFoundException;
 import io.chris.training.repository.AuthorityRepository;
 import io.chris.training.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.jws.soap.SOAPBinding;
+import javax.validation.constraints.Null;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,9 +38,8 @@ public class UserService {
 
     // TODO transactional(readOnly = true) how to explain and how to use;
     // TODO Optional ifprsesent test
-    // TODO find user by email or username
+    // TODO add ignore case
     public User findById(Long id){
-
         Optional<User> result = userRepository.findById(id);
         User obj = result.get();
         return obj;
@@ -51,12 +52,18 @@ public class UserService {
 
     }
 
-
-
-    public User findByUsername(String username){
-        Optional<User> result = userRepository.findByUsername(username);
-        User obj = result.get();
-        return obj;
+    public User findByEmailOrUsername(String keyword) throws NotFoundException, NullPointerException {
+        if (keyword==null || "".equals(keyword.trim())){
+            throw new NullPointerException();
+        }
+            User user = userRepository.findByEmail(keyword);
+        if (user==null){
+            user = userRepository.findByUsername(keyword);
+        }
+        if (user==null){
+            throw new NotFoundException("Could not find the User by Username Or Email");
+        }
+        return user;
     }
 
     public List<User> findByFirstName(String firstName){
@@ -70,9 +77,13 @@ public class UserService {
     }
 
     public User findByEmail(String email){
-        Optional<User> result =userRepository.findByEmail(email);
-        User obj = result.get();
-        return obj;
+        User result =userRepository.findByEmail(email);
+        return result;
+    }
+
+    public User findByUsername(String username){
+        User result =userRepository.findByUsername(username);
+        return result;
     }
 
     public User addUser(User user){
