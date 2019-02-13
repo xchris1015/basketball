@@ -1,8 +1,8 @@
-package io.chris.training.config;
+package io.chris.training.mvc.config;
 
-import io.chris.training.config.viewResolver.JsonViewResolver;
-import io.chris.training.config.viewResolver.SwaggerConfig;
-import io.chris.training.extension.jackson.JsonViewHttpMessageConverter;
+import io.chris.training.mvc.config.viewResolver.JsonViewResolver;
+import io.chris.training.mvc.config.viewResolver.SwaggerConfig;
+import io.chris.training.mvc.extension.jackson.JsonViewHttpMessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +23,7 @@ import java.util.List;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("io.chris.training.api")
+@ComponentScan("io.chris.training.mvc.api")
 @Import({SwaggerConfig.class})
 public class MvcConfig implements WebMvcConfigurer {
 

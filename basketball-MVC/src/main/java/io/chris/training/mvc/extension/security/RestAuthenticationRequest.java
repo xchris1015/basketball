@@ -1,4 +1,4 @@
-package io.chris.training.extension.security;
+package io.chris.training.mvc.extension.security;
 
 public class RestAuthenticationRequest {
 

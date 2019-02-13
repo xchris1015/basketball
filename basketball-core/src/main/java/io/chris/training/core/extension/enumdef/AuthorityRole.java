@@ -1,4 +1,4 @@
-package io.chris.training.mvc.core.extension.enumdef;
+package io.chris.training.core.extension.enumdef;
 
 public abstract class AuthorityRole {
 

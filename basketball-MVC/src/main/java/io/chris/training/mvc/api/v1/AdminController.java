@@ -1,6 +1,6 @@
 package io.chris.training.mvc.api.v1;
 
-import io.chris.training.domain.User;
+import io.chris.training.core.domain.User;
 import io.chris.training.core.service.AuthorityService;
 import io.chris.training.core.service.UserService;
 import org.slf4j.Logger;

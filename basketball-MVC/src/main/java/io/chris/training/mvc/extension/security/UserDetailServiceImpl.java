@@ -1,7 +1,7 @@
-package io.chris.training.extension.security;
+package io.chris.training.mvc.extension.security;
 
-import io.chris.training.domain.Authority;
-import io.chris.training.domain.User;
+import io.chris.training.core.domain.Authority;
+import io.chris.training.core.domain.User;
 import io.chris.training.core.service.AuthorityService;
 import io.chris.training.core.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

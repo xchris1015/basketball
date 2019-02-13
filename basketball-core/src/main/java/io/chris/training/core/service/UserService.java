@@ -1,9 +1,9 @@
-package io.chris.training.mvc.core.service;
+package io.chris.training.core.service;
 
-import io.chris.training.mvc.core.domain.User;
-import io.chris.training.mvc.core.extension.exp.NotFoundException;
-import io.chris.training.mvc.core.repository.AuthorityRepository;
-import io.chris.training.mvc.core.repository.UserRepository;
+import io.chris.training.core.extension.exp.NotFoundException;
+import io.chris.training.core.domain.User;
+import io.chris.training.core.repository.AuthorityRepository;
+import io.chris.training.core.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

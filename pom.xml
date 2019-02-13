@@ -11,6 +11,7 @@
     <modules>
         <module>basketball-MVC</module>
         <module>basketball-worker</module>
+        <module>basketball-core</module>
     </modules>
 
 </project>

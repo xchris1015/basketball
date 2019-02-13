@@ -1,4 +1,4 @@
-package io.chris.training.mvc.core.domain;
+package io.chris.training.core.domain;
 
 public class JsView {
     public static class Registered_User{} //{} represent as class or implementation

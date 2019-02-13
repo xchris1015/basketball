@@ -1,36 +1,24 @@
-package io.chris.training.mvc.config;
+package io.chris.training.worker.config;
 
-
-import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import com.amazonaws.services.sqs.AmazonSQS;
-import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
-import io.chris.training.core.config.DataSourceConfig;
 import io.chris.training.core.config.ServiceConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 
-import java.io.IOException;
-
-
 @Configuration
-@Import({DataSourceConfig.class, ServiceConfig.class})
-@ComponentScan(basePackages = "io.chris.training.mvc",
-        excludeFilters = @ComponentScan.Filter(type= FilterType.REGEX,pattern="io.ascending.training.mvc.api.*"))
-public class AppConfig {
+@Import(ServiceConfig.class)
+@ComponentScan(basePackages = "io.chris.training.worker")
+public class WorkerConfig {
 
 
     @Autowired
     private Environment environment; // get jvm environment, get a string array
     private final Logger logger = LoggerFactory.getLogger(getClass());
-    //private String propertyKey = "amazon.s3.bucket";
+
 
     @Bean(name="applicationProperties")
     public PropertiesFactoryBean getObProperties(){
@@ -47,16 +35,5 @@ public class AppConfig {
         bean.setLocation(new ClassPathResource("META-INF/share-runtime.properties"));
         return bean;
     }
-
-
-    @Bean // approach 2: autowired AmazonSQS
-    @Profile({"dev","test","prod"})
-    public AmazonSQS getAmazonSQS(){
-        AmazonSQS sqsClient = AmazonSQSClientBuilder.standard().withCredentials(new DefaultAWSCredentialsProviderChain()).build();
-        return sqsClient;
-    }
-
-
-
 
 }

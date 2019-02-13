@@ -16,7 +16,7 @@
        specified for component-scanning -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>io.chris.training.config.AppConfig</param-value>
+        <param-value>io.chris.training.mvc.config.AppConfig</param-value>
     </context-param>
 
     <!-- Bootstrap the root application context using ContextLoaderListener -->
@@ -40,7 +40,7 @@
              and fully-qualified @Configuration classes -->
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>io.chris.training.config.MvcConfig</param-value>
+            <param-value>io.chris.training.mvc.config.MvcConfig</param-value>
         </init-param>
     </servlet>
 

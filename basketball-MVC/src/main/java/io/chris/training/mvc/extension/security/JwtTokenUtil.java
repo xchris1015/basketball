@@ -1,6 +1,6 @@
-package io.chris.training.extension.security;
+package io.chris.training.mvc.extension.security;
 
-import io.chris.training.domain.User;
+import io.chris.training.core.domain.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

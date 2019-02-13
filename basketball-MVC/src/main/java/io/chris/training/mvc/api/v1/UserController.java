@@ -1,14 +1,14 @@
 package io.chris.training.mvc.api.v1;
 
-import io.chris.training.domain.JsView;
-import io.chris.training.domain.User;
-import io.chris.training.extension.Comparator;
+import io.chris.training.core.domain.JsView;
+import io.chris.training.core.domain.User;
+import io.chris.training.core.extension.Comparator;
 import io.chris.training.core.extension.exp.NotFoundException;
-import io.chris.training.mvc.extension.security.JwtTokenUtil;
-import io.chris.training.mvc.extension.security.RestAuthenticationRequest;
-import io.chris.training.repository.UserRepository;
+import io.chris.training.core.repository.UserRepository;
 import io.chris.training.core.service.AuthorityService;
 import io.chris.training.core.service.UserService;
+import io.chris.training.mvc.extension.security.JwtTokenUtil;
+import io.chris.training.mvc.extension.security.RestAuthenticationRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

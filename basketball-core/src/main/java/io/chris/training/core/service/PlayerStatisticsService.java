@@ -1,7 +1,7 @@
-package io.chris.training.mvc.core.service;
+package io.chris.training.core.service;
 
-import io.chris.training.mvc.core.domain.PlayerStatistics;
-import io.chris.training.mvc.core.repository.PlayerStatisticsRepository;
+import io.chris.training.core.domain.PlayerStatistics;
+import io.chris.training.core.repository.PlayerStatisticsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

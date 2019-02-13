@@ -1,7 +1,7 @@
-package io.chris.training.mvc.core.service.jms;
+package io.chris.training.core.service.jms;
 
-import io.chris.training.mvc.core.domain.Image;
-import io.chris.training.mvc.core.repository.ImageRepository;
+import io.chris.training.core.domain.Image;
+import io.chris.training.core.repository.ImageRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

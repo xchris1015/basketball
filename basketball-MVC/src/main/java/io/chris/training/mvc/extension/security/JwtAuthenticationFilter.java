@@ -1,4 +1,4 @@
-package io.chris.training.extension.security;
+package io.chris.training.mvc.extension.security;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

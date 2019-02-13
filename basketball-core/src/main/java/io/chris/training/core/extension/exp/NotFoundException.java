@@ -1,4 +1,4 @@
-package io.chris.training.mvc.core.extension.exp;
+package io.chris.training.core.extension.exp;
 
 public class NotFoundException extends Exception {
     /** default serialVersionUID */

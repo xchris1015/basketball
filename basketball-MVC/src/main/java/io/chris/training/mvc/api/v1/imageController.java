@@ -1,8 +1,9 @@
 package io.chris.training.mvc.api.v1;
 
 import com.amazonaws.services.s3.model.S3Object;
-import io.chris.training.domain.Image;
-import io.chris.training.core.service.ImageService;
+
+import io.chris.training.core.domain.Image;
+import io.chris.training.core.service.jms.ImageService;
 import io.chris.training.core.service.jms.StorageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

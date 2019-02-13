@@ -1,4 +1,4 @@
-package io.chris.training.mvc.core.service.jms;
+package io.chris.training.core.service.jms;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.S3Object;

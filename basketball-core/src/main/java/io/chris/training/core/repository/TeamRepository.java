@@ -1,7 +1,7 @@
-package io.chris.training.mvc.core.repository;
+package io.chris.training.core.repository;
 
 
-import io.chris.training.mvc.core.domain.Team;
+import io.chris.training.core.domain.Team;
 import org.springframework.data.repository.CrudRepository;
 
 import java.time.Instant;

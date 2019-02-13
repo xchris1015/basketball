@@ -1,8 +1,8 @@
-package io.chris.training.mvc.core.service;
+package io.chris.training.core.service;
 
-import io.chris.training.mvc.core.domain.Authority;
-import io.chris.training.mvc.core.domain.User;
-import io.chris.training.mvc.core.repository.AuthorityRepository;
+import io.chris.training.core.domain.Authority;
+import io.chris.training.core.domain.User;
+import io.chris.training.core.repository.AuthorityRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

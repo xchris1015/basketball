@@ -1,4 +1,4 @@
-package io.chris.training.config.viewResolver;
+package io.chris.training.mvc.config.viewResolver;
 
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;

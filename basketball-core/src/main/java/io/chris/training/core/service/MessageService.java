@@ -1,4 +1,4 @@
-package io.chris.training.mvc.core.service;
+package io.chris.training.core.service;
 
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;

@@ -1,7 +1,6 @@
 package io.chris.training.mvc.api.v1;
 
-import io.chris.training.domain.Player;
-import io.chris.training.domain.PlayerStatistics;
+import io.chris.training.core.domain.PlayerStatistics;
 import io.chris.training.core.service.PlayerStatisticsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

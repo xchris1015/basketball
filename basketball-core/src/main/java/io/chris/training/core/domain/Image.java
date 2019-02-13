@@ -1,4 +1,4 @@
-package io.chris.training.mvc.core.domain;
+package io.chris.training.core.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

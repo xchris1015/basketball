@@ -1,7 +1,6 @@
 package io.chris.training.mvc.api.v1;
 
-import io.chris.training.domain.Team;
-import io.chris.training.domain.User;
+import io.chris.training.core.domain.Team;
 import io.chris.training.core.service.TeamService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

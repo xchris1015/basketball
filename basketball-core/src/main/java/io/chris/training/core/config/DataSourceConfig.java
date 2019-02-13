@@ -1,4 +1,4 @@
-package io.chris.training.mvc.core.config;
+package io.chris.training.core.config;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.jpa.HibernatePersistenceProvider;
@@ -50,7 +50,7 @@ public class DataSourceConfig {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
 
         factoryBean.setDataSource(getDataSource());
-        factoryBean.setPackagesToScan(new String[] { "io.chris.training.domain","io.chris.training.repository" });
+        factoryBean.setPackagesToScan(new String[] { "io.chris.training.core.domain","io.chris.training.core.repository" });
         factoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
         Properties props = new Properties();
         props.put("hibernate.dialect", "org.hibernate.spatial.dialect.postgis.PostgisDialect");
@@ -75,7 +75,7 @@ public class DataSourceConfig {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
 
         factoryBean.setDataSource(getDataSource());
-        factoryBean.setPackagesToScan(new String[] { "io.chris.training.domain","io.chris.training.repository" });
+        factoryBean.setPackagesToScan(new String[] { "io.chris.training.core.domain","io.chris.training.core.repository" });
         factoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
         Properties props = new Properties();
         props.put("hibernate.dialect", "org.hibernate.spatial.dialect.postgis.PostgisDialect");

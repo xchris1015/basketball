@@ -1,6 +1,6 @@
-package io.chris.training.mvc.core.extension;
+package io.chris.training.core.extension;
 
-import io.chris.training.mvc.core.domain.User;
+import io.chris.training.core.domain.User;
 
 public class Comparator implements java.util.Comparator<User> {
 

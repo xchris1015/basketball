@@ -1,7 +1,8 @@
 package io.chris.training.mvc.api.v1;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.chris.training.core.service.jms.MessageService;
+
+import io.chris.training.core.service.MessageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
