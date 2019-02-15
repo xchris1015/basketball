@@ -54,12 +54,14 @@ public class AmazonConfig {
     }
 
 
-
-
     @Bean // approach 2: autowired AmazonSQS
     public AmazonSQS getAmazonSQS(){
         AmazonSQS sqsClient = AmazonSQSClientBuilder.standard().withCredentials(new DefaultAWSCredentialsProviderChain()).build();
         return sqsClient;
     }
+
+
+
+
 
 }

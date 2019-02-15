@@ -1,5 +1,6 @@
 package io.chris.training.worker.config;
 
+import io.chris.training.core.config.DataSourceConfig;
 import io.chris.training.core.config.ServiceConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +11,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
 
 @Configuration
-@Import(ServiceConfig.class)
+@Import({DataSourceConfig.class, ServiceConfig.class})
 @ComponentScan(basePackages = "io.chris.training.worker")
 public class WorkerConfig {
 
@@ -29,11 +30,5 @@ public class WorkerConfig {
         return bean;
     }
 
-    @Bean(name="shareProperties")
-    public PropertiesFactoryBean getShareProperties(){
-        PropertiesFactoryBean bean = new PropertiesFactoryBean();
-        bean.setLocation(new ClassPathResource("META-INF/share-runtime.properties"));
-        return bean;
-    }
 
 }
