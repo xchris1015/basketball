@@ -49,8 +49,8 @@ public class ProcessServiceTest {
 
     @Test
     public void SMSSendTest(){
-        String ACCOUNT_SID = "ACc694b49cf87a97d61d44c4d7d1195004";
-        String AUTH_TOKEN = "7837bb6763d91deb368cfecaadd25ef6";
+        String ACCOUNT_SID = "XXXXX";
+        String AUTH_TOKEN = "XXXXX";
         Twilio.init(ACCOUNT_SID,AUTH_TOKEN);
         String receiveNumber = "+1234567890";
         String messageBody = "body";
