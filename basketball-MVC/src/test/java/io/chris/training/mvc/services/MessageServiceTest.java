@@ -1,9 +1,9 @@
-package io.chris.training.core.service;
+package io.chris.training.mvc.services;
 
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.model.SendMessageRequest;
+import io.chris.training.core.service.MessageService;
 import io.chris.training.mvc.config.AppConfig;
-import io.chris.training.core.service.jms.MessageService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

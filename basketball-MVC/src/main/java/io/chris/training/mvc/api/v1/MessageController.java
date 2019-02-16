@@ -21,25 +21,20 @@ public class MessageController {
     @Autowired
     private MessageService messageService;
 
-    @RequestMapping(params={"messageBody","messageKey","id"},method = RequestMethod.POST)
-    public boolean sendMessage(@RequestParam(value = "messageBody") String messageBody,@RequestParam(value = "messageKey") String messageKey,@RequestParam(value = "id")Long id){
+    @RequestMapping(params={"messageBody","id"},method = RequestMethod.POST)
+    public boolean sendMessage(@RequestParam(value = "messageBody") String messageBody,@RequestParam(value = "id")Long id){
         logger.debug("Message Body is:" + messageBody);
-        logger.debug("Message Body is:" + messageKey);
         logger.debug("User Id is:" +id);
-        Map<String,Object> map = convertStringToMap(messageKey,messageBody);
+        Map<Object,Object> map = new HashMap<>();
+        map.put("messageKey",messageBody);
         map.put("object_id",id);
         String jsonString = convertMapToString(map);
         messageService.sendMessage(jsonString,5);
         return true;
     }
 
-    private Map<String,Object> convertStringToMap(String messageKey,String messageBody){
-        Map<String, Object> map = new HashMap<>();
-        map.put(messageKey,messageBody);
-        return map;
-    }
 
-    private String convertMapToString(Map<String,Object> map){
+    private String convertMapToString(Map<Object,Object> map){
         String jsonString= null;
         ObjectMapper mapper = new ObjectMapper();
         try {

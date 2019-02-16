@@ -1,5 +1,7 @@
-package io.chris.training.core.service;
+package io.chris.training.mvc.services;
 
+
+import io.chris.training.core.service.AuthorityService;
 import io.chris.training.mvc.config.AppConfig;
 import io.chris.training.core.domain.Authority;
 import io.chris.training.core.domain.Player;

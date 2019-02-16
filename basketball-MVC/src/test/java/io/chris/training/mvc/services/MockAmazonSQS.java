@@ -1,4 +1,4 @@
-package io.chris.training.core.service;
+package io.chris.training.mvc.services;
 
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.model.GetQueueUrlResult;

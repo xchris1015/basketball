@@ -33,35 +33,35 @@ public class ProcessService {
     @JmsListener(destination ="chrisbasketball-dev")
     public void processMessage(String message){
 
-        Map<String, Object> map = convertStringToMap(message);
+        Map<Object, Object> map = convertStringToMap(message);
         String messageBody = (String) map.get("messageKey");
         Long id = Long.valueOf((String) map.get("object_id")).longValue();
         User user = userService.findById(id);
         String phoneNumber = user.getPhoneNumber();
-        SMSSend(phoneNumber,messageBody);
+
+        String sendNumber = "+12025177959";
+
+        MessageCreator messageCreator = SMS(phoneNumber,"body",sendNumber);
+        twillioSMSSend(messageCreator);
         logger.info("receive messageContent:" + messageBody);
         logger.info("Object Id:" + id);
 
     }
 
-    public void SMSSend(String receiveNumber,String messageBody) {
-
-        Message message = Message.creator(
+    public MessageCreator SMS(String receiveNumber,String messageBody, String sendNumber) {
+        MessageCreator message = Message.creator(
                 new com.twilio.type.PhoneNumber(receiveNumber),
                 new com.twilio.type.PhoneNumber("+12025177959"),
-                messageBody)
-                .create();
-
-        logger.debug(message.getSid());
-
+                messageBody);
+        return message;
     }
 
-//    public void twillioSMSSend(MessageCreator creator){
-//            creator.create();
-//    }
+    public void twillioSMSSend(MessageCreator creator){
+        creator.create();
+    }
 
-    public Map<String,Object> convertStringToMap(String string){
-        Map<String, Object> map = null;
+    public Map<Object,Object> convertStringToMap(String string){
+        Map<Object, Object> map = null;
         ObjectMapper mapper = new ObjectMapper();
         // convert JSON string to Map
         try {

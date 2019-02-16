@@ -6,14 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 
 import java.io.IOException;
 
+@Configuration
 @ComponentScan(basePackages = "io.chris.training.worker")
 public class TwilioConfig {
 
-
+    @Bean
     public ProcessService getProcessService(@Autowired @Qualifier("applicationProperties") PropertiesFactoryBean propertiesFactoryBean) throws IOException {
         String ACCOUNT_SID = propertiesFactoryBean.getObject().getProperty("ACCOUNT_SID");
         String AUTH_TOKEN = propertiesFactoryBean.getObject().getProperty("AUTH_TOKEN");
