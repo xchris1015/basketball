@@ -6,4 +6,6 @@ out
 target
 *.properties
 workspace.xml
+lib
+ops/
 
