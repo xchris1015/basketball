@@ -7,5 +7,5 @@ target
 *.properties
 workspace.xml
 lib
-ops/
+ops/container/setenv.sh
 
