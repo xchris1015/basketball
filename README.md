@@ -32,7 +32,7 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
     docker pull postgres
     ```
     ```
-    docker run --name {BasketballDB_Demo} -e POSTGRES_DB={basketballDB_Demo} -e POSTGRES_USER={username} -e POSTGRES_PASSWORD={password} -p 5432:5432 -d postgres
+    docker run --name ${BasketballDB_Demo} -e POSTGRES_DB=${basketballDB_Demo} -e POSTGRES_USER=${username} -e POSTGRES_PASSWORD=${password} -p 5432:5432 -d postgres
    ```
 4. Create Unit database on PGAdmin for unit testing
 
@@ -44,12 +44,12 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
 ---
 5. Schema migration for creating tables in database for dev environment.
      ```
-     mvn compile flyway:migrate -P dev -Ddb_url={localhost:5432/basketballDB_Demo} -Ddb_password={password} -Ddb_username={username}
+     mvn compile flyway:migrate -P dev -Ddb_url=${localhost:5432/basketballDB_Demo} -Ddb_password=${password} -Ddb_username=${username}
      ```
      
    Schema migration for creating tables in database for unit environment.
      ```
-     mvn compile flyway:migrate -P unit -Ddb_url={localhost:5432/basketballDB_Demo_unit} -Ddb_password={password} -Ddb_username={username}
+     mvn compile flyway:migrate -P unit -Ddb_url=${localhost:5432/basketballDB_Demo_unit} -Ddb_password=${password} -Ddb_username=${username}
      ```
      
 ### Testing Results
@@ -57,7 +57,7 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
 6. Tests are done using JUnit and Mockito. Tests are run using the command
 
      ```
-     mvn compile test -Dspring.profiles.active={unit} -Ddb_url={localhost:5432/basketballDB_Demo_unit} -Ddb.username={username} -Ddb.password={password}
+     mvn compile test -Dspring.profiles.active=${unit} -Ddb_url=${localhost:5432/basketballDB_Demo_unit} -Ddb.username=${username} -Ddb.password=${password}
      ```
 
 ### Package
@@ -65,7 +65,7 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
 7. Package and Run the Basketball jar type file to spin up the Basketball Reference
     
     ```
-    mvn compile package -DskipTests=true && java -jar -Dspring.profiles.active={dev} -Ddb_url={localhost:5432/basketballDB_Demo_unit} -Ddb.username={admin} -Ddb.password={password} target/basketball-1.0-SNAPSHOT.jar  
+    mvn compile package -DskipTests=true && java -jar -Dspring.profiles.active=${dev} -Ddb_url=${localhost:5432/basketballDB_Demo_unit} -Ddb.username=${admin} -Ddb.password=${password} target/basketball-1.0-SNAPSHOT.jar  
     ```
 
 ### Basketball Reference Demo
