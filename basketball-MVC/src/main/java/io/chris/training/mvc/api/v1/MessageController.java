@@ -22,7 +22,7 @@ public class MessageController {
     private MessageService messageService;
 
     @RequestMapping(params={"messageBody","id"},method = RequestMethod.POST)
-    public boolean sendMessage(@RequestParam(value = "messageBody") String messageBody,@RequestParam(value = "id")Long id){
+    public String sendMessage(@RequestParam(value = "messageBody") String messageBody,@RequestParam(value = "id")Long id){
         logger.debug("Message Body is:" + messageBody);
         logger.debug("User Id is:" +id);
         Map<Object,Object> map = new HashMap<>();
@@ -30,7 +30,7 @@ public class MessageController {
         map.put("object_id",id);
         String jsonString = convertMapToString(map);
         messageService.sendMessage(jsonString,5);
-        return true;
+        return "Message has been send";
     }
 
 
