@@ -42,9 +42,12 @@
                         <version>${flyway.version}</version>
                         <configuration>
                             <driver>org.postgresql.Driver</driver>
-                            <url>jdbc:postgresql://localhost:5432/basketball_unit</url>
-                            <password>password</password>
-                            <user>admin</user>
+                            <!--<url>jdbc:postgresql://localhost:5432/basketball_unit</url>-->
+                            <!--<password>password</password>-->
+                            <!--<user>admin</user>-->
+                            <url>${db_url}</url>
+                            <password>${db_password}</password>
+                            <user>${db_username}</user>
                             <locations>
                                 <location>db/migration</location>
                             </locations>
@@ -67,9 +70,12 @@
                         <version>${flyway.version}</version>
                         <configuration>
                             <driver>org.postgresql.Driver</driver>
-                            <url>jdbc:postgresql://localhost:5432/basketball</url>
-                            <password>password</password>
-                            <user>admin</user>
+                            <!--<url>jdbc:postgresql://localhost:5432/basketball</url>-->
+                            <!--<password>password</password>-->
+                            <!--<user>admin</user>-->
+                            <url>${db_url}</url>
+                            <password>${db_password}</password>
+                            <user>${db_username}</user>
                             <locations>
                                 <location>db/migration</location>
                             </locations>

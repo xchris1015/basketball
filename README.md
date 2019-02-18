@@ -34,15 +34,12 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
     ```
     docker run --name {BasketballDB_Demo} -e POSTGRES_DB={basketballDB_Demo} -e POSTGRES_USER={username} -e POSTGRES_PASSWORD={password} -p 5432:5432 -d postgres
    ```
-4. Create Unit database for unit testing
+4. Create Unit database on PGAdmin for unit testing
+
      ```
-     psql -h localhost -U {username} -d postgres;
+     create database baskerballDB_Demo_unit;
      ```
-     Type password: password     
-     ```
-     create database baskerballDB_Demo_unit
-     \q
-     ```
+     
 ### Database Migration
 ---
 5. Schema migration for creating tables in database for dev environment.
