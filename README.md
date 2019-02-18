@@ -71,7 +71,18 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
 ### Basketball Reference Demo
 ---
 
-1.  User sign up to get email 
+1.  Health Check Application
+    ```
+    GET - http://localhost:8080/api/test/check
+    ```
+    
+    ```
+    {
+	    "Application running okay"
+    }
+    ``` 
+
+2.  User sign up to get email 
     ```
     POST - http://localhost:8080/api/user/signup
     ```
@@ -86,7 +97,7 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
     }
     ``` 
 
-2. User Login with Token 
+3. User Login with Token 
 	
 		POST - http://localhost:8080/api/user/login
    		
@@ -100,7 +111,7 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
 		
    ![token](https://github.com/xchris1015/basketball/blob/master/ReadmePicture/token.png)
    
-3. Input the JwtToken with Serect Key and use findByFirstName pass the User last name by using @PathParam.
+4. Input the JwtToken with Serect Key and use findByFirstName pass the User last name by using @PathParam.
     
         GET - http://localhost:8080/api/user/?first_name=Chris  
     
@@ -117,5 +128,4 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
         
     ![findByUsername](https://github.com/xchris1015/basketball/blob/master/ReadmePicture/findByUsername.png)
 
-### Todo List In The Future
----
+

@@ -13,7 +13,7 @@ public class TestController {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @RequestMapping(method = RequestMethod.GET,value = "/check")
-    public String findAll(){
+    public String healthCheck(){
         return "Application running okay";
     }
 }
