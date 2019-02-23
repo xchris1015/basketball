@@ -1,5 +1,8 @@
 package io.chris.training.worker.config;
 
+import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
+import com.amazonaws.services.sqs.AmazonSQS;
+import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 import io.chris.training.core.config.DataSourceConfig;
 import io.chris.training.core.config.ServiceConfig;
 import org.slf4j.Logger;
@@ -29,6 +32,7 @@ public class WorkerConfig {
         bean.setLocation(new ClassPathResource("META-INF/env/application-"+profile+".properties"));
         return bean;
     }
+
 
 
 }

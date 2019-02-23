@@ -52,7 +52,7 @@ public class AmazonConfig {
 
 
     @Bean // approach 2: autowired AmazonSQS
-    @Primary
+    @Profile({"dev","prod"})
     public AmazonSQS getAmazonSQS(){
         AmazonSQS sqsClient = AmazonSQSClientBuilder.standard().withCredentials(new DefaultAWSCredentialsProviderChain()).build();
         return sqsClient;
