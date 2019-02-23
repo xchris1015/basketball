@@ -62,12 +62,12 @@ public class StorageServiceTest{
         validateMockitoUsage();
     }
 
-    @Test
-    public void putObjectTest(){
-        File file = new File("/Users/chris/Desktop/1.png");
-        storageService.putObject("test1.png",file);
-        assertTrue(false);
-    }
+//    @Test
+//    public void putObjectTest(){
+//        File file = new File("/Users/chris/Desktop/1.png");
+//        storageService.putObject("test1.png",file);
+//        assertTrue(false);
+//    }
 
     @Test
     public void putObjectMockTest(){

@@ -31,7 +31,6 @@ public class UserService {
 
 
 
-    // TODO transactional(readOnly = true) how to explain and how to use;
     // TODO Optional ifprsesent test
     // TODO add ignore case
     public User findById(Long id){
