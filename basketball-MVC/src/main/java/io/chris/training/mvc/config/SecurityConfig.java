@@ -93,7 +93,7 @@ public class SecurityConfig implements Serializable {
         protected void configure(HttpSecurity http) throws Exception {
             //http://www.baeldung.com/securing-a-restful-web-service-with-spring-security
             http.addFilterAt(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-                    .csrf().disable().authorizeRequests().antMatchers("/api/user/login","/api/user/signup").permitAll()
+                    .csrf().disable().authorizeRequests().antMatchers("/api/user/login","/api/user/signup","/api/test/check").permitAll()
                     .and()
                         .authorizeRequests().antMatchers("/api/player/**","/api/team/**","/api/playerstatistic/**","/api/user/**","/api/image/**").hasAnyRole("REGISTERED_USER")
 //                    .and()
