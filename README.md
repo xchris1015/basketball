@@ -42,12 +42,12 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
      
 ### Database Migration
 ---
-5. Schema migration for creating tables in database for dev environment.
+5. Schema migration for creating tables in database for dev environment on basketball-MVC folder.
      ```
      mvn compile flyway:migrate -P dev -Ddb_url=${localhost:5432/basketballDB_Demo} -Ddb_password=${password} -Ddb_username=${username}
      ```
      
-   Schema migration for creating tables in database for unit environment.
+   Schema migration for creating tables in database for unit environment on basketball-MVC folder.
      ```
      mvn compile flyway:migrate -P unit -Ddb_url=${localhost:5432/basketballDB_Demo_unit} -Ddb_password=${password} -Ddb_username=${username}
      ```
