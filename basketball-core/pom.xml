@@ -20,13 +20,13 @@
         <spring.version>5.0.6.RELEASE</spring.version>
         <hibernate.version>5.3.6.Final</hibernate.version>
         <java-version>1.8</java-version>
-        <flyway.version>5.1.4</flyway.version>
         <org.slf4j-version>1.7.25</org.slf4j-version>
         <slf4j-log4j12>1.7.25</slf4j-log4j12>
         <fasterxml-jackson.version>2.9.5</fasterxml-jackson.version>
         <aws.sdk.version>1.11.360</aws.sdk.version>
         <mockito.version>2.19.0</mockito.version>
         <swagger.version>2.9.2</swagger.version>
+        <flyway.version>5.2.4</flyway.version>
     </properties>
 
 
@@ -45,6 +45,64 @@
             </plugin>
         </plugins>
     </build>
+
+
+    <profiles>
+        <!--unit level maven flyway -->
+        <profile>
+            <id>unit</id>
+            <build>
+                <finalName>basketball-spring-mvc</finalName>
+                <plugins>
+                    <plugin>
+                        <groupId>org.flywaydb</groupId>
+                        <artifactId>flyway-maven-plugin</artifactId>
+                        <version>${flyway.version}</version>
+                        <configuration>
+                            <driver>org.postgresql.Driver</driver>
+                            <url>jdbc:postgresql://localhost:5432/basketball_unit</url>
+                            <password>password</password>
+                            <user>admin</user>
+                            <!--<url>${db_url}</url>-->
+                            <!--<password>${db_password}</password>-->
+                            <!--<user>${db_username}</user>-->
+                            <locations>
+                                <location>db/migration</location>
+                            </locations>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+
+        <!--dev level maven flyway -->
+        <profile>
+            <id>dev</id>
+            <build>
+                <finalName>basketball-spring-mvc</finalName>
+                <plugins>
+                    <plugin>
+                        <groupId>org.flywaydb</groupId>
+                        <artifactId>flyway-maven-plugin</artifactId>
+                        <version>${flyway.version}</version>
+                        <configuration>
+                            <driver>org.postgresql.Driver</driver>
+                            <url>jdbc:postgresql://localhost:5432/basketball</url>
+                            <password>password</password>
+                            <user>admin</user>
+                            <!--<url>${db_url}</url>-->
+                            <!--<password>${db_password}</password>-->
+                            <!--<user>${db_username}</user>-->
+                            <locations>
+                                <location>db/migration</location>
+                            </locations>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <dependencies>
 
@@ -234,7 +292,7 @@
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk</artifactId>
-            <version>1.11.468</version>
+            <version>${aws.sdk.version}</version>
         </dependency>
 
         <!--json-->
@@ -281,6 +339,10 @@
 
         <!-- AWS SDK-->
         <dependency>
+
+
+
+
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk</artifactId>
             <version>${aws.sdk.version}</version>
@@ -316,6 +378,9 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>${swagger.version}</version>
         </dependency>
+
+
+
 
     </dependencies>
 
