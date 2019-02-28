@@ -54,7 +54,12 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
      
 ### Testing Results
 ---
-6. Tests are done using JUnit and Mockito. Tests are run using the command
+6.  Package the basketball-core folder before unit test.
+     ```
+     mvn clean compile package -DskipTests=true
+     ```
+
+7. Tests are done using JUnit and Mockito. Tests are run using the command in basketball-MVC and basketball-worker folder.
 
      ```
      mvn compile test -Dspring.profiles.active=${unit} -Daws.region=${region} -Ddb_url=${localhost:5432/basketballDB_Demo_unit} -Ddb.username=${username} -Ddb.password=${password} 
@@ -62,7 +67,7 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
 
 ### Package
 ---
-7. Package and Run the Basketball jar type file to spin up the Basketball Reference
+8. Package and Run the Basketball jar type file to spin up the Basketball Reference
     
     ```
     mvn compile package -DskipTests=true && java -jar -Dspring.profiles.active=${dev} -Ddb_url=${localhost:5432/basketballDB_Demo_unit} -Ddb.username=${admin} -Ddb.password=${password} target/basketball-1.0-SNAPSHOT.jar  

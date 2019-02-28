@@ -63,7 +63,7 @@
                             <!--<url>jdbc:postgresql://localhost:5432/basketball_unit</url>-->
                             <!--<password>password</password>-->
                             <!--<user>admin</user>-->
-                            <url>${db_url}</url>
+                            <url>jdbc:postgresql://${db_url}</url>
                             <password>${db_password}</password>
                             <user>${db_username}</user>
                             <locations>
@@ -91,7 +91,7 @@
                             <!--<url>jdbc:postgresql://localhost:5432/basketball</url>-->
                             <!--<password>password</password>-->
                             <!--<user>admin</user>-->
-                            <url>${db_url}</url>
+                            <url>jdbc:postgresql://${db_url}</url>
                             <password>${db_password}</password>
                             <user>${db_username}</user>
                             <locations>
