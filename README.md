@@ -37,7 +37,7 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
 4. Create Unit database on PGAdmin for unit testing
 
      ```
-     create database baskerballDB_Demo_unit;
+     create database basketballDB_Demo_unit;
      ```
      
 ### Database Migration
