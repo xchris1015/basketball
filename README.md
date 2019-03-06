@@ -58,6 +58,14 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
      ```
      mvn clean compile package -DskipTests=true
      ```
+     ```
+     mvn install
+     ```
+     Install the dependency in basketball-MVC and basketball-worker folder.
+     ```
+     mvn clean compile install -DskipTests=true
+     ```
+     
 
 7. Tests are done using JUnit and Mockito. Tests are run using the command in basketball-MVC and basketball-worker folder.
 
