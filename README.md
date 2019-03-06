@@ -54,7 +54,7 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
      
 ### Testing Results
 ---
-6.  Package the basketball-core folder before unit test.
+6.  Package and install the basketball-core folder before unit test.
      ```
      mvn clean compile package -DskipTests=true
      ```

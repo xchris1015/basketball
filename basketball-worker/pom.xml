@@ -7,6 +7,7 @@
     <groupId>io.chris.training</groupId>
     <artifactId>basketball-worker</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
     <name>worker</name>
 
     <parent>
@@ -62,7 +63,6 @@
             <artifactId>basketball-core</artifactId>
             <groupId>io.chris.training</groupId>
             <version>1.0-SNAPSHOT</version>
-            <type>jar</type>
         </dependency>
 
         <!--twilio-->
