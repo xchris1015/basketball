@@ -47,67 +47,7 @@
     </build>
 
 
-    <profiles>
-        <!--unit level maven flyway -->
-        <profile>
-            <id>unit</id>
-            <build>
-                <finalName>basketball-spring-mvc</finalName>
-                <plugins>
-                    <plugin>
-                        <groupId>org.flywaydb</groupId>
-                        <artifactId>flyway-maven-plugin</artifactId>
-                        <version>${flyway.version}</version>
-                        <configuration>
-                            <driver>org.postgresql.Driver</driver>
-                            <!--<url>jdbc:postgresql://localhost:5432/basketball_unit</url>-->
-                            <!--<password>password</password>-->
-                            <!--<user>admin</user>-->
-                            <url>jdbc:postgresql://${db_url}</url>
-                            <password>${db_password}</password>
-                            <user>${db_username}</user>
-                            <locations>
-                                <location>db/migration</location>
-                            </locations>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-
-        <!--dev level maven flyway -->
-        <profile>
-            <id>dev</id>
-            <build>
-                <finalName>basketball-spring-mvc</finalName>
-                <plugins>
-                    <plugin>
-                        <groupId>org.flywaydb</groupId>
-                        <artifactId>flyway-maven-plugin</artifactId>
-                        <version>${flyway.version}</version>
-                        <configuration>
-                            <driver>org.postgresql.Driver</driver>
-                            <!--<url>jdbc:postgresql://localhost:5432/basketball</url>-->
-                            <!--<password>password</password>-->
-                            <!--<user>admin</user>-->
-                            <url>jdbc:postgresql://${db_url}</url>
-                            <password>${db_password}</password>
-                            <user>${db_username}</user>
-                            <locations>
-                                <location>db/migration</location>
-                            </locations>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
-
     <dependencies>
-
-
-
 
         <!--Unit test-->
         <dependency>

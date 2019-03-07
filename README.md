@@ -21,11 +21,12 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
 ### Building Project
 ---
 1. Clone the project
-	
 	```
 	git clone https://github.com/xchris1015/basketball
 	```
-2. Install docker if needed.
+2. Install docker if needed. Please use docker maven java oracle jdk.
+    
+    [docker-mvn-jdk8](https://github.com/shinyay/docker-mvn-jdk8)
 
 3. Open a new command line window and Spin up the PostgreSql database server using Postgres docker image
     ```
@@ -33,7 +34,7 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
     ```
     ```
     docker run --name ${BasketballDB_Demo} -e POSTGRES_DB=${basketballDB_Demo} -e POSTGRES_USER=${username} -e POSTGRES_PASSWORD=${password} -p 5432:5432 -d postgres
-   ```
+    ```
 4. Create Unit database on PGAdmin for unit testing
 
      ```
@@ -42,32 +43,24 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
      
 ### Database Migration
 ---
-5. Schema migration for creating tables in database for dev environment on basketball-core folder.
+5. Schema migration for creating tables in database for dev environment on basketball-MVC folder.
      ```
      mvn compile flyway:migrate -P dev -Ddb_url=${localhost:5432/basketballDB_Demo} -Ddb_password=${password} -Ddb_username=${username}
      ```
      
-   Schema migration for creating tables in database for unit environment on basketball-core folder.
+   Schema migration for creating tables in database for unit environment on basketball-MVC folder.
      ```
      mvn compile flyway:migrate -P unit -Ddb_url=${localhost:5432/basketballDB_Demo_unit} -Ddb_password=${password} -Ddb_username=${username}
      ```
      
 ### Testing Results
 ---
-6.  Package and install the basketball-core folder before unit test.
-     ```
-     mvn clean compile package -DskipTests=true
-     ```
-     ```
-     mvn install
-     ```
-     Install the dependency in basketball-MVC and basketball-worker folder.
+6.  Package and install the basketball folder before unit test.
      ```
      mvn clean compile install -DskipTests=true
-     ```
-     
+     ```    
 
-7. Tests are done using JUnit and Mockito. Tests are run using the command in basketball-MVC and basketball-worker folder.
+7. Tests are done using JUnit and Mockito. Tests are run using the command on basketball folder.
 
      ```
      mvn compile test -Dspring.profiles.active=${unit} -Daws.region=${region} -Ddb_url=${localhost:5432/basketballDB_Demo_unit} -Ddb.username=${username} -Ddb.password=${password} 
