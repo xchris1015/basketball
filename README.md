@@ -24,9 +24,9 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
 	```
 	git clone https://github.com/xchris1015/basketball
 	```
-2. Install docker if needed. Please use docker maven java oracle jdk.
+2. Install docker if needed. Please use docker maven openjdk and select the 3.6-jdk-8 version.
     
-    [docker-mvn-jdk8](https://github.com/shinyay/docker-mvn-jdk8)
+    [3.6.0-jdk-8, 3.6-jdk-8, 3-jdk-8 (jdk-8/Dockerfile)](https://hub.docker.com/_/maven?tab=description)
 
 3. Open a new command line window and Spin up the PostgreSql database server using Postgres docker image
     ```
@@ -40,10 +40,40 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
      ```
      create database basketballDB_Demo_unit;
      ```
+5. Update application.properties and share-runtime.properties as following format:
+    
+    ```
+        Application-unit.properties template:
+        database.dataSourceClassName=
+        database.serverName=
+        database.username=
+        database.password=
+        amazon.s3.bucket=
+        jms.queue.name=
+        amazon.s3.url=
+        ACCOUNT_SID = 
+        AUTH_TOKEN = 
+        
+        location:./basketball-core/src/main/resources/META-INF/env 
+    ```
+    
+    ```
+        share-runtime.properties template:
+        jwt.secret=
+        jwt.expiration=
+        jwt.header=
+            
+        location:./basketball-core/src/main/resources/META-INF
+      ```
+    
+6. Package installation with 2 time. 1. run this commend on basketball-core folder and 2. run this commend on basketball folder
+     ```
+        mvn clean compile install -DskipTests=true
+     ```   
      
 ### Database Migration
 ---
-5. Schema migration for creating tables in database for dev environment on basketball-MVC folder.
+7. Schema migration for creating tables in database for dev environment on basketball-MVC folder.
      ```
      mvn compile flyway:migrate -P dev -Ddb_url=${localhost:5432/basketballDB_Demo} -Ddb_password=${password} -Ddb_username=${username}
      ```
@@ -54,13 +84,9 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
      ```
      
 ### Testing Results
----
-6.  Package and install the basketball folder before unit test.
-     ```
-     mvn clean compile install -DskipTests=true
-     ```    
+---  
 
-7. Tests are done using JUnit and Mockito. Tests are run using the command on basketball folder.
+8. Tests are done using JUnit and Mockito. Tests are run using the command on basketball folder.
 
      ```
      mvn compile test -Dspring.profiles.active=${unit} -Daws.region=${region} -Ddb_url=${localhost:5432/basketballDB_Demo_unit} -Ddb.username=${username} -Ddb.password=${password} 
@@ -68,7 +94,7 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
 
 ### Package
 ---
-8. Package and Run the Basketball jar type file to spin up the Basketball Reference
+9. Package and Run the Basketball jar type file to spin up the Basketball Reference
     
     ```
     mvn compile package -DskipTests=true && java -jar -Dspring.profiles.active=${dev} -Ddb_url=${localhost:5432/basketballDB_Demo_unit} -Ddb.username=${admin} -Ddb.password=${password} target/basketball-1.0-SNAPSHOT.jar  
