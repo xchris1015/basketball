@@ -102,34 +102,23 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
 
 ### Docker
 ---
-10. Create setenv.sh as following template.
-    
-    setenv.sh
-    ```
-    export CATALINA_OPTS="$CATALINA_OPTS -Dspring.profiles.active="
-    export CATALINA_OPTS="$CATALINA_OPTS -ea"
-    export CATALINA_OPTS="$CATALINA_OPTS -Daws.accessKeyId="
-    export CATALINA_OPTS="$CATALINA_OPTS -Daws.secretKey="
-    export CATALINA_OPTS="$CATALINA_OPTS -Daws.region="
-    ```
-11. Create docker file as floowing template.
+
+10. Create docker file as following template.
     ```
     RUN rm -rf /usr/local/tomcat/webapps/ROOT
     COPY ./*.war /usr/local/tomcat/webapps/ROOT.war
     COPY ./setenv.sh /usr/local/tomcat/bin/setenv.sh
     ```
     
-12. Build the docker image with the following commend
-   ```
-   docker build -t basketball-api -f Dockerfile .
+12. Build the docker image with the following commend, copy the war file to the container folder and then open the container folder to run the docker image.
+    ```
+    cp ./basketball-MVC/target/*.war ./ops/container/
+    cd ./ops/container/
+    docker build -t basketball-api -f Dockerfile .
    
-   #start container
-   #docker run --name test-api basketball-api
-   ```
-    
-
-    
-   
+    #start container
+    #docker run --name test-api basketball-api
+    ```
 
 ### Basketball Reference Demo
 ---
