@@ -66,8 +66,8 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
         location:./basketball-core/src/main/resources/META-INF
       ```
     
-6. Change directory to ./basketball-core and run following command, then change directory to root directory, then run it again.
-     ```bash
+6. Package installation with 2 time. 1. run this commend on basketball-core folder and 2. run this commend on basketball folder
+     ```
         mvn clean compile install -DskipTests=true
      ```   
      
@@ -75,12 +75,12 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
 ---
 7. Schema migration for creating tables in database for dev environment on basketball-MVC folder.
      ```
-     mvn compile flyway:migrate -P dev -Ddb_url=${localhost:5432/basketballDB_Demo} -Ddb_password=${password} -Ddb_username=${username}
+     mvn compile flyway:migrate -P dev -Ddb.url=${localhost:5432/basketballDB_Demo} -Ddb.password=${password} -Ddb.username=${username}
      ```
      
    Schema migration for creating tables in database for unit environment on basketball-MVC folder.
      ```
-     mvn compile flyway:migrate -P unit -Ddb_url=${localhost:5432/basketballDB_Demo_unit} -Ddb_password=${password} -Ddb_username=${username}
+     mvn compile flyway:migrate -P unit -Ddb.url=${localhost:5432/basketballDB_Demo_unit} -Ddb.password=${password} -Ddb.username=${username}
      ```
      
 ### Testing Results
@@ -89,7 +89,7 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
 8. Tests are done using JUnit and Mockito. Tests are run using the command on basketball folder.
 
      ```
-     mvn compile test -Dspring.profiles.active=${unit} -Daws.region=${region} -Ddb_url=${localhost:5432/basketballDB_Demo_unit} -Ddb.username=${username} -Ddb.password=${password} 
+     mvn compile test -Dspring.profiles.active=${unit} -Daws.region=${region} -Ddb.url=${localhost:5432/basketballDB_Demo_unit} -Ddb.username=${username} -Ddb.password=${password} 
      ```
 
 ### Package
@@ -97,7 +97,7 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
 9. Package and Run the Basketball jar type file to spin up the Basketball Reference
     
     ```
-    mvn compile package -DskipTests=true && java -jar -Dspring.profiles.active=${dev} -Ddb_url=${localhost:5432/basketballDB_Demo_unit} -Ddb.username=${admin} -Ddb.password=${password} target/basketball-1.0-SNAPSHOT.jar  
+    mvn compile package -DskipTests=true && java -jar -Dspring.profiles.active=${dev} -Ddb.url=${localhost:5432/basketballDB_Demo_unit} -Ddb.username=${admin} -Ddb.password=${password} target/basketball-1.0-SNAPSHOT.jar  
     ```
 
 ### Basketball Reference Demo
