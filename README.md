@@ -66,8 +66,8 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
         location:./basketball-core/src/main/resources/META-INF
       ```
     
-6. Package installation with 2 time. 1. run this commend on basketball-core folder and 2. run this commend on basketball folder
-     ```
+6. Change directory to ./basketball-core and run following command, then change directory to root directory, then run it again.
+     ```bash
         mvn clean compile install -DskipTests=true
      ```   
      
