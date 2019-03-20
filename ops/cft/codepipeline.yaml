@@ -68,7 +68,7 @@ Resources:
                 - aws s3 cp s3://ascending-devops/kris_project/application-unit.properties ./basketball-core/resources/META-INF/env/
                 - aws s3 cp s3://ascending-devops/kris_project/share-runtime.properties ./basketball-core/resources/META-INF/
                 - cd basketball-core
-                - mvn compile flyway:migrate -P unit -Ddb_url=${DB_URL}:5432/${DB_NAME} -Ddb_password=${DB_PASSWORD} -Ddb_username=${DB_USERNAME} -q
+                - mvn compile flyway:migrate -P unit -Ddb.url=${DB_URL}:5432/${DB_NAME} -Ddb.password=${DB_PASSWORD} -Ddb.username=${DB_USERNAME} -q
                 - cd ..
                 - mvn clean compile package -DskipTests=true -q
                 - mvn install -DskipTests=true -q
@@ -76,10 +76,10 @@ Resources:
               commands:
                 - cd basketball-MVC
                 - mvn install -DskipTests=true -q
-                - mvn compile test -Dspring.profiles.active=unit -Daws.region=us-east-1 -Ddb_url=${DB_URL}:5432/${DB_NAME} -Ddb.username=${DB_USERNAME} -Ddb.password=${DB_PASSWORD} -q
+                - mvn compile test -Dspring.profiles.active=unit -Daws.region=us-east-1 -Ddb.url=${DB_URL}:5432/${DB_NAME} -Ddb.username=${DB_USERNAME} -Ddb.password=${DB_PASSWORD} -q
                 - cd ../basketball-worker
                 - mvn install -DskipTests=true -q
-                - mvn compile test -Dspring.profiles.active=unit -Daws.region=us-east-1 -Ddb_url=${DB_URL}:5432/${DB_NAME} -Ddb.username=${DB_USERNAME} -Ddb.password=${DB_PASSWORD} -q
+                - mvn compile test -Dspring.profiles.active=unit -Daws.region=us-east-1 -Ddb.url=${DB_URL}:5432/${DB_NAME} -Ddb.username=${DB_USERNAME} -Ddb.password=${DB_PASSWORD} -q
         GitCloneDepth: 1
         Location: https://github.com/xchris1015/basketball.git
         Type: GITHUB
