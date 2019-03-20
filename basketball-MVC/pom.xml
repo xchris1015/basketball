@@ -26,6 +26,7 @@
         <aws.sdk.version>1.11.360</aws.sdk.version>
         <mockito.version>2.19.0</mockito.version>
         <swagger.version>2.9.2</swagger.version>
+        <git-commit-id-plugin.version>2.2.4</git-commit-id-plugin.version>
     </properties>
 
 
@@ -88,6 +89,7 @@
 
     <!-- maven compiler -->
     <build>
+        <finalName>${project.artifactId}-${project.version}-${git.commit.id.describe-short}</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -107,8 +109,31 @@
                     <useSystemClassLoader>false</useSystemClassLoader>
                 </configuration>
             </plugin>
+
+
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+                <version>${git-commit-id-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>get-the-git-infos</id>
+                        <goals>
+                            <goal>revision</goal>
+                        </goals>
+                        <phase>validate</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+                </configuration>
+            </plugin>
         </plugins>
+
+
     </build>
+
+
 
 
 
