@@ -89,7 +89,7 @@
 
     <!-- maven compiler -->
     <build>
-        <finalName>${project.artifactId}-${project.version}-${git.commit.id.describe-short}</finalName>
+        <finalName>${project.artifactId}-${project.version}-${HASH}</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
