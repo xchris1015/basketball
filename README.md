@@ -66,7 +66,7 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
         location:./basketball-core/src/main/resources/META-INF
       ```
     
-6. Package installation with 2 time. 1. run this commend on basketball-core folder and 2. run this commend on basketball folder
+6. Package installation with 2 time. 1. run this commend on basketball folder and 2. run this commend on basketball-core folder.
      ```
         mvn clean compile install -DskipTests=true
      ```   
@@ -94,11 +94,42 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
 
 ### Package
 ---
-9. Package and Run the Basketball jar type file to spin up the Basketball Reference
+9. Package and Run the Basketball-MVC war type file to spin up the Basketball Reference
     
     ```
-    mvn compile package -DskipTests=true && java -jar -Dspring.profiles.active=${dev} -Ddb.url=${localhost:5432/basketballDB_Demo_unit} -Ddb.username=${admin} -Ddb.password=${password} target/basketball-1.0-SNAPSHOT.jar  
+    mvn compile package -DskipTests=true -Dspring.profiles.active=${dev}
     ```
+
+### Docker
+---
+10. Create setenv.sh as following template.
+    
+    setenv.sh
+    ```
+    export CATALINA_OPTS="$CATALINA_OPTS -Dspring.profiles.active="
+    export CATALINA_OPTS="$CATALINA_OPTS -ea"
+    export CATALINA_OPTS="$CATALINA_OPTS -Daws.accessKeyId="
+    export CATALINA_OPTS="$CATALINA_OPTS -Daws.secretKey="
+    export CATALINA_OPTS="$CATALINA_OPTS -Daws.region="
+    ```
+11. Create docker file as floowing template.
+    ```
+    RUN rm -rf /usr/local/tomcat/webapps/ROOT
+    COPY ./*.war /usr/local/tomcat/webapps/ROOT.war
+    COPY ./setenv.sh /usr/local/tomcat/bin/setenv.sh
+    ```
+    
+12. Build the docker image with the following commend
+   ```
+   docker build -t basketball-api -f Dockerfile .
+   
+   #start container
+   #docker run --name test-api basketball-api
+   ```
+    
+
+    
+   
 
 ### Basketball Reference Demo
 ---
