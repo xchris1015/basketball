@@ -1,0 +1,9 @@
+database.dataSourceClassName=org.postgresql.ds.PGSimpleDataSource
+database.serverName=${db.url}
+database.username=${db.username}
+database.password=${db.password}
+amazon.s3.bucket=${aws.s3.bucket}
+jms.queue.name=${queue}
+amazon.s3.url=${s3.url}
+ACCOUNT_SID = ${twilio.sid}
+AUTH_TOKEN = ${twilio.token}
