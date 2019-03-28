@@ -105,19 +105,33 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
 
 10. Create docker file as following template.
     ```
+    FROM tomcat:9.0.10-jre8
+    
+    EXPOSE 8080
+    
+    ENV PROFILE=stage
+    ENV AWS_REGION=region
+    ENV DB_URL=172.17.0.4:5432/basketball_xx
+    ENV DB_PASSWORD=password
+    ENV DB_USERNAME=username
+    
+    # set environment
+    
     RUN rm -rf /usr/local/tomcat/webapps/ROOT
     COPY ./*.war /usr/local/tomcat/webapps/ROOT.war
     COPY ./setenv.sh /usr/local/tomcat/bin/setenv.sh
     ```
     
-12. Build the docker image with the following commend, copy the war file to the container folder and then open the container folder to run the docker image.
+12. Build the docker image with the following commend from root directory, copy the war file to the container folder and then open the container folder to run the docker image.
     ```
+    #! /bin/bash
     cp ./basketball-MVC/target/*.war ./ops/container/
     cd ./ops/container/
     docker build -t basketball-api -f Dockerfile .
-   
+    rm *.war
+    
     #start container
-    #docker run --name test-api basketball-api
+    docker run --name test-api -e PROFILE=dev -e DB_URL=jdbc:postgresql://172.17.0.2:5432/basketball -e DB_USERNAME=admin -e DB_PASSWORD=password -e AWS_REGION=us-east-1 basketball-api
     ```
 
 ### Basketball Reference Demo

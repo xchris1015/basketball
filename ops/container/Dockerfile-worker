@@ -1,0 +1,17 @@
+FROM java:openjdk-8
+
+MAINTAINER Chris
+
+ENV PROFILE=dev
+ENV AWS_REGION=us-east-1
+ENV DB_URL=172.17.0.4:5432/basketball_xx
+ENV DB_PASSWORD=password
+ENV DB_USERNAME=admin
+
+
+#config jar file and run it
+#RUN yum install/ apt-get install
+
+COPY ./*.jar /tmp/worker.jar
+
+CMD ["java", "-jar","/tmp/worker.jar","-Dspring.profiles.active=${PROFILE}","-Daws.region=${AWS_REGION}","-Ddb.url=${DB_URL}","-Ddb.password=${DB_PASSWORD}","-Dbd.username=${DB_USERNAME}"]

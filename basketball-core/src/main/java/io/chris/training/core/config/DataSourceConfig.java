@@ -32,13 +32,13 @@ public class DataSourceConfig {
     @Value("#{applicationProperties['database.dataSourceClassName']}")
     private String driverClassName;
 
-    @Value("#{applicationProperties['database.serverName']}")
+    @Value("${db.url}")
     private String databaseUrl;
 
-    @Value("#{applicationProperties['database.username']}")
+    @Value("${db.username}")
     private String databaseUsername;
 
-    @Value("#{applicationProperties['database.password']}")
+    @Value("${db.password}")
     private String databasePassword;
 
 

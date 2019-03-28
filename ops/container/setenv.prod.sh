@@ -1,3 +1,6 @@
-export CATALINA_OPTS="$CATALINA_OPTS -Dspring.profiles.active=prod"
+export CATALINA_OPTS="$CATALINA_OPTS -Dspring.profiles.active=${PROFILE}"
 export CATALINA_OPTS="$CATALINA_OPTS -ea"
-export CATALINA_OPTS="$CATALINA_OPTS -Daws.region=us-east-1"
+export CATALINA_OPTS="$CATALINA_OPTS -Daws.region=${AWS_REGION}"
+export CATALINA_OPTS="$CATALINA_OPTS -Ddb.url=${DB_URL}"
+export CATALINA_OPTS="$CATALINA_OPTS -Ddb.password=${DB_PASSWORD}"
+export CATALINA_OPTS="$CATALINA_OPTS -Ddb.username=${DB_USERNAME}"
