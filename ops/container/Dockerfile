@@ -8,6 +8,7 @@ ENV DB_URL=172.17.0.4:5432/basketball_xx
 ENV DB_PASSWORD=password
 ENV DB_USERNAME=admin
 
+
 # set environment
 
 RUN rm -rf /usr/local/tomcat/webapps/ROOT

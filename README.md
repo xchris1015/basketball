@@ -103,7 +103,7 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
 ### Docker
 ---
 
-10. Create docker file as following template.
+10. Create docker file for MVC image as following template.
     ```
     FROM tomcat:9.0.10-jre8
     
@@ -132,6 +132,41 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
     
     #start container
     docker run --name test-api -e PROFILE=dev -e DB_URL=jdbc:postgresql://172.17.0.2:5432/basketball -e DB_USERNAME=admin -e DB_PASSWORD=password -e AWS_REGION=us-east-1 basketball-api
+    ```
+    
+13. Create docker file for worker image as following template.
+    ```
+    FROM java:openjdk-8
+       
+    ENV PROFILE=dev
+    ENV AWS_REGION=us-east-1
+    ENV DB_URL=172.17.0.4:5432/basketball_xx
+    ENV DB_PASSWORD=password
+    ENV DB_USERNAME=admin
+       
+       
+    #config jar file and run it
+    #RUN yum install/ apt-get install
+       
+    COPY ./*.jar /tmp/worker.jar
+       
+       
+    #CMD echo $PROFILE
+    CMD java -Dspring.profiles.active=$PROFILE -Daws.region=$AWS_REGION -Ddb.url=$DB_URL -Ddb.password=$DB_PASSWORD -Dbd.username=$DB_USERNAME -jar /tmp/worker.jar
+    ```
+
+14. Build the docker image with the following commend from root directory, copy the jar file to the container folder and then open the container folder to run the docker image.
+    ```
+    cp ./basketball-worker/target/*.jar ./ops/container/
+    cd ./ops/container/
+
+    build image:
+    docker build -t basketball-worker -f Dockerfile-worker .
+
+    rm *.jar
+
+    run the docker image:
+    docker run --name SQS-worker -e PROFILE=dev -e DB_URL=jdbc:postgresql://172.17.0.2:5432/basketball -e DB_USERNAME=admin -e DB_PASSWORD=password -e AWS_REGION=us-east-1 basketball-worker
     ```
 
 ### Basketball Reference Demo
