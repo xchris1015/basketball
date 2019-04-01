@@ -114,7 +114,7 @@ public class DataSourceConfig {
     private BasicDataSource createDataSource(){
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName(driverClassName); // current class instance variables
-        dataSource.setUrl(databaseUrl);
+        dataSource.setUrl("jdbc:postgresql://"+databaseUrl);
         dataSource.setUsername(databaseUsername);
         dataSource.setPassword(databasePassword);
         dataSource.setTestOnBorrow(true);
