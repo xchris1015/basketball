@@ -4,10 +4,9 @@ EXPOSE 8080
 
 ENV PROFILE=dev
 ENV AWS_REGION=us-east-1
-ENV DB_URL=172.17.0.4:5432/basketball_xx
+ENV DB_URL=172.17.0.2:5432/basketball
 ENV DB_PASSWORD=password
 ENV DB_USERNAME=admin
-
 
 # set environment
 
