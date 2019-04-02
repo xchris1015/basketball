@@ -97,7 +97,7 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
 9. Package and Run the Basketball-MVC war type file to spin up the Basketball Reference
     
     ```
-    mvn compile package -DskipTests=true -Dspring.profiles.active=${dev}
+    mvn compile package -DskipTests=true -Dspring.profiles.active=${dev} -DHASH=${HASH}
     ```
 
 ### Docker
