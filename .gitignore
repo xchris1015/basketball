@@ -7,3 +7,4 @@ target
 *.properties
 workspace.xml
 lib
+kube_*.yaml
