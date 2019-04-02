@@ -31,7 +31,7 @@
 
 
     <build>
-        <finalName>basketball-spring-mvc</finalName>
+        <finalName>${project.artifactId}-${project.version}-${HASH}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.flywaydb</groupId>
