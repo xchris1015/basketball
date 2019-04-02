@@ -75,12 +75,12 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
 ---
 7. Schema migration for creating tables in database for dev environment on basketball-MVC folder.
      ```
-     mvn compile flyway:migrate -P dev -Ddb.url=${jdbc:postgresql://localhost:5432/basketballDB_Demo} -Ddb.password=${password} -Ddb.username=${username}
+     mvn compile flyway:migrate -Ddb.url=${localhost:5432/basketballDB_Demo} -Ddb.password=${password} -Ddb.username=${username}
      ```
      
    Schema migration for creating tables in database for unit environment on basketball-MVC folder.
      ```
-     mvn compile flyway:migrate -P unit -Ddb.url=${jdbc:postgresql://localhost:5432/basketballDB_Demo_unit} -Ddb.password=${password} -Ddb.username=${username}
+     mvn compile flyway:migrate -Ddb.url=${localhost:5432/basketballDB_Demo_unit} -Ddb.password=${password} -Ddb.username=${username}
      ```
      
 ### Testing Results
@@ -89,7 +89,7 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
 8. Tests are done using JUnit and Mockito. Tests are run using the command on basketball folder.
 
      ```
-     mvn compile test -Dspring.profiles.active=${unit} -Daws.region=${region} -Ddb.url=${jdbc:postgresql://localhost:5432/basketballDB_Demo_unit} -Ddb.username=${username} -Ddb.password=${password} 
+     mvn compile test -Dspring.profiles.active=${unit} -Daws.region=${region} -Ddb.url=${localhost:5432/basketballDB_Demo_unit} -Ddb.username=${username} -Ddb.password=${password} 
      ```
 
 ### Package
@@ -111,7 +111,7 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
     
     ENV PROFILE=stage
     ENV AWS_REGION=region
-    ENV DB_URL=jdbc:postgresql://172.17.0.2:5432/basketball
+    ENV DB_URL=172.17.0.2:5432/basketball
     ENV DB_PASSWORD=password
     ENV DB_USERNAME=username
     
@@ -131,7 +131,7 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
     rm *.war
     
     #start container
-    docker run --name test-api -e PROFILE=dev -e DB_URL=jdbc:postgresql://172.17.0.2:5432/basketball -e DB_USERNAME=admin -e DB_PASSWORD=password -e AWS_REGION=us-east-1 basketball-api
+    docker run --name test-api -e PROFILE=dev -e DB_URL=172.17.0.2:5432/basketball -e DB_USERNAME=admin -e DB_PASSWORD=password -e AWS_REGION=us-east-1 basketball-api
     ```
     
 13. Create docker file for worker image as following template.
@@ -140,7 +140,7 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
        
     ENV PROFILE=dev
     ENV AWS_REGION=us-east-1
-    ENV DB_URL=jdbc:postgresql://172.17.0.2:5432/basketball
+    ENV DB_URL=172.17.0.2:5432/basketball
     ENV DB_PASSWORD=password
     ENV DB_USERNAME=admin
        
@@ -166,14 +166,14 @@ This application is developed using Spring Boot, Spring Data, Spring RESTful web
     rm *.jar
 
     run the docker image:
-    docker run --name SQS-worker -e PROFILE=dev -e DB_URL=jdbc:postgresql://172.17.0.2:5432/basketball -e DB_USERNAME=admin -e DB_PASSWORD=password -e AWS_REGION=us-east-1 basketball-worker
+    docker run --name SQS-worker -e PROFILE=dev -e DB_URL=172.17.0.2:5432/basketball -e DB_USERNAME=admin -e DB_PASSWORD=password -e AWS_REGION=us-east-1 basketball-worker
     ```
     
 ### Online Database Migration
 ---
 15. Schema migration for creating tables in database for prod environment on basketball-MVC folder.
      ```
-     mvn compile flyway:migrate -P prod -Ddb.url=${jdbc:postgresql://localhost:5432/basketballDB_Demo} -Ddb.password=${password} -Ddb.username=${username}
+     mvn compile flyway:migrate -Ddb.url=${localhost:5432/basketballDB_Demo} -Ddb.password=${password} -Ddb.username=${username}
      ```
     
     
