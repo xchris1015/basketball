@@ -20,6 +20,9 @@ Parameters:
     Description: Database Password
     Type: String
     NoEcho: true
+  OAuthToken:
+    Type: String
+    NoEcho: true
 Resources:
   UnitTest:
     Type: AWS::CodeBuild::Project
@@ -86,15 +89,6 @@ Resources:
         Type: no_artifacts
       Description: Build war file
       Environment:
-        EnvironmentVariables:
-          - Name: DB_USERNAME
-            Value: !Ref Username
-          - Name: DB_URL
-            Value: db-test.ascendingdc.com
-          - Name: DB_PASSWORD
-            Value: !Ref Password
-          - Name: DB_NAME
-            Value: kris_unit 
         ComputeType: BUILD_GENERAL1_SMALL
         Image: maven:3.6.0-jdk-8
         Type: LINUX_CONTAINER
@@ -103,11 +97,6 @@ Resources:
           - ''
           - - !Ref AWS::StackName
             - '-BuildWarFile'
-      # VpcConfig:
-      #   SecurityGroupIds:
-      #     - Fn::ImportValue: !Sub "${SecurityStack}-WorkerNodeSG"
-      #   Subnets: !Ref PrivateSubnets
-      #   VpcId: !Ref VpcId
       ServiceRole: 
         Fn::ImportValue: !Sub "${SecurityStack}-CodeBuildRole"
       Source: 
@@ -129,8 +118,172 @@ Resources:
                 - aws s3 cp s3://ascending-devops/kris_project/share-runtime.properties ./basketball-core/src/main/resources/META-INF/
             build:
               commands:
-                - mvn compile package -DskipTests=true
-                - aws s3 cp basketball-MVC/target/*.war s3://
+                - mvn compile package -DskipTests=true -q
+                - aws s3 cp basketball-MVC/target/*.war s3://ascending-devops/kris_project/warfiles/
         GitCloneDepth: 1
         Location: https://github.com/xchris1015/basketball.git
         Type: GITHUB
+  BuildImage:
+    Type: AWS::CodeBuild::Project
+    Properties:
+      Artifacts:
+        Type: no_artifacts
+      Description: Build Image before Deployment
+      Environment: 
+        EnvironmentVariables:
+          - Name: ECR
+            Value: 595312265488.dkr.ecr.us-east-1.amazonaws.com/kris
+        PrivilegedMode: true
+        ComputeType: BUILD_GENERAL1_SMALL
+        Image: aws/codebuild/standard:1.0
+        Type: LINUX_CONTAINER
+      Name: 
+        Fn::Join:
+          - ''
+          - - !Ref AWS::StackName
+            - '-BuildImage'
+      ServiceRole: 
+        Fn::ImportValue: !Sub "${SecurityStack}-CodeBuildRole"
+      Source: 
+        BuildSpec: |
+          version: 0.2
+          phases:
+            pre_build:
+              commands:
+                - $(aws ecr get-login --no-include-email --region us-east-1)
+                - if [ -z "$CODEBUILD_RESOLVED_SOURCE_VERSION" ]; then SRC_HASH=${CODEBUILD_SOURCE_VERSION}; else SRC_HASH=${CODEBUILD_RESOLVED_SOURCE_VERSION}; fi
+                - IMAGE_TAG=$(echo ${SRC_HASH} | cut -b 1-8)
+            build:
+              commands:
+                - cd ./ops/container/
+                - aws s3 cp s3://ascending-devops/kris_project/warfiles/basketball-MVC-1.0-SNAPSHOT-${IMAGE_TAG}.war .
+                - docker build -t "${ECR}:${IMAGE_TAG}" .
+            post_build:
+              commands:
+                - docker push ${ECR}:${IMAGE_TAG}
+        GitCloneDepth: 1
+        Location: https://github.com/xchris1015/basketball.git
+        Type: GITHUB
+  UpdatePod:
+    Type: AWS::CodeBuild::Project
+    Properties:
+      Artifacts:
+        Type: no_artifacts
+      Description: Update image for pods
+      Environment: 
+        EnvironmentVariables:
+          - Name: ECR
+            Value: 595312265488.dkr.ecr.us-east-1.amazonaws.com/kris
+        ComputeType: BUILD_GENERAL1_SMALL
+        Image: aws/codebuild/standard:1.0
+        Type: LINUX_CONTAINER
+      Name: 
+        Fn::Join:
+          - ''
+          - - !Ref AWS::StackName
+            - '-UpdatePod'
+      ServiceRole: 
+        Fn::ImportValue: !Sub "${SecurityStack}-CodeBuildRole"
+      Source: 
+        BuildSpec: |
+          version: 0.2
+          phases:
+            install:
+              commands:
+                - curl -o kubectl https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-06-05/bin/linux/amd64/kubectl
+                - chmod +x ./kubectl
+                - mkdir -p /root/bin
+                - cp ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH
+                - curl -o heptio-authenticator-aws https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-06-05/bin/linux/amd64/heptio-authenticator-aws
+                - chmod +x ./heptio-authenticator-aws
+                - cp ./heptio-authenticator-aws $HOME/bin/heptio-authenticator-aws && export PATH=$HOME/bin:$PATH
+            pre_build:
+              commands:
+                - mkdir -p ~/.kube
+                - if [ -z "$CODEBUILD_RESOLVED_SOURCE_VERSION" ]; then SRC_HASH=${CODEBUILD_SOURCE_VERSION}; else SRC_HASH=${CODEBUILD_RESOLVED_SOURCE_VERSION}; fi
+                - IMAGE_TAG=$(echo ${SRC_HASH} | cut -b 1-8)
+                - aws s3 cp s3://ascending-devops/ascending-conf/config ~/.kube/config-AscendingEksBackend-7hsAAVY8I5Uc
+                - export KUBECONFIG=$KUBECONFIG:~/.kube/config-AscendingEksBackend-7hsAAVY8I5Uc
+            build:
+              commands:
+                - kubectl set image deployment/kris kris=${ECR}:${IMAGE_TAG} --kubeconfig ~/.kube/config-AscendingEksBackend-7hsAAVY8I5Uc
+        GitCloneDepth: 1
+        Location: https://github.com/xchris1015/basketball.git
+        Type: GITHUB
+  AscendingCodePipeline:
+    Type: AWS::CodePipeline::Pipeline
+    Properties:
+      RoleArn: 
+        Fn::ImportValue: !Sub "${SecurityStack}-CodePipelineRole"
+      ArtifactStore:
+        Type: S3
+        Location: ascending-devops
+      Stages:
+        - Name: Source
+          Actions:
+            - Name: Source
+              ActionTypeId: 
+                Category: Source
+                Owner: ThirdParty
+                Provider: GitHub
+                Version: 1
+              Configuration:
+                Owner: xchris1015
+                Repo: basketball
+                Branch: master
+                OAuthToken: !Ref OAuthToken
+              OutputArtifacts:
+                - Name: Source
+              RunOrder: 1
+        - Name: UnitTest
+          Actions:
+            - Name: UnitTest
+              ActionTypeId: 
+                Category: Test
+                Owner: AWS
+                Provider: CodeBuild
+                Version: 1
+              Configuration:
+                ProjectName: !Ref UnitTest
+              InputArtifacts:
+                - Name: Source
+              RunOrder: 1
+        - Name: BuildWarFile
+          Actions:
+            - Name: BuildWarFile
+              ActionTypeId: 
+                Category: Build
+                Owner: AWS
+                Provider: CodeBuild
+                Version: 1
+              Configuration:
+                ProjectName: !Ref BuildWarFile
+              InputArtifacts:
+                - Name: Source
+              RunOrder: 1
+        - Name: BuildImage
+          Actions:
+            - Name: BuildImage
+              ActionTypeId: 
+                Category: Build
+                Owner: AWS
+                Provider: CodeBuild
+                Version: 1
+              Configuration:
+                ProjectName: !Ref BuildImage
+              InputArtifacts:
+                - Name: Source
+              RunOrder: 1
+        - Name: UpdatePod
+          Actions:
+            - Name: UpdatePod
+              ActionTypeId: 
+                Category: Build
+                Owner: AWS
+                Provider: CodeBuild
+                Version: 1
+              Configuration:
+                ProjectName: !Ref UpdatePod
+              InputArtifacts:
+                - Name: Source
+              RunOrder: 1
