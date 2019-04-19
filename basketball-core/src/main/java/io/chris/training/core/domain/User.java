@@ -46,7 +46,7 @@ public class User implements UserDetails, Serializable {
     @Column(name="passwords")
     private String password;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "user")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "user", cascade = CascadeType.ALL) //mapped by is mapped by instance name not sql column name, cascade.all provide the authorities to manage the foreign key object.
     @Transient
     private List<Authority> authority;
 
