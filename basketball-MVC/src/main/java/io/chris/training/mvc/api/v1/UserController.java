@@ -80,7 +80,7 @@ public class UserController extends BaseController{
     }
 
     @RequestMapping(method = RequestMethod.GET,params = {"first_name"})
-    public List<User> findByFirstName(@RequestParam(value = "first_name") String firstName) {
+    public List<User> findByFirstName(@RequestParam(value = "first_name") String firstName) throws NotFoundException {
         logger.debug("This first name is :"+ firstName);
         List<User> result = userService.findByFirstName(firstName);
         Comparator comparator = new Comparator();
@@ -89,7 +89,7 @@ public class UserController extends BaseController{
     }
 
     @RequestMapping(method = RequestMethod.GET,params = {"last_name"})
-    public List<User> findByLastName(@RequestParam(value = "last_name") String lastName) {
+    public List<User> findByLastName(@RequestParam(value = "last_name") String lastName) throws NotFoundException{
         logger.debug("This last name is :"+ lastName);
         List<User> result = userService.findByLastName(lastName);
         return result;
@@ -103,7 +103,7 @@ public class UserController extends BaseController{
     }
 
     @RequestMapping(method = RequestMethod.GET,params = {"email"})
-    public User findByEmail(@RequestParam(value = "email") String email) {
+    public User findByEmail(@RequestParam(value = "email") String email) throws NotFoundException{
         logger.debug("This email is :"+ email);
         User result = userService.findByEmail(email);
         return result;

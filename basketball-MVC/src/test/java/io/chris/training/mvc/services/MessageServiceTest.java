@@ -22,7 +22,6 @@ import static org.powermock.api.mockito.PowerMockito.when;
 @ContextConfiguration(classes = {AppConfig.class})
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles("unit")
-//@TestExecutionListeners(listeners = {DependencyInjectionTestExecutionListener.class})
 public class MessageServiceTest {
 
     @Autowired

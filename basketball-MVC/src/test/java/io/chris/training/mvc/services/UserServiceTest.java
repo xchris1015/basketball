@@ -1,5 +1,6 @@
 package io.chris.training.mvc.services;
 
+import io.chris.training.core.extension.exp.NotFoundException;
 import io.chris.training.core.service.AuthorityService;
 import io.chris.training.core.service.UserService;
 import io.chris.training.mvc.config.AppConfig;
@@ -9,17 +10,20 @@ import io.chris.training.mvc.extension.security.JwtTokenUtil;
 import io.chris.training.mvc.extension.security.UserDetailServiceImpl;
 import io.chris.training.core.repository.AuthorityRepository;
 import io.chris.training.core.repository.UserRepository;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mobile.device.LiteDevice;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.constraints.Null;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -32,7 +36,6 @@ import static org.junit.Assert.assertTrue;
 @ContextConfiguration(classes = {AppConfig.class})
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles("unit")
-
 public class UserServiceTest extends UserService {
 
     @Autowired
@@ -53,46 +56,54 @@ public class UserServiceTest extends UserService {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
-    private LocalDate date = LocalDate.parse("1993-10-15");
+    private User expectedResult = new User();
 
-    @Transactional
-    @Test
-    public void findByIdTest() {
-        User expectedResult = new User();
+    private User nullUser = null;
+
+    LocalDate date = LocalDate.parse("1993-10-15");
+
+    @Before
+    public void setUp() throws Exception{
         expectedResult.setUsername("xchris");
         expectedResult.setEmail("xchris1015@gmail.com");
         expectedResult.setFirstName("chris");
         expectedResult.setLastName("xu");
         expectedResult.setPassword("password");
         userRepository.save(expectedResult);
-        User actualResult = userService.findById(expectedResult.getId());
-        assertEquals(actualResult.getId(), expectedResult.getId());
     }
 
     @Transactional
     @Test
+    public void findByIdTest() {
+        User actualResult = userService.findById((expectedResult.getId()));
+        assertEquals(actualResult.getId(), expectedResult.getId());
+    }
+
+    @Transactional
+    @Test(expected = NullPointerException.class)
+    public void findByIdNullPointerExceptionTest() {
+        User actualResult = userService.findById(null);
+    }
+
+    @Transactional
+    @Test(expected = NotFoundException.class)
+    public void findByIdNotFoundExceptionTest() {
+        User actualResult = userService.findById(null);
+    }
+
+
+
+
+    @Transactional
+    @Test
     public void findByUsernameTest() {
-        User expectedResult = new User();
-        expectedResult.setUsername("xchris7");
-        expectedResult.setEmail("xchris1015@gmail.com7");
-        expectedResult.setFirstName("chris7");
-        expectedResult.setLastName("xu7");
-        expectedResult.setPassword("password7");
-        userRepository.save(expectedResult);
         User actualResult = userService.findByUsername("xchris7");
         assertEquals(actualResult.getId(), expectedResult.getId());
     }
 
     @Transactional
     @Test
-    public void findByFirstNameTest() {
-        User expectedResult = new User();
-        expectedResult.setUsername("xchris7");
-        expectedResult.setEmail("xchris1015@gmail.com7");
-        expectedResult.setFirstName("chris7");
-        expectedResult.setLastName("xu7");
-        expectedResult.setPassword("password7");
-        userRepository.save(expectedResult);
+    public void findByFirstNameTest() throws NullPointerException, NotFoundException {
         List<User> actualResult = userService.findByFirstName("chris7");
         assertTrue(actualResult.size()>0);
     }
@@ -100,7 +111,7 @@ public class UserServiceTest extends UserService {
 
     @Transactional
     @Test
-    public void findByLastNameTest(){
+    public void findByLastNameTest()throws NullPointerException, NotFoundException{
         User expectedResult = new User();
         expectedResult.setUsername("xchris7");
         expectedResult.setEmail("xchris1015@gmail.com7");
@@ -114,7 +125,7 @@ public class UserServiceTest extends UserService {
 
     @Transactional
     @Test
-    public void findByEmailTest(){
+    public void findByEmailTest()throws NullPointerException, NotFoundException{
         User expectedResult = new User();
         expectedResult.setUsername("xchris7");
         expectedResult.setEmail("xchris1015@gmail.com7");
@@ -128,7 +139,7 @@ public class UserServiceTest extends UserService {
 
     @Test
     @Transactional
-    public void loadUserByUsernameTest() {
+    public void loadUserByUsernameTest()throws NullPointerException, UsernameNotFoundException {
         Authority expectedAuthority = new Authority();
         User user = new User();
         expectedAuthority.setAuthority("ADMIN");
